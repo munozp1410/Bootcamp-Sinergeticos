@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Script de Llamada — Bootcamp Digital Jun 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f0f2f5;
+    padding: 20px;
+    font-size: 11px;
+    color: #1a1a2e;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    margin: 0 auto;
+    padding: 14mm 12mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1B2B5B;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .header-left h1 {
+    font-size: 15px;
+    font-weight: 900;
+    color: #D4A843;
+    line-height: 1.1;
+  }
+  .header-left p {
+    font-size: 9px;
+    color: #aab4d4;
+    margin-top: 2px;
+  }
+  .header-right {
+    text-align: right;
+    font-size: 9px;
+    color: #aab4d4;
+    line-height: 1.7;
+  }
+  .header-right strong {
+    color: #D4A843;
+    font-size: 11px;
+  }
+
+  /* ── DÍAS DEL EVENTO ── */
+  .dias-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .dia-card {
+    border-radius: 5px;
+    padding: 7px 9px;
+    border-left: 4px solid;
+  }
+  .dia1 { background: #EDE7F6; border-color: #5E35B1; }
+  .dia2 { background: #E3F2FD; border-color: #1565C0; }
+  .dia3 { background: #E8F5E9; border-color: #2E7D32; }
+
+  .dia-card .num {
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+  }
+  .dia-card .tema {
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 2px 0;
+  }
+  .dia1 .tema { color: #4527A0; }
+  .dia2 .tema { color: #0D47A1; }
+  .dia3 .tema { color: #1B5E20; }
+
+  .dia-card .para {
+    font-size: 8.5px;
+    color: #444;
+    line-height: 1.4;
+  }
+
+  /* ── DOS COLUMNAS ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* ── SECCIÓN ── */
+  .section {
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: white;
+    background: #1B2B5B;
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+  }
+
+  /* ── FIRTS FLOW ── */
+  .firts-step {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    margin-bottom: 5px;
+    padding: 5px 7px;
+    border-radius: 4px;
+    background: #F8F9FC;
+    border-left: 3px solid;
+  }
+  .firts-step.f  { border-color: #5E35B1; }
+  .firts-step.i  { border-color: #1565C0; }
+  .firts-step.r  { border-color: #00838F; }
+  .firts-step.s  { border-color: #E65100; }
+  .firts-step.t  { border-color: #2E7D32; }
+  .firts-step.c  { border-color: #D4A843; background: #FFF8E1; }
+
+  .firts-letter {
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    min-width: 14px;
+  }
+  .firts-step.f  .firts-letter { color: #5E35B1; }
+  .firts-step.i  .firts-letter { color: #1565C0; }
+  .firts-step.r  .firts-letter { color: #00838F; }
+  .firts-step.s  .firts-letter { color: #E65100; }
+  .firts-step.t  .firts-letter { color: #2E7D32; }
+  .firts-step.c  .firts-letter { color: #B8860B; }
+
+  .firts-content .label {
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 0.3px;
+  }
+  .firts-content .script {
+    font-size: 9.5px;
+    color: #1a1a2e;
+    line-height: 1.35;
+    font-style: italic;
+  }
+  .firts-content .nota {
+    font-size: 8px;
+    color: #666;
+    margin-top: 1px;
+  }
+
+  /* ── OBJECIONES ── */
+  .obj-card {
+    background: #F8F9FC;
+    border-radius: 4px;
+    padding: 6px 8px;
+    margin-bottom: 5px;
+    border-left: 3px solid #C62828;
+  }
+  .obj-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #C62828;
+    margin-bottom: 3px;
+  }
+  .obj-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+  }
+  .obj-step {
+    font-size: 8.5px;
+    line-height: 1.3;
+    color: #333;
+  }
+  .obj-step .step-label {
+    font-weight: 700;
+    font-size: 7.5px;
+    text-transform: uppercase;
+    color: #888;
+    display: block;
+  }
+
+  /* ── PERFILES ── */
+  .perfil-row {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr 1.5fr;
+    gap: 4px;
+    padding: 5px 6px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    font-size: 8.5px;
+    align-items: center;
+  }
+  .perfil-row:nth-child(odd)  { background: #F5F5F5; }
+  .perfil-row:nth-child(even) { background: #FAFAFA; }
+  .perfil-row .dice { color: #555; font-style: italic; }
+  .perfil-row .dia-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 8px;
+    font-weight: 700;
+    color: white;
+  }
+  .tag-m { background: #5E35B1; }
+  .tag-n { background: #1565C0; }
+  .tag-e { background: #2E7D32; }
+  .tag-t { background: #1B2B5B; }
+  .perfil-tag {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 8px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 2px;
+  }
+  .ptag-fan  { background: #C2185B; }
+  .ptag-wann { background: #E65100; }
+  .ptag-ent  { background: #2E7D32; }
+  .ptag-emp  { background: #1565C0; }
+  .ptag-acp  { background: #5E35B1; }
+  .perfil-row .frase { color: #1a1a2e; line-height: 1.3; font-style: italic; }
+
+  /* ── CIERRE + REGLAS ── */
+  .cierre-box {
+    background: #1B2B5B;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+  .cierre-box .cierre-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #D4A843;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .cierre-box .cierre-script {
+    font-size: 10px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #E8EEF9;
+  }
+  .cierre-box .cierre-nota {
+    font-size: 8px;
+    color: #aab4d4;
+    margin-top: 4px;
+  }
+
+  .reglas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .regla {
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
+    background: #FFF8E1;
+    padding: 4px 6px;
+    border-radius: 3px;
+    font-size: 8.5px;
+    line-height: 1.35;
+    color: #333;
+  }
+  .regla .rnum {
+    font-weight: 900;
+    color: #D4A843;
+    font-size: 11px;
+    line-height: 1;
+    min-width: 12px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #E0E0E0;
+    padding-top: 6px;
+  }
+  .footer span {
+    font-size: 7.5px;
+    color: #999;
+  }
+  .footer .meta-badges {
+    display: flex;
+    gap: 8px;
+  }
+  .badge {
+    background: #1B2B5B;
+    color: white;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 7.5px;
+    font-weight: 600;
+  }
+
+  /* PRINT */
+  /* ── SPEAKERS ── */
+  .speakers-page { margin-top: 32px; page-break-before: always; }
+  .spk-section-title {
+    font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .6px;
+    color: white; background: #1B2B5B; padding: 7px 14px; border-radius: 4px; margin-bottom: 14px;
+  }
+  .spk-day-label {
+    display: inline-block; padding: 4px 12px; border-radius: 4px;
+    font-size: 10px; font-weight: 700; color: white; text-transform: uppercase;
+    letter-spacing: .5px; margin-bottom: 8px;
+  }
+  .spk-day-label.m { background: #5E35B1; }
+  .spk-day-label.n { background: #1565C0; }
+  .spk-day-label.e { background: #2E7D32; }
+  .speakers-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 16px;
+  }
+  .speaker-card {
+    background: #fafbff; border-radius: 6px; padding: 10px 12px;
+    border-left: 3px solid #D4A843; font-size: 11px;
+  }
+  .spk-name  { font-weight: 900; font-size: 12px; color: #1B2B5B; margin-bottom: 2px; }
+  .spk-creds { font-size: 9.5px; color: #888; line-height: 1.4; margin-bottom: 5px; }
+  .spk-topic { font-size: 10px; font-style: italic; color: #333; background: #eef0f8; padding: 4px 7px; border-radius: 3px; line-height: 1.4; margin-bottom: 4px; }
+  .spk-handle { font-size: 9.5px; color: #25D366; font-weight: 700; }
+  .spk-tip { background: #FFF8E1; border-left: 3px solid #D4A843; padding: 7px 12px; border-radius: 3px; font-size: 10.5px; color: #555; margin-bottom: 14px; }
+
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; padding: 10mm 10mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>SCRIPT DE LLAMADA — CLUB SINERGÉTICO</h1>
+      <p>Bootcamp Digital Junio 2026 · Equipo de Ventas · Uso interno</p>
+    </div>
+    <div class="header-right">
+      <strong>5 · 6 · 7 JUNIO 2026</strong><br>
+      Evento digital en vivo<br>
+      Incluido en membresía · $0 adicional
+    </div>
+  </div>
+
+  <!-- DÍAS -->
+  <div class="dias-grid">
+    <div class="dia-card dia1">
+      <div class="num">Día 1 · Jue 5 Jun</div>
+      <div class="tema">MENTALIDAD</div>
+      <div class="para">Para quien se sabotea, procrastina o está mentalmente atascado</div>
+    </div>
+    <div class="dia-card dia2">
+      <div class="num">Día 2 · Vie 6 Jun</div>
+      <div class="tema">NEGOCIOS</div>
+      <div class="para">Para quien tiene ventas planas o no consigue clientes de forma constante</div>
+    </div>
+    <div class="dia-card dia3">
+      <div class="num">Día 3 · Sáb 7 Jun</div>
+      <div class="tema">ESCALAMIENTO</div>
+      <div class="para">Para quien quiere delegar, crecer equipo o salir del día a día</div>
+    </div>
+  </div>
+
+  <!-- DOS COLUMNAS -->
+  <div class="two-col">
+
+    <!-- COLUMNA IZQUIERDA: F.I.R.$T -->
+    <div>
+      <div class="section-title">▸ FLUJO DE LA LLAMADA — F.I.R.$T</div>
+
+      <div class="firts-step f">
+        <div class="firts-letter">F</div>
+        <div class="firts-content">
+          <div class="label">Apertura · Boleto disponible</div>
+          <div class="script">"Hola [Nombre], soy [X] de Sinergéticos. Te llamo porque tu <strong>boleto de acceso al Bootcamp de Aceleración de Emprendimiento ya está disponible</strong> — es un bono que obtuviste al ingresar al Club, sin costo adicional. El evento reúne a más de 20 conferencistas internacionales para potenciar tus ventas, tu mentalidad y tu negocio. ¿Lo sabías?"</div>
+          <div class="nota">→ Abre con lo que ya le pertenece. "¿Lo sabías?" genera curiosidad y lo hace hablar de inmediato.</div>
+        </div>
+      </div>
+
+      <div class="firts-step i">
+        <div class="firts-letter">I</div>
+        <div class="firts-content">
+          <div class="label">Información · Perfila</div>
+          <div class="script">"Son 3 días completos — <strong>Mentalidad, Negocios y Escalamiento</strong> — del 5 al 7 de junio, con speakers de primer nivel en cada área. Dime, ¿cómo está el negocio ahorita? ¿Dónde sientes el cuello de botella: mentalidad y enfoque, ventas y negocio, o cómo crecer lo que ya tienes?"</div>
+          <div class="nota">→ Presentas el evento y perfilas en el mismo paso. Anota exactamente lo que dice — son sus palabras para el cierre.</div>
+        </div>
+      </div>
+
+      <div class="firts-step r">
+        <div class="firts-letter">R</div>
+        <div class="firts-content">
+          <div class="label">Resultado deseado</div>
+          <div class="script">"¿Qué es lo que más quieres lograr en lo que queda del año? Si me dijeras 'esto es lo que necesito resolver sí o sí', ¿qué sería?"</div>
+          <div class="nota">→ Déjalo hablar. No interrumpas.</div>
+        </div>
+      </div>
+
+      <div class="firts-step s">
+        <div class="firts-letter">$</div>
+        <div class="firts-content">
+          <div class="label">Inversión (de tiempo)</div>
+          <div class="script">"¿Si tuvieras que invertir 3 días de tu tiempo para lograr [SU RESULTADO], lo harías?"</div>
+          <div class="nota">→ El evento no cuesta dinero — la inversión es tiempo. Conéctalo al resultado que él ya te dijo que quiere.</div>
+        </div>
+      </div>
+
+      <div class="firts-step t">
+        <div class="firts-letter">T</div>
+        <div class="firts-content">
+          <div class="label">Tiempo · Fechas</div>
+          <div class="script">"Será del 5 al 7 de junio, de 9am a 7pm. Visualiza esas fechas — ¿las tienes disponibles?"</div>
+          <div class="nota">→ Nómbralas completas para que las vea en su cabeza. Si duda, busca el día más fácil.</div>
+        </div>
+      </div>
+
+      <div class="firts-step c">
+        <div class="firts-letter">→</div>
+        <div class="firts-content">
+          <div class="label">Presentación + Cierre</div>
+          <div class="script">"El Bootcamp Digital del 5 al 7 de junio ya está incluido en tu membresía. Son 3 días completos — <strong>Mentalidad, Negocios y Escalamiento</strong> — con speakers de primer nivel en cada área. Con lo que me dijiste de [SU DOLOR], el Día [X] de [TEMA] va directo a eso. ¿Apartamos tu lugar ahorita?"</div>
+          <div class="nota">→ Después del cierre: SILENCIO. El primero que habla, pierde.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: OBJECIONES + PERFILES -->
+    <div>
+      <div class="section-title">▸ OBJECIONES — NRS</div>
+
+      <div class="obj-card">
+        <div class="obj-title">❶ "No tengo tiempo esos días"</div>
+        <div class="obj-steps">
+          <div class="obj-step"><span class="step-label">Acknowledge</span>"Entiendo, todos andamos apretados..."</div>
+          <div class="obj-step"><span class="step-label">Push Away</span>"No tienes que ir los 3 días. Aunque sea uno..."</div>
+          <div class="obj-step"><span class="step-label">Pull In</span>"Pero me dijiste que querías [su dolor]. ¿Sigue siendo prioridad?"</div>
+          <div class="obj-step"><span class="step-label">Re-Close</span>"¿Cuál de los 3 días tiene más oportunidad para ti?"</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-title">❷ "¿Puedo ver el replay?"</div>
+        <div class="obj-steps">
+          <div class="obj-step"><span class="step-label">Acknowledge</span>"Claro, habrá material..."</div>
+          <div class="obj-step"><span class="step-label">Push Away</span>"No te preocupes..."</div>
+          <div class="obj-step"><span class="step-label">Pull In</span>"Pero si lo ves en 3 semanas, ¿cuándo lo aplicas?"</div>
+          <div class="obj-step"><span class="step-label">Re-Close</span>"Aparta el lugar en vivo. Si no puedes en algo, tienes el respaldo. ¿Lo hacemos?"</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-title">❸ "Ya sé de qué va"</div>
+        <div class="obj-steps">
+          <div class="obj-step"><span class="step-label">Acknowledge</span>"Tiene sentido, llevas tiempo en el Club..."</div>
+          <div class="obj-step"><span class="step-label">Push Away</span>"No tienes que ir si no lo ves relevante..."</div>
+          <div class="obj-step"><span class="step-label">Pull In</span>"¿Cuánto de lo que ya sabes has podido implementar?"</div>
+          <div class="obj-step"><span class="step-label">Re-Close</span>"La diferencia entre saber y tener resultados es la ejecución. ¿Lo intentamos?"</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-title">❹ "Ahorita no es buen momento"</div>
+        <div class="obj-steps">
+          <div class="obj-step"><span class="step-label">Acknowledge</span>"Totalmente válido..."</div>
+          <div class="obj-step"><span class="step-label">Push Away</span>"No tienes que hacer nada..."</div>
+          <div class="obj-step"><span class="step-label">Pull In</span>"¿Cuándo sería un buen momento para resolver [dolor]?"</div>
+          <div class="obj-step"><span class="step-label">Re-Close</span>"¿Y si este es el momento en que empiezas a salir de eso?"</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 6px;">
+        <div class="section-title">▸ PERFIL → DÍA ANCLA</div>
+
+        <div class="perfil-row">
+          <div><span class="perfil-tag ptag-fan">🩷 FAN</span><br><span class="dice">"Ya conozco Sinergéticos" / "sigo el contenido"</span></div>
+          <div><span class="dia-tag tag-m">Día 1 · Mental.</span></div>
+          <div class="frase">"El Día 1 es el salto de consumir contenido a tomar acción. El Día 2 te da el sistema y el Día 3 para que crezca."</div>
+        </div>
+        <div class="perfil-row">
+          <div><span class="perfil-tag ptag-wann">🟠 WANNAPRENEUR</span><br><span class="dice">"Quiero emprender" / "tengo la idea pero no arranco"</span></div>
+          <div><span class="dia-tag tag-m">Día 1 · Mental.</span></div>
+          <div class="frase">"El Día 1 derrumba lo que te ha frenado. El Día 2 te lanza con claridad. El Día 3 para que lo construyas bien desde el inicio."</div>
+        </div>
+        <div class="perfil-row">
+          <div><span class="perfil-tag ptag-ent">🟢 ENTREPRENEUR</span><br><span class="dice">"Tengo negocio" / "no tengo suficientes clientes"</span></div>
+          <div><span class="dia-tag tag-n">Día 2 · Negoc.</span></div>
+          <div class="frase">"El Día 2 construye el sistema de ventas. El Día 1 es el desbloqueador y el Día 3 para escalarlo sin depender de ti."</div>
+        </div>
+        <div class="perfil-row">
+          <div><span class="perfil-tag ptag-emp">🔵 EMPRESARIO</span><br><span class="dice">"Tengo equipo" / "no puedo delegar" / "quiero escalar"</span></div>
+          <div><span class="dia-tag tag-e">Día 3 · Escal.</span></div>
+          <div class="frase">"El Día 3 saca todo de ti. El Día 1 trabaja al líder y el Día 2 hace el sistema de ventas independiente."</div>
+        </div>
+        <div class="perfil-row">
+          <div><span class="perfil-tag ptag-acp">🟣 ACOMPAÑANTE</span><br><span class="dice">"Me invitó [nombre]" / "no soy miembro pero me recomendaron"</span></div>
+          <div><span class="dia-tag tag-t">Los 3 días</span></div>
+          <div class="frase">"Que alguien del Club te invitara ya dice algo. Los 3 días — Mentalidad, Negocios, Escalamiento — son para salir con claridad y un plan."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CIERRE -->
+  <div class="cierre-box">
+    <div class="cierre-title">★ El cierre — únala siempre con sus palabras</div>
+    <div class="cierre-script">
+      "Con lo que me dijiste — que [REPITE SU DOLOR CON SUS PALABRAS] — el Día [X] de [MENTALIDAD / NEGOCIOS / ESCALAMIENTO] va directo a eso.<br>
+      Tu lugar está incluido en la membresía. ¿Lo apartamos ahorita mismo?"
+    </div>
+    <div class="cierre-nota">→ Después del cierre: SILENCIO. Cuenta 5 segundos. El primero que habla, pierde.</div>
+  </div>
+
+  <!-- REGLAS DE ORO -->
+  <div class="section-title">▸ REGLAS DE ORO</div>
+  <div class="reglas-grid">
+    <div class="regla"><span class="rnum">1</span>Perfila antes de vender. Sin dolor claro, no hay conexión.</div>
+    <div class="regla"><span class="rnum">2</span>Usa SUS palabras para cerrar. No las tuyas.</div>
+    <div class="regla"><span class="rnum">3</span>Nombra el día específico: "Tu día es el Día 2 de Negocios."</div>
+    <div class="regla"><span class="rnum">4</span>No vendas el evento — vende el resultado que él ya dijo que quiere.</div>
+    <div class="regla"><span class="rnum">5</span>Registra en vivo durante la llamada. Cada minuto que pasa, menos probabilidad.</div>
+    <div class="regla"><span class="rnum">6</span>El replay es tu último recurso, no tu primera oferta.</div>
+  </div>
+
+  <!-- SPEAKERS -->
+  <div class="speakers-page">
+    <div class="spk-section-title">▸ 24 CONFERENCISTAS INTERNACIONALES — BOOTCAMP JUN 2026</div>
+    <div class="spk-tip"><strong>Para el vendedor:</strong> Usa los nombres de los speakers para personalizar el cierre. "¿Sabes quién va a hablar de [tema del prospecto]? [Nombre]..." genera urgencia real y conexión inmediata.</div>
+    <div class="speakers-grid">
+      <div class="speaker-card">
+            <div class="spk-name">Efrén Martínez</div>
+        <div class="spk-creds">PhD en logoterapia · Autor 25 libros · Coach de líderes · 1M seguidores</div>
+        <div class="spk-topic">"Hazte dueño de ti: romper las programaciones mentales que te sabotean"</div>
+        <div class="spk-handle">@efrenmartinezo</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Luis Fallas</div>
+        <div class="spk-creds">CEO Centro de Superación Personal · +25 años transformando vidas</div>
+        <div class="spk-topic">"Potencial máximo: cómo el desarrollo personal desbloquea ingresos reales"</div>
+        <div class="spk-handle">@luis_fallas</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Memo Serrano</div>
+        <div class="spk-creds">Business & Mindset Mentor · Proctor Gallagher Institute · Autor bestseller</div>
+        <div class="spk-topic">"Cómo reprogramar tu mentalidad financiera para escalar sin límites"</div>
+        <div class="spk-handle">@memo_serrano_d</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Ricardo Perret</div>
+        <div class="spk-creds">Conferencista internacional · Autor 11 libros · +1,200 conferencias en 20 países · Fundador La Montaña</div>
+        <div class="spk-topic">"El gen exitoso: los hábitos y la mentalidad que separan a los que escalan"</div>
+        <div class="spk-handle">@ricardo.perret</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Coral Mujaes</div>
+        <div class="spk-creds">Mentora de ventas digitales #1 LATAM · +4M seguidores · Top 25 infoproductores Hotmart · +1M alumnos</div>
+        <div class="spk-topic">"Cómo monetizar tu conocimiento y construir un negocio digital escalable desde cero"</div>
+      </div>
+    
+      <div class="speaker-card">
+            <div class="spk-name">Jorge Serratos</div>
+        <div class="spk-creds">CEO Grupo Serlo · Doctor en derecho · Podcast #1 Negocios México · +11M seguidores</div>
+        <div class="spk-topic">"Cómo construir un movimiento, no solo un negocio"</div>
+        <div class="spk-handle">@jorgeserratos</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Salvador Alva</div>
+        <div class="spk-creds">Empresario y speaker · Estrategia comercial y escalamiento</div>
+        <div class="spk-topic">"Estrategia comercial: cerrar ventas de 6 cifras sin depender de ti"</div>
+        <div class="spk-handle">@s.dealba</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Pavo Gómez</div>
+        <div class="spk-creds">Fundador GoLaunch · Agencia de lanzamientos #1 México · Host Podcast Épicamente</div>
+        <div class="spk-topic">"Anatomía de un lanzamiento rentable: storytelling que convierte en frío"</div>
+        <div class="spk-handle">@pavogomezorea</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Alejandro Cardona</div>
+        <div class="spk-creds">Economista · Fundador Seminario Creando Riqueza · 517K seguidores</div>
+        <div class="spk-topic">"Crear riqueza con inversiones: el emprendedor que también es inversionista"</div>
+        <div class="spk-handle">@alejandrocardonascr</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Regina Carrot</div>
+        <div class="spk-creds">+14M seguidores · TEDx Speaker · Fundadora Speaker Magnética · Forbes · Ex Pepsico</div>
+        <div class="spk-topic">"Cómo construir una audiencia millonaria y monetizar tu mensaje"</div>
+        <div class="spk-handle">@reginacarrot</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Fer León</div>
+        <div class="spk-creds">Fundadora Ojo de Miel · Podcast Emprende con Fer León</div>
+        <div class="spk-topic">"Cómo escalar un negocio físico y construir una marca con propósito"</div>
+        <div class="spk-handle">@ferleonmx</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Fernando Anzures</div>
+        <div class="spk-creds">Autor 8 libros · Conferencista internacional · Experto en marketing y marcas</div>
+        <div class="spk-topic">"Cómo construir una marca que vende sola en la era digital"</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Claudia Lizaldi</div>
+        <div class="spk-creds">Conductora · Actriz · Empresaria · Fundadora Soy Mamá Ejecutiva</div>
+        <div class="spk-topic">"Liderazgo femenino y emprendimiento con propósito"</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Milena Sandoval</div>
+        <div class="spk-creds">Emprendedora · Speaker · Fundadora comunidades de mujeres líderes en LATAM</div>
+        <div class="spk-topic">"De empleada a empresaria: el camino hacia la libertad financiera"</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">César Sánchez</div>
+        <div class="spk-creds">Emprendedor</div>
+        <div class="spk-topic">"Emprendimiento y negocios"</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Daniel Garcia</div>
+        <div class="spk-creds">Especialista en relaciones internacionales</div>
+        <div class="spk-topic">"Relaciones internacionales y negocios globales"</div>
+      </div>
+    
+      <div class="speaker-card">
+            <div class="spk-name">Manuel de León</div>
+        <div class="spk-creds">Co-host · COO Sinergéticos · Experto en IA, tráfico y contenido digital</div>
+        <div class="spk-topic">"IA + tráfico + contenido: el stack técnico del crecimiento en 2026"</div>
+        <div class="spk-handle">@manueldeleonmjr</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Susi Vereecken</div>
+        <div class="spk-creds">Directora Maxwell Leadership® LATAM · Coach internacional · Speaker</div>
+        <div class="spk-topic">"Liderazgo que escala: cómo desarrollar el equipo y la cultura que tu negocio necesita"</div>
+        <div class="spk-handle">@susivv</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Alejandro Saracho</div>
+        <div class="spk-creds">Ingeniero industrial · Autor 'Reconfiguración Financiera' · Programas en Harvard, Stanford y MIT</div>
+        <div class="spk-topic">"Reconfiguración financiera: cómo pensar y operar tu dinero como empresario exitoso"</div>
+      </div>
+      <div class="speaker-card">
+            <div class="spk-name">Brando Angulo</div>
+        <div class="spk-creds">Fundador Brada Grupo Inmobiliario · Premio Joven Empresario Inmobiliario 2017 · +823K seguidores</div>
+        <div class="spk-topic">"Cómo construir patrimonio desde cero: inversión inmobiliaria como vehículo de libertad financiera"</div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-name">Daniel Marcos</div>
+        <div class="spk-creds">Cofundador y CEO Growth Institute · Coach certificado Scaling Up · +15,000 empresas en 66 países</div>
+        <div class="spk-topic">"Cómo escalar tu empresa más rápido y con menos drama: los 4 pilares de Scaling Up"</div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-name">Dr. Roch</div>
+        <div class="spk-creds">Doctor en Comportamiento Organizacional · Neurocientífico · Consultor FEMSA, Disney, Coca-Cola · Autor de 10+ libros</div>
+        <div class="spk-topic">"Mentalidad de alto rendimiento: cómo programar tu cerebro para vender más y liderar mejor"</div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-name">Tito Luzardo</div>
+        <div class="spk-creds">Emprendedor venezolano · Creador del método Hackea Tu Mente · De -$800K a +$1.5M/año</div>
+        <div class="spk-topic">"Transformar la crisis en negocio: de perder todo a escalar a 7 cifras"</div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-name">Víctor Heras</div>
+        <div class="spk-creds">Experto en marca personal · +500K seguidores en 5 meses · Fundador de PostMe, agencia de marca personal #1 España</div>
+        <div class="spk-topic">"Contenido viral, comunidades gigantes y ganar dinero con redes sociales"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Sinergéticos / Synergy for Education · Uso interno equipo de ventas · Bootcamp Digital Jun 2026</span>
+    <div class="meta-badges">
+      <span class="badge">22,000 leads Club</span>
+      <span class="badge">Meta: 8,800 registros</span>
+      <span class="badge">CPL: $0</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

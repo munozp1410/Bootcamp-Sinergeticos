@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synergy Unlimited — Precios</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #080000;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .slideshow {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: radial-gradient(ellipse at top, #1a0505 0%, #080000 70%);
+    }
+
+    .slide.active { display: flex; }
+
+    /* Channel badge */
+    .channel-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #ff4444;
+      border: 1px solid #ff4444;
+      border-radius: 20px;
+      padding: 6px 18px;
+      margin-bottom: 20px;
+    }
+
+    /* Card */
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 50px 60px;
+      max-width: 620px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 0 60px rgba(200,0,0,0.15);
+    }
+
+    .card.vip {
+      border-color: rgba(255, 68, 68, 0.4);
+      background: rgba(180, 0, 0, 0.08);
+      box-shadow: 0 0 80px rgba(200,0,0,0.25);
+    }
+
+    /* Más vendido badge */
+    .mas-vendido {
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: #cc0000;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    /* Ticket type label */
+    .ticket-type {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #ff4444;
+      margin-bottom: 10px;
+    }
+
+    .ticket-type.vip { color: #f0c030; }
+
+    /* Title */
+    .ticket-name {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .ticket-name.vip { color: #f0c030; }
+
+    .ticket-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+    /* Price */
+    .price-container {
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      color: white;
+    }
+
+    .price sup {
+      font-size: 28px;
+      font-weight: 600;
+      vertical-align: super;
+    }
+
+    .price-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    /* Divider */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 28px;
+    }
+
+    /* Incluye */
+    .incluye-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 18px;
+    }
+
+    .benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .benefits li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+
+    .benefits li .check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255,68,68,0.15);
+      border: 1px solid rgba(255,68,68,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: #ff6666;
+    }
+
+    .benefits li .benefit-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      margin-left: 4px;
+    }
+
+    /* Logo top */
+    .top-logo {
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: rgba(200,0,0,0.3);
+      border-color: #cc0000;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dot.active {
+      background: #cc0000;
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Slide counter */
+    .slide-counter {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slideshow">
+
+  <!-- SLIDE 1: Club Sinergético — General -->
+  <div class="slide active">
+    <div class="top-logo">Synergy Unlimited</div>
+    <div class="channel-badge">⭐ Club Sinergético</div>
+    <div class="card">
+      <div class="ticket-type">CLUB — General —</div>
+      <h1 class="ticket-name">Synergy General<br>Access</h1>
+      <p class="ticket-subtitle">Acceso General · 3 días</p>
+      <div class="price-container">
+        <div class="price"><sup>$</sup>3,997</div>
+      </div>
+      <p class="price-note">MXN · precio exclusivo Club</p>
+      <div class="divider"></div>
+      <p class="incluye-label">Incluye</p>
+      <ul class="benefits">
+        <li><span class="check">✓</span> Acceso General al evento los 3 días</li>
+        <li><span class="check">✓</span> Kit de bienvenida General</li>
+        <li><span class="check">✓</span> Asientos Generales al evento</li>
+        <li><span class="check">✓</span> Comunidad de Networking General</li>
+        <li><span class="check">✓</span> Acceso a los Shows en vivo</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Club Sinergético — VIP -->
+  <div class="slide">
+    <div class="top-logo">Synergy Unlimited</div>
+    <div class="channel-badge">⭐ Club Sinergético</div>
+    <div class="card vip">
+      <div class="mas-vendido">⭐ Más Vendido</div>
+      <div class="ticket-type vip">CLUB — VIP —</div>
+      <h1 class="ticket-name vip">Synergy VIP<br>Access</h1>
+      <p class="ticket-subtitle">Acceso VIP · 3 días</p>
+      <div class="price-container">
+        <div class="price"><sup>$</sup>5,997</div>
+      </div>
+      <p class="price-note">MXN · precio exclusivo Club</p>
+      <div class="divider"></div>
+      <p class="incluye-label">Incluye</p>
+      <ul class="benefits">
+        <li><span class="check">✓</span> Acceso VIP al evento los 3 días</li>
+        <li><span class="check">✓</span> Kit de bienvenida VIP</li>
+        <li><span class="check">✓</span> Asientos VIP al evento</li>
+        <li><span class="check">✓</span> Comunidad de Networking VIP</li>
+        <li><span class="check">✓</span> Shows en vivo — categoría VIP</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Pauta Digital — General -->
+  <div class="slide">
+    <div class="top-logo">Synergy Unlimited</div>
+    <div class="channel-badge">🚀 Canal Pauta Digital</div>
+    <div class="card">
+      <div class="ticket-type">PAUTA — General —</div>
+      <h1 class="ticket-name">Synergy General<br>Access</h1>
+      <p class="ticket-subtitle">Acceso General · 3 días</p>
+      <div class="price-container">
+        <div class="price"><sup>$</sup>5,997</div>
+      </div>
+      <p class="price-note">MXN · pago único</p>
+      <div class="divider"></div>
+      <p class="incluye-label">Incluye</p>
+      <ul class="benefits">
+        <li><span class="check">✓</span> Acceso General al evento los 3 días</li>
+        <li><span class="check">✓</span> Kit de bienvenida General</li>
+        <li><span class="check">✓</span> Asientos Generales al evento</li>
+        <li><span class="check">✓</span> Comunidad de Networking General</li>
+        <li><span class="check">✓</span> Acceso a los Shows en vivo</li>
+        <li><span class="check">✓</span> Membresía 1 año Club Sinergético <span class="benefit-note">(Plan Esencial)</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Pauta Digital — VIP -->
+  <div class="slide">
+    <div class="top-logo">Synergy Unlimited</div>
+    <div class="channel-badge">🚀 Canal Pauta Digital</div>
+    <div class="card vip">
+      <div class="mas-vendido">⭐ Más Vendido</div>
+      <div class="ticket-type vip">PAUTA — VIP —</div>
+      <h1 class="ticket-name vip">Synergy VIP<br>Access</h1>
+      <p class="ticket-subtitle">Acceso VIP · 3 días</p>
+      <div class="price-container">
+        <div class="price"><sup>$</sup>7,997</div>
+      </div>
+      <p class="price-note">MXN · pago único</p>
+      <div class="divider"></div>
+      <p class="incluye-label">Incluye</p>
+      <ul class="benefits">
+        <li><span class="check">✓</span> Acceso VIP al evento los 3 días</li>
+        <li><span class="check">✓</span> Kit de bienvenida VIP</li>
+        <li><span class="check">✓</span> Asientos VIP al evento</li>
+        <li><span class="check">✓</span> Comunidad de Networking VIP</li>
+        <li><span class="check">✓</span> Shows en vivo — categoría VIP</li>
+        <li><span class="check">✓</span> Membresía 1 año Club Sinergético <span class="benefit-note">(Plan Esencial)</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- Slide counter -->
+<div class="slide-counter" id="counter">1 / 4</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button class="nav-btn" onclick="changeSlide(-1)">&#8592;</button>
+  <div class="dots">
+    <div class="dot active" onclick="goToSlide(0)"></div>
+    <div class="dot" onclick="goToSlide(1)"></div>
+    <div class="dot" onclick="goToSlide(2)"></div>
+    <div class="dot" onclick="goToSlide(3)"></div>
+  </div>
+  <button class="nav-btn" onclick="changeSlide(1)">&#8594;</button>
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const counter = document.getElementById('counter');
+
+  function goToSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  function changeSlide(dir) {
+    goToSlide(current + dir);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+</script>
+
+</body>
+</html>

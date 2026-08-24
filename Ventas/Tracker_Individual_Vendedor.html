@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tracker Individual — Bootcamp Jun 2026</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a1a; font-size: 13px; }
+.wrapper { max-width: 1200px; margin: 0 auto; padding: 20px 16px 60px; }
+
+/* HEADER */
+.header {
+  background: #1B2B5B;
+  color: white;
+  padding: 20px 24px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+.header h1 { font-size: 18px; font-weight: 900; color: #D4A843; }
+.header p { font-size: 11px; color: #aab4d4; margin-top: 3px; }
+.countdown { text-align: right; }
+.countdown-num { font-size: 36px; font-weight: 900; color: #D4A843; line-height: 1; }
+.countdown-label { font-size: 10px; color: #aab4d4; }
+.header-fields { display: flex; gap: 14px; flex-wrap: wrap; }
+.field-group { display: flex; flex-direction: column; gap: 3px; }
+.field-group label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #aab4d4; }
+.field-group input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 5px;
+  color: white;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.field-group input::placeholder { color: rgba(255,255,255,0.35); font-weight: 400; }
+.field-group input:focus { outline: none; border-color: #D4A843; }
+.field-group input.wide { min-width: 200px; }
+.field-group input.narrow { width: 100px; }
+
+/* KPI STRIP */
+.kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 16px; }
+.kpi-card {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  border-top: 3px solid #ddd;
+}
+.kpi-card.navy  { border-top-color: #1B2B5B; }
+.kpi-card.gold  { border-top-color: #D4A843; }
+.kpi-card.green { border-top-color: #1A6B31; }
+.kpi-card.orange{ border-top-color: #E65100; }
+.kpi-card.purple{ border-top-color: #5E35B1; }
+.kpi-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 3px; }
+.kpi-value { font-size: 30px; font-weight: 900; color: #1B2B5B; line-height: 1; }
+.kpi-sub { font-size: 10px; color: #aaa; margin-top: 3px; }
+.kpi-bar { height: 4px; background: #eee; border-radius: 2px; margin-top: 8px; }
+.kpi-fill { height: 4px; border-radius: 2px; transition: width .3s; }
+
+/* DAILY TABLE */
+.table-section { background: white; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 16px; }
+.table-header-bar { background: #1B2B5B; color: white; padding: 10px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th {
+  background: #f5f6fa;
+  padding: 8px 6px;
+  text-align: center;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #666;
+  border-bottom: 2px solid #e8e8e8;
+  white-space: nowrap;
+}
+th.left { text-align: left; padding-left: 14px; }
+td {
+  padding: 5px 6px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center;
+  vertical-align: middle;
+}
+td.fecha { text-align: left; padding-left: 14px; font-weight: 700; font-size: 12px; white-space: nowrap; color: #1B2B5B; }
+td input[type="number"] {
+  width: 50px;
+  padding: 4px 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  transition: border-color .2s;
+}
+td input[type="number"]:focus { outline: none; border-color: #1B2B5B; background: #f0f4ff; }
+tr.today-row td { background: #FFFDE7 !important; }
+tr.today-row td.fecha::before { content: '▶ '; color: #D4A843; }
+tr.today-row td.fecha { color: #B8860B; }
+tr:not(.total-row):not(.meta-row):hover td { background: #f8f9ff; }
+.pct { font-weight: 700; font-size: 11px; }
+.pct.good { color: #1A6B31; }
+.pct.warn { color: #E65100; }
+.pct.bad  { color: #B71C1C; }
+
+/* tfoot */
+.total-row td { background: #1B2B5B !important; color: white !important; font-weight: 900; font-size: 12px; border: none; }
+.total-row td.fecha { color: #D4A843 !important; }
+.meta-row td { background: #f0f4ff !important; font-weight: 700; color: #1B2B5B; font-size: 11px; border: none; }
+.meta-row td.fecha { color: #1B2B5B; }
+
+/* BOTTOM GRID */
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.bottom-card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.bottom-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 14px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+.perfil-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.perfil-label { font-size: 11px; font-weight: 700; width: 140px; flex-shrink: 0; }
+.perfil-track { flex: 1; height: 16px; background: #eee; border-radius: 8px; overflow: hidden; }
+.perfil-fill { height: 16px; border-radius: 8px; transition: width .3s; min-width: 0; }
+.fill-fan  { background: #C2185B; }
+.fill-wann { background: #E65100; }
+.fill-ent  { background: #2E7D32; }
+.fill-emp  { background: #1565C0; }
+.fill-acp  { background: #5E35B1; }
+.perfil-count { font-size: 13px; font-weight: 900; width: 32px; text-align: right; }
+textarea.notas {
+  width: 100%;
+  height: 115px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  resize: vertical;
+  color: #333;
+}
+textarea.notas:focus { outline: none; border-color: #1B2B5B; }
+.footer { text-align: center; font-size: 10px; color: #bbb; margin-top: 24px; }
+
+/* PRINT */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+  body { background: white !important; }
+  .wrapper { padding: 8mm; }
+  .table-section, .bottom-card, .kpi-card { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>TRACKER INDIVIDUAL — BOOTCAMP JUN 2026</h1>
+      <p>Club Sinergético · 7 al 15 de mayo · Meta: 50 llamadas/día · 8 días · 384 leads · 40% tasa de confirmación</p>
+    </div>
+    <div class="countdown">
+      <div class="countdown-num" id="dias-restantes">—</div>
+      <div class="countdown-label">días restantes</div>
+    </div>
+  </div>
+  <div class="header-fields">
+    <div class="field-group">
+      <label>Nombre del vendedor</label>
+      <input type="text" id="inp-nombre" class="wide" placeholder="Tu nombre completo">
+    </div>
+    <div class="field-group">
+      <label>Líder de equipo</label>
+      <input type="text" id="inp-lider" class="wide" placeholder="Nombre del líder">
+    </div>
+    <div class="field-group">
+      <label>Leads asignados</label>
+      <input type="number" id="inp-leads" class="narrow" value="384">
+    </div>
+    <div class="field-group">
+      <label>Meta confirmados</label>
+      <input type="number" id="inp-meta" class="narrow" value="77">
+    </div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="kpi-row">
+  <div class="kpi-card navy">
+    <div class="kpi-label">Llamadas totales</div>
+    <div class="kpi-value" id="kpi-ll">0</div>
+    <div class="kpi-sub">Meta: 400</div>
+    <div class="kpi-bar"><div class="kpi-fill" id="kbar-ll" style="width:0%;background:#D4A843"></div></div>
+  </div>
+  <div class="kpi-card purple">
+    <div class="kpi-label">Contactos efectivos</div>
+    <div class="kpi-value" id="kpi-ce">0</div>
+    <div class="kpi-sub">Meta: 200 (50%)</div>
+    <div class="kpi-bar"><div class="kpi-fill" id="kbar-ce" style="width:0%;background:#5E35B1"></div></div>
+  </div>
+  <div class="kpi-card green">
+    <div class="kpi-label">Confirmados</div>
+    <div class="kpi-value" id="kpi-conf">0</div>
+    <div class="kpi-sub">Meta: <span id="kpi-meta-disp">77</span> · tasa 40%</div>
+    <div class="kpi-bar"><div class="kpi-fill" id="kbar-conf" style="width:0%;background:#1A6B31"></div></div>
+  </div>
+  <div class="kpi-card gold">
+    <div class="kpi-label">Acompañantes</div>
+    <div class="kpi-value" id="kpi-ac">0</div>
+    <div class="kpi-sub">Acumulado</div>
+    <div class="kpi-bar"><div class="kpi-fill" id="kbar-ac" style="width:0%;background:#D4A843"></div></div>
+  </div>
+  <div class="kpi-card orange">
+    <div class="kpi-label">Por contactar</div>
+    <div class="kpi-value" id="kpi-pc">0</div>
+    <div class="kpi-sub">Pendientes</div>
+    <div class="kpi-bar"><div class="kpi-fill" id="kbar-pc" style="width:0%;background:#E65100"></div></div>
+  </div>
+</div>
+
+<!-- DAILY TABLE -->
+<div class="table-section">
+  <div class="table-header-bar">▸ REGISTRO DIARIO — 8 días · 7 al 15 de mayo de 2026</div>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th class="left">Día / Fecha</th>
+        <th>Llamadas<br><span style="color:#D4A843;font-size:9px">Meta 50</span></th>
+        <th>%&nbsp;Meta</th>
+        <th>Contactos<br>efectivos</th>
+        <th>Confirmados</th>
+        <th>Acompañantes</th>
+        <th>Por<br>contactar</th>
+        <th style="background:#FCE4EC;color:#C2185B">FAN</th>
+        <th style="background:#FFF3E0;color:#E65100">WANNA-<br>PRENEUR</th>
+        <th style="background:#E8F5E9;color:#2E7D32">ENTRE-<br>PRENEUR</th>
+        <th style="background:#E3F2FD;color:#1565C0">EMPRE-<br>SARIO</th>
+        <th style="background:#EDE7F6;color:#5E35B1">ACOMP.</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+    <tfoot>
+      <tr class="total-row">
+        <td class="fecha">TOTAL ACUMULADO</td>
+        <td id="tot-ll">0</td>
+        <td id="tot-pct">—</td>
+        <td id="tot-ce">0</td>
+        <td id="tot-conf">0</td>
+        <td id="tot-ac">0</td>
+        <td id="tot-pc">0</td>
+        <td id="tot-fan">0</td>
+        <td id="tot-wann">0</td>
+        <td id="tot-ent">0</td>
+        <td id="tot-emp">0</td>
+        <td id="tot-acp">0</td>
+      </tr>
+      <tr class="meta-row">
+        <td class="fecha">META TOTAL</td>
+        <td>400</td>
+        <td>100%</td>
+        <td>200</td>
+        <td id="meta-row-conf">77</td>
+        <td>—</td>
+        <td>—</td>
+        <td colspan="5" style="text-align:center;color:#555">Según perfilamiento</td>
+      </tr>
+    </tfoot>
+  </table>
+  </div>
+</div>
+
+<!-- BOTTOM -->
+<div class="bottom-grid">
+  <div class="bottom-card">
+    <h3>▸ Perfilamiento acumulado — distribución por día de evento</h3>
+    <div class="perfil-row">
+      <div class="perfil-label" style="color:#C2185B">Fan</div>
+      <div class="perfil-track"><div class="perfil-fill fill-fan" id="pbar-fan" style="width:0%"></div></div>
+      <div class="perfil-count" id="pcnt-fan">0</div>
+    </div>
+    <div class="perfil-row">
+      <div class="perfil-label" style="color:#E65100">Wannapreneur</div>
+      <div class="perfil-track"><div class="perfil-fill fill-wann" id="pbar-wann" style="width:0%"></div></div>
+      <div class="perfil-count" id="pcnt-wann">0</div>
+    </div>
+    <div class="perfil-row">
+      <div class="perfil-label" style="color:#2E7D32">Entrepreneur</div>
+      <div class="perfil-track"><div class="perfil-fill fill-ent" id="pbar-ent" style="width:0%"></div></div>
+      <div class="perfil-count" id="pcnt-ent">0</div>
+    </div>
+    <div class="perfil-row">
+      <div class="perfil-label" style="color:#1565C0">Empresario</div>
+      <div class="perfil-track"><div class="perfil-fill fill-emp" id="pbar-emp" style="width:0%"></div></div>
+      <div class="perfil-count" id="pcnt-emp">0</div>
+    </div>
+    <div class="perfil-row">
+      <div class="perfil-label" style="color:#5E35B1">Acompañante</div>
+      <div class="perfil-track"><div class="perfil-fill fill-acp" id="pbar-acp" style="width:0%"></div></div>
+      <div class="perfil-count" id="pcnt-acp">0</div>
+    </div>
+    <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee">
+      <div style="font-size:10px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px">Tasa de contacto efectivo</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1;height:10px;background:#eee;border-radius:5px;overflow:hidden">
+          <div id="tasa-bar" style="height:10px;background:#1B2B5B;border-radius:5px;width:0%;transition:width .3s"></div>
+        </div>
+        <div id="tasa-val" style="font-weight:900;font-size:14px;color:#1B2B5B;width:42px;text-align:right">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-card">
+    <h3>▸ Notas del día / Seguimientos importantes</h3>
+    <textarea class="notas" id="inp-notas" placeholder="Anota aquí seguimientos importantes, objeciones frecuentes o prospectos calientes para el día siguiente..."></textarea>
+    <div style="margin-top:10px;font-size:10px;color:#aaa">💾 Los datos se guardan automáticamente en este navegador.</div>
+  </div>
+</div>
+
+<div class="footer">Sinergéticos / Synergy for Education &nbsp;·&nbsp; Tracker Individual · Bootcamp Digital Junio 5–7, 2026 &nbsp;·&nbsp; Uso interno</div>
+</div>
+
+<script>
+const DIAS = [
+  { label:'Día 1', fecha:'Jue 7 Mayo',  today: true  },
+  { label:'Día 2', fecha:'Vie 8 Mayo',  today: false },
+  { label:'Día 3', fecha:'Sáb 9 Mayo',  today: false },
+  { label:'Día 4', fecha:'Lun 11 Mayo', today: false },
+  { label:'Día 5', fecha:'Mar 12 Mayo', today: false },
+  { label:'Día 6', fecha:'Mié 13 Mayo', today: false },
+  { label:'Día 7', fecha:'Jue 14 Mayo', today: false },
+  { label:'Día 8', fecha:'Vie 15 Mayo', today: false },
+];
+const COLS = ['ll','ce','conf','ac','pc','fan','wann','ent','emp','acp'];
+
+// Countdown
+(function(){
+  const end = new Date('2026-05-15');
+  const now = new Date('2026-05-07');
+  const diff = Math.max(0, Math.ceil((end - now)/(1000*60*60*24)));
+  document.getElementById('dias-restantes').textContent = diff;
+})();
+
+// Build rows
+const tbody = document.getElementById('tbody');
+DIAS.forEach((d,i) => {
+  const tr = document.createElement('tr');
+  if(d.today) tr.className = 'today-row';
+  tr.innerHTML = `
+    <td class="fecha">${d.label} — ${d.fecha}</td>
+    <td><input type="number" min="0" max="200" data-r="${i}" data-c="ll" placeholder="0"></td>
+    <td class="pct" id="pct-${i}">—</td>
+    <td><input type="number" min="0" max="200" data-r="${i}" data-c="ce" placeholder="0"></td>
+    <td><input type="number" min="0" max="200" data-r="${i}" data-c="conf" placeholder="0"></td>
+    <td><input type="number" min="0" max="200" data-r="${i}" data-c="ac" placeholder="0"></td>
+    <td><input type="number" min="0" max="500" data-r="${i}" data-c="pc" placeholder="0"></td>
+    <td style="background:#FCE4EC"><input type="number" min="0" max="200" data-r="${i}" data-c="fan" placeholder="0"></td>
+    <td style="background:#FFF3E0"><input type="number" min="0" max="200" data-r="${i}" data-c="wann" placeholder="0"></td>
+    <td style="background:#E8F5E9"><input type="number" min="0" max="200" data-r="${i}" data-c="ent" placeholder="0"></td>
+    <td style="background:#E3F2FD"><input type="number" min="0" max="200" data-r="${i}" data-c="emp" placeholder="0"></td>
+    <td style="background:#EDE7F6"><input type="number" min="0" max="200" data-r="${i}" data-c="acp" placeholder="0"></td>
+  `;
+  tbody.appendChild(tr);
+});
+
+function v(el){ return parseInt(el.value)||0; }
+function colSum(c){ return Array.from(document.querySelectorAll(`input[data-c="${c}"]`)).reduce((s,e)=>s+v(e),0); }
+function pct(a,b){ return b===0?'—':Math.round(a/b*100)+'%'; }
+function clamp(x){ return Math.min(100,Math.max(0,x)); }
+
+function recalc(){
+  const meta = parseInt(document.getElementById('inp-meta').value)||80;
+  // Per-day pct
+  document.querySelectorAll('input[data-c="ll"]').forEach(el=>{
+    const i=el.dataset.r, vv=v(el);
+    const cell=document.getElementById(`pct-${i}`);
+    cell.textContent = vv===0?'—':Math.round(vv/50*100)+'%';
+    cell.className = 'pct '+(vv>=50?'good':vv>=40?'warn':vv>0?'bad':'');
+  });
+  // Totals
+  const tLL=colSum('ll'), tCE=colSum('ce'), tCONF=colSum('conf'),
+        tAC=colSum('ac'), tPC=colSum('pc'),
+        tFAN=colSum('fan'), tWANN=colSum('wann'), tENT=colSum('ent'), tEMP=colSum('emp'), tACP=colSum('acp');
+  document.getElementById('tot-ll').textContent=tLL;
+  document.getElementById('tot-pct').textContent=pct(tLL,400);
+  document.getElementById('tot-ce').textContent=tCE;
+  document.getElementById('tot-conf').textContent=tCONF;
+  document.getElementById('tot-ac').textContent=tAC;
+  document.getElementById('tot-pc').textContent=tPC;
+  document.getElementById('tot-fan').textContent=tFAN;
+  document.getElementById('tot-wann').textContent=tWANN;
+  document.getElementById('tot-ent').textContent=tENT;
+  document.getElementById('tot-emp').textContent=tEMP;
+  document.getElementById('tot-acp').textContent=tACP;
+  document.getElementById('meta-row-conf').textContent=meta;
+  // KPIs
+  document.getElementById('kpi-ll').textContent=tLL;
+  document.getElementById('kpi-ce').textContent=tCE;
+  document.getElementById('kpi-conf').textContent=tCONF;
+  document.getElementById('kpi-ac').textContent=tAC;
+  document.getElementById('kpi-pc').textContent=tPC;
+  document.getElementById('kpi-meta-disp').textContent=meta;
+  // KPI bars
+  document.getElementById('kbar-ll').style.width=clamp(Math.round(tLL/400*100))+'%';
+  document.getElementById('kbar-ce').style.width=clamp(Math.round(tCE/200*100))+'%';
+  document.getElementById('kbar-conf').style.width=clamp(Math.round(tCONF/meta*100))+'%';
+  document.getElementById('kbar-ac').style.width=clamp(Math.round(tAC/50*100))+'%';
+  document.getElementById('kbar-pc').style.width=clamp(Math.round(tPC/384*100))+'%';
+  // Perfilamiento bars
+  const maxP=Math.max(tFAN,tWANN,tENT,tEMP,tACP,1);
+  document.getElementById('pbar-fan').style.width=Math.round(tFAN/maxP*100)+'%';
+  document.getElementById('pbar-wann').style.width=Math.round(tWANN/maxP*100)+'%';
+  document.getElementById('pbar-ent').style.width=Math.round(tENT/maxP*100)+'%';
+  document.getElementById('pbar-emp').style.width=Math.round(tEMP/maxP*100)+'%';
+  document.getElementById('pbar-acp').style.width=Math.round(tACP/maxP*100)+'%';
+  document.getElementById('pcnt-fan').textContent=tFAN;
+  document.getElementById('pcnt-wann').textContent=tWANN;
+  document.getElementById('pcnt-ent').textContent=tENT;
+  document.getElementById('pcnt-emp').textContent=tEMP;
+  document.getElementById('pcnt-acp').textContent=tACP;
+  // Tasa contacto
+  const tasaPct = tLL===0?0:clamp(Math.round(tCE/tLL*100));
+  document.getElementById('tasa-bar').style.width=tasaPct+'%';
+  document.getElementById('tasa-val').textContent=tLL===0?'—':tasaPct+'%';
+}
+
+// Persistence
+function save(){
+  const d={};
+  document.querySelectorAll('input[data-c]').forEach(e=>{ d[`${e.dataset.r}-${e.dataset.c}`]=e.value; });
+  d.nombre=document.getElementById('inp-nombre').value;
+  d.lider=document.getElementById('inp-lider').value;
+  d.leads=document.getElementById('inp-leads').value;
+  d.meta=document.getElementById('inp-meta').value;
+  d.notas=document.getElementById('inp-notas').value;
+  localStorage.setItem('tracker-ind-v1',JSON.stringify(d));
+}
+function load(){
+  const raw=localStorage.getItem('tracker-ind-v1');
+  if(!raw)return;
+  const d=JSON.parse(raw);
+  document.querySelectorAll('input[data-c]').forEach(e=>{
+    const k=`${e.dataset.r}-${e.dataset.c}`;
+    if(d[k]!=null) e.value=d[k];
+  });
+  if(d.nombre) document.getElementById('inp-nombre').value=d.nombre;
+  if(d.lider)  document.getElementById('inp-lider').value=d.lider;
+  if(d.leads)  document.getElementById('inp-leads').value=d.leads;
+  if(d.meta)   document.getElementById('inp-meta').value=d.meta;
+  if(d.notas)  document.getElementById('inp-notas').value=d.notas;
+  recalc();
+}
+
+document.addEventListener('input',()=>{ recalc(); save(); });
+load();
+</script>
+</body>
+</html>

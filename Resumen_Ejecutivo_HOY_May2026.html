@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Resumen Ejecutivo — HOY 12 Mayo 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 12px; padding: 24px; }
+
+  .page { max-width: 980px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    background: #1B2B5B; border-radius: 10px; padding: 22px 28px;
+    margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .header h1 { font-size: 20px; font-weight: 900; color: #D4A843; line-height: 1.2; }
+  .header p  { font-size: 11px; color: #aab4d4; margin-top: 4px; }
+  .header-right { text-align: right; }
+  .header-right .fecha { font-size: 22px; font-weight: 900; color: white; }
+  .header-right .sub   { font-size: 10px; color: #aab4d4; margin-top: 3px; }
+  .badge-row { display: flex; gap: 8px; margin-top: 10px; }
+  .badge { padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+  .badge.gold  { background: #D4A843; color: #1B2B5B; }
+  .badge.green { background: #2E7D32; color: white; }
+  .badge.red   { background: #C62828; color: white; }
+
+  /* SECTION TITLE */
+  .sec-title {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+    color: white; background: #1B2B5B; padding: 6px 12px; border-radius: 4px; margin: 18px 0 12px;
+  }
+  .sec-title.gold   { background: #B8860B; }
+  .sec-title.red    { background: #B71C1C; }
+  .sec-title.green  { background: #1A6B31; }
+  .sec-title.purple { background: #4527A0; }
+
+  /* KPI GRID */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
+  .kpi-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+  .kpi-card {
+    background: white; border-radius: 8px; padding: 14px 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07); border-top: 3px solid #1B2B5B;
+  }
+  .kpi-card.gold-top  { border-top-color: #D4A843; }
+  .kpi-card.green-top { border-top-color: #2E7D32; }
+  .kpi-card.red-top   { border-top-color: #C62828; }
+  .kpi-card.amber-top { border-top-color: #E65100; }
+  .kpi-label { font-size: 9px; font-weight: 700; text-transform: uppercase; color: #999; letter-spacing: 0.4px; margin-bottom: 5px; }
+  .kpi-value { font-size: 26px; font-weight: 900; color: #1B2B5B; line-height: 1; margin-bottom: 4px; }
+  .kpi-value.gold  { color: #B8860B; }
+  .kpi-value.green { color: #2E7D32; }
+  .kpi-value.red   { color: #C62828; }
+  .kpi-value.amber { color: #E65100; }
+  .kpi-meta { font-size: 10px; color: #888; margin-bottom: 6px; }
+  .kpi-meta span { color: #1B2B5B; font-weight: 700; }
+  .progress-bar { height: 6px; background: #eee; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 3px; }
+  .fill-green  { background: #2E7D32; }
+  .fill-gold   { background: #D4A843; }
+  .fill-amber  { background: #E65100; }
+  .fill-red    { background: #C62828; }
+  .kpi-pct { font-size: 10px; font-weight: 700; margin-top: 4px; }
+
+  /* CASCADA */
+  .cascada-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px; border-radius: 4px; margin-bottom: 3px; font-size: 11px;
+  }
+  .cascada-row.header-row { background: #1B2B5B; color: white; font-weight: 700; font-size: 10px; }
+  .cascada-row.normal { background: #F8F9FC; color: #333; }
+  .cascada-row.minus  { background: #FFF3E0; color: #E65100; }
+  .cascada-row.total  { background: #E8F5E9; font-weight: 900; color: #1B5E20; font-size: 12px; }
+  .cascada-row.subtotal { background: #EDE7F6; font-weight: 700; color: #4527A0; }
+  .cascada-label { flex: 1; }
+  .cascada-val   { font-weight: 700; min-width: 120px; text-align: right; }
+
+  /* COMPARATIVO */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .comp-table th {
+    background: #1B2B5B; color: white; padding: 7px 10px;
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.4px; text-align: left;
+  }
+  .comp-table th.gold-bg { background: #B8860B; }
+  .comp-table th.green-bg { background: #1A6B31; }
+  .comp-table td { padding: 7px 10px; border-bottom: 1px solid #eee; }
+  .comp-table tr:nth-child(even) td { background: #F8F9FC; }
+  .comp-table .highlight td { background: #FFF8E1 !important; font-weight: 700; }
+  .comp-table .alert-row td { background: #FFEBEE !important; color: #C62828; font-weight: 700; }
+  .tag-ok  { display: inline-block; background: #E8F5E9; color: #2E7D32; padding: 2px 7px; border-radius: 10px; font-size: 9px; font-weight: 700; }
+  .tag-warn{ display: inline-block; background: #FFF8E1; color: #E65100; padding: 2px 7px; border-radius: 10px; font-size: 9px; font-weight: 700; }
+  .tag-bad { display: inline-block; background: #FFEBEE; color: #C62828; padding: 2px 7px; border-radius: 10px; font-size: 9px; font-weight: 700; }
+
+  /* ALERTAS */
+  .alerta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .alerta-card { border-radius: 8px; padding: 14px 16px; border-left: 4px solid; }
+  .alerta-card.rojo  { background: #FFEBEE; border-color: #C62828; }
+  .alerta-card.amber { background: #FFF3E0; border-color: #E65100; }
+  .alerta-card.verde { background: #E8F5E9; border-color: #2E7D32; }
+  .alerta-title { font-size: 11px; font-weight: 900; margin-bottom: 5px; }
+  .alerta-card.rojo  .alerta-title { color: #C62828; }
+  .alerta-card.amber .alerta-title { color: #E65100; }
+  .alerta-card.verde .alerta-title { color: #2E7D32; }
+  .alerta-body { font-size: 10.5px; color: #444; line-height: 1.5; }
+  .alerta-body strong { color: #1B2B5B; }
+
+  /* BRECHA */
+  .brecha-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .brecha-card { background: white; border-radius: 8px; padding: 12px 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); text-align: center; }
+  .brecha-label { font-size: 9px; color: #999; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+  .brecha-val   { font-size: 20px; font-weight: 900; color: #C62828; margin-bottom: 3px; }
+  .brecha-sub   { font-size: 9px; color: #666; }
+
+  /* SUPUESTOS */
+  .supuesto-row { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px solid #eee; font-size: 11px; }
+  .supuesto-key { font-weight: 700; color: #1B2B5B; min-width: 200px; }
+  .supuesto-val { color: #444; }
+
+  /* FOOTER */
+  .footer { margin-top: 24px; border-top: 1px solid #ddd; padding-top: 10px; display: flex; justify-content: space-between; font-size: 9px; color: #999; }
+
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { background: white; padding: 8mm; }
+    .page { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1>Resumen Ejecutivo — Estado Real del Bootcamp</h1>
+      <p>Sinergéticos / Synergy for Education · Real Jun 2026 + Club Sinergético · Columna I Dashboard</p>
+      <div class="badge-row">
+        <span class="badge gold">Pauta Digital + Club Sinergético</span>
+        <span class="badge green">170 Blacks vendidos</span>
+        <span class="badge red">108 Blacks para meta</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="fecha">12 Mayo 2026</div>
+      <div class="sub">Evento: Junio 5 · 6 · 7, 2026<br>24 días para el evento</div>
+    </div>
+  </div>
+
+  <!-- KPIs PRINCIPALES -->
+  <div class="sec-title">▸ Estado Actual vs Meta — KPIs Principales</div>
+  <div class="kpi-grid">
+
+    <div class="kpi-card amber-top">
+      <div class="kpi-label">Leads totales</div>
+      <div class="kpi-value amber">39,879</div>
+      <div class="kpi-meta">Meta: <span>77,556</span></div>
+      <div class="progress-bar"><div class="progress-fill fill-amber" style="width:51.4%"></div></div>
+      <div class="kpi-pct" style="color:#E65100;">51.4% de meta</div>
+    </div>
+
+    <div class="kpi-card red-top">
+      <div class="kpi-label">Registros confirmados</div>
+      <div class="kpi-value red">12,105</div>
+      <div class="kpi-meta">Meta: <span>28,800</span></div>
+      <div class="progress-bar"><div class="progress-fill fill-red" style="width:42%"></div></div>
+      <div class="kpi-pct" style="color:#C62828;">42.0% de meta</div>
+    </div>
+
+    <div class="kpi-card gold-top">
+      <div class="kpi-label">Blacks vendidos</div>
+      <div class="kpi-value gold">170</div>
+      <div class="kpi-meta">Meta: <span>278</span></div>
+      <div class="progress-bar"><div class="progress-fill fill-gold" style="width:61.2%"></div></div>
+      <div class="kpi-pct" style="color:#B8860B;">61.2% de meta</div>
+    </div>
+
+    <div class="kpi-card green-top">
+      <div class="kpi-label">Ingreso bruto generado</div>
+      <div class="kpi-value green" style="font-size:20px;">$4.11M</div>
+      <div class="kpi-meta">Meta: <span>$6.72M MXN</span></div>
+      <div class="progress-bar"><div class="progress-fill fill-green" style="width:61.2%"></div></div>
+      <div class="kpi-pct" style="color:#2E7D32;">61.2% de meta</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card red-top">
+      <div class="kpi-label">Tasa de confirmación</div>
+      <div class="kpi-value red">30.35%</div>
+      <div class="kpi-meta">Meta: <span>39.86%</span> · Histórico: 39.86%</div>
+      <div class="progress-bar"><div class="progress-fill fill-red" style="width:76%"></div></div>
+      <div class="kpi-pct" style="color:#C62828;">−9.5 pp bajo meta ⚠️</div>
+    </div>
+
+    <div class="kpi-card amber-top">
+      <div class="kpi-label">CPL blended (pauta + Club)</div>
+      <div class="kpi-value amber">$22</div>
+      <div class="kpi-meta">CPL pauta sola: <span>$27</span> · Meta blended: $19.34</div>
+      <div class="progress-bar"><div class="progress-fill fill-amber" style="width:72%"></div></div>
+      <div class="kpi-pct" style="color:#E65100;">Por encima de meta blended</div>
+    </div>
+
+    <div class="kpi-card amber-top">
+      <div class="kpi-label">Inversión publicitaria</div>
+      <div class="kpi-value green" style="font-size:20px;">$220K</div>
+      <div class="kpi-meta">Presupuesto total: <span>$1.5M</span></div>
+      <div class="progress-bar"><div class="progress-fill fill-green" style="width:14.7%"></div></div>
+      <div class="kpi-pct" style="color:#2E7D32;">Restan $1.28M de pauta</div>
+    </div>
+
+    <div class="kpi-card green-top">
+      <div class="kpi-label">Utilidad neta estimada</div>
+      <div class="kpi-value green" style="font-size:20px;">$1.84M</div>
+      <div class="kpi-meta">Bruto $4.11M × 60% − costos operativos</div>
+      <div class="progress-bar"><div class="progress-fill fill-amber" style="width:25.8%"></div></div>
+      <div class="kpi-pct" style="color:#E65100;">Ver cascada de costos ↓</div>
+    </div>
+  </div>
+
+  <!-- CASCADA DE COSTOS HOY -->
+  <div class="sec-title purple">▸ Cascada de Costos — Resultado Real a Hoy (Pauta + Club)</div>
+
+  <div class="cascada-row header-row">
+    <span class="cascada-label">CONCEPTO</span>
+    <span class="cascada-val">MONTO (MXN)</span>
+  </div>
+  <div class="cascada-row normal">
+    <span class="cascada-label">Ingreso bruto HOY (170 trans. × $24,186 prom. — pauta + Club)</span>
+    <span class="cascada-val">$4,111,620</span>
+  </div>
+  <div class="cascada-row minus">
+    <span class="cascada-label">− Cascada de pagos (−40%: comis. 15% + banco 4% + IVA 16% + merma 5%)</span>
+    <span class="cascada-val">−$1,644,648</span>
+  </div>
+  <div class="cascada-row subtotal">
+    <span class="cascada-label">Ingreso neto variable (60%)</span>
+    <span class="cascada-val">$2,466,972</span>
+  </div>
+  <div class="cascada-row minus">
+    <span class="cascada-label">− Twilio / WhatsApp API (pauta: ~8,148 leads × $13)</span>
+    <span class="cascada-val">−$105,924</span>
+  </div>
+  <div class="cascada-row minus">
+    <span class="cascada-label">− LLM / IA tokens (variable, estimado)</span>
+    <span class="cascada-val">−$150,000</span>
+  </div>
+  <div class="cascada-row minus">
+    <span class="cascada-label">− Speakers del evento (costo fijo)</span>
+    <span class="cascada-val">−$150,000</span>
+  </div>
+  <div class="cascada-row minus">
+    <span class="cascada-label">− Inversión de pauta ejecutada</span>
+    <span class="cascada-val">−$220,000</span>
+  </div>
+  <div class="cascada-row total">
+    <span class="cascada-label">★ UTILIDAD NETA A HOY</span>
+    <span class="cascada-val">$1,841,048</span>
+  </div>
+  <div style="font-size:10px; color:#666; margin-top:5px; padding: 0 4px;">
+    Margen neto estimado: ~44.8% · ROI sobre inversión pauta ejecutada ($220K): +837% · Club aporta leads orgánicos sin costo adicional de pauta
+  </div>
+
+  <!-- COMPARATIVO META vs HOY -->
+  <div class="sec-title gold">▸ Comparativo Completo — Meta vs Real HOY</div>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>MÉTRICA</th>
+        <th class="gold-bg">META (Pauta + Club)</th>
+        <th>HOY — 12 Mayo 2026</th>
+        <th>PENDIENTE</th>
+        <th>% AVANCE</th>
+        <th>SEMÁFORO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="6" style="background:#1B2B5B; color:#aab4d4; font-size:9px; font-weight:700; padding:5px 10px; letter-spacing:0.5px;">ADQUISICIÓN</td></tr>
+      <tr>
+        <td>Leads totales</td>
+        <td>77,556</td>
+        <td><strong>39,879</strong></td>
+        <td>37,677 pendientes</td>
+        <td>51.4%</td>
+        <td><span class="tag-warn">⚠️ En proceso</span></td>
+      </tr>
+      <tr>
+        <td>Registros confirmados</td>
+        <td>28,800</td>
+        <td><strong>12,105</strong></td>
+        <td>16,695 pendientes</td>
+        <td>42.0%</td>
+        <td><span class="tag-bad">🔴 Rezagado</span></td>
+      </tr>
+      <tr class="alert-row">
+        <td>Tasa de confirmación</td>
+        <td>39.86%</td>
+        <td><strong>30.35%</strong></td>
+        <td>−9.5 puntos</td>
+        <td>76.1%</td>
+        <td><span class="tag-bad">🔴 Crítico</span></td>
+      </tr>
+      <tr>
+        <td>Inversión publicitaria</td>
+        <td>$1,500,000</td>
+        <td><strong>$220,000</strong></td>
+        <td>$1,280,000 restantes</td>
+        <td>14.7%</td>
+        <td><span class="tag-ok">✅ Margen amplio</span></td>
+      </tr>
+      <tr>
+        <td>CPL blended</td>
+        <td>$19.34</td>
+        <td><strong>$22.00</strong></td>
+        <td>+$2.66 sobre meta</td>
+        <td>—</td>
+        <td><span class="tag-warn">⚠️ Mejorar</span></td>
+      </tr>
+      <tr><td colspan="6" style="background:#1B2B5B; color:#aab4d4; font-size:9px; font-weight:700; padding:5px 10px; letter-spacing:0.5px;">EVENTO EN VIVO</td></tr>
+      <tr>
+        <td>Pico máx. audiencia</td>
+        <td>13,036</td>
+        <td><strong>6,703</strong></td>
+        <td>6,333 pendientes</td>
+        <td>51.4%</td>
+        <td><span class="tag-warn">⚠️ Proporcional a leads</span></td>
+      </tr>
+      <tr>
+        <td>Tasa de asistencia</td>
+        <td>16.81%</td>
+        <td><strong>16.81%</strong></td>
+        <td>—</td>
+        <td>100%</td>
+        <td><span class="tag-ok">✅ En meta</span></td>
+      </tr>
+      <tr><td colspan="6" style="background:#1B2B5B; color:#aab4d4; font-size:9px; font-weight:700; padding:5px 10px; letter-spacing:0.5px;">VENTAS BLACK</td></tr>
+      <tr>
+        <td>Blacks simples</td>
+        <td>119</td>
+        <td><strong>73</strong></td>
+        <td>46 pendientes</td>
+        <td>61.3%</td>
+        <td><span class="tag-warn">⚠️ En proceso</span></td>
+      </tr>
+      <tr>
+        <td>Blacks dobles</td>
+        <td>81</td>
+        <td><strong>49</strong></td>
+        <td>32 pendientes</td>
+        <td>60.5%</td>
+        <td><span class="tag-warn">⚠️ En proceso</span></td>
+      </tr>
+      <tr class="highlight">
+        <td>Total Blacks (transacciones)</td>
+        <td>278</td>
+        <td><strong>170</strong></td>
+        <td><strong>108 Blacks</strong></td>
+        <td>61.2%</td>
+        <td><span class="tag-warn">⚠️ 108 por cerrar</span></td>
+      </tr>
+      <tr>
+        <td>Conv. Blacks / Asistentes</td>
+        <td>2.13%</td>
+        <td><strong>2.53%</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td><span class="tag-ok">✅ Por encima de meta</span></td>
+      </tr>
+      <tr><td colspan="6" style="background:#1B2B5B; color:#aab4d4; font-size:9px; font-weight:700; padding:5px 10px; letter-spacing:0.5px;">FINANCIERO</td></tr>
+      <tr>
+        <td>Ingreso bruto generado</td>
+        <td>$6,723,708</td>
+        <td><strong>$4,111,620</strong></td>
+        <td>$2,612,088</td>
+        <td>61.2%</td>
+        <td><span class="tag-warn">⚠️ En proceso</span></td>
+      </tr>
+      <tr class="highlight">
+        <td>Utilidad neta estimada</td>
+        <td>$7,133,914</td>
+        <td><strong>$1,841,048</strong></td>
+        <td><strong>$5,292,866</strong></td>
+        <td>25.8%</td>
+        <td><span class="tag-warn">⚠️ Ver cascada</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- LO QUE FALTA -->
+  <div class="sec-title red">▸ Brecha — Lo que Falta para Cerrar la Meta</div>
+  <div class="brecha-grid">
+    <div class="brecha-card">
+      <div class="brecha-label">Blacks por cerrar</div>
+      <div class="brecha-val">108</div>
+      <div class="brecha-sub">en los próximos 24 días</div>
+    </div>
+    <div class="brecha-card">
+      <div class="brecha-label">Confirmados por lograr</div>
+      <div class="brecha-val">16,695</div>
+      <div class="brecha-sub">leads por registrar</div>
+    </div>
+    <div class="brecha-card">
+      <div class="brecha-label">Leads por conseguir</div>
+      <div class="brecha-val">37,677</div>
+      <div class="brecha-sub">con $1.28M disponibles de pauta</div>
+    </div>
+    <div class="brecha-card">
+      <div class="brecha-label">Utilidad por generar</div>
+      <div class="brecha-val" style="font-size:17px;">$5.29M</div>
+      <div class="brecha-sub">MXN pendientes</div>
+    </div>
+  </div>
+
+  <!-- ALERTAS -->
+  <div class="sec-title red">▸ Alertas Críticas y Acciones Inmediatas</div>
+  <div class="alerta-grid">
+
+    <div class="alerta-card rojo">
+      <div class="alerta-title">🔴 Tasa de confirmación por debajo de meta</div>
+      <div class="alerta-body">
+        Actual <strong>30.35%</strong> vs meta <strong>39.86%</strong> — 9.5 puntos de diferencia.<br>
+        Esto impacta directamente el número de asistentes en vivo y la conversión de Blacks.<br>
+        <strong>Acción:</strong> El equipo del Club (llamadas 7–15 mayo) debe alcanzar 40% de confirmación sobre los 22,000 leads para compensar. A hoy, los 12,105 confirmados sugieren que se confirman aproximadamente 1 de cada 3 leads contactados.
+      </div>
+    </div>
+
+    <div class="alerta-card verde">
+      <div class="alerta-title">✅ Presupuesto de pauta con amplio margen disponible</div>
+      <div class="alerta-body">
+        Solo se han invertido <strong>$220K de $1.5M</strong> — restan <strong>$1.28M disponibles</strong>.<br>
+        Con CPL actual de $27 en pauta digital, ese presupuesto restante puede generar aproximadamente <strong>47,407 leads adicionales</strong>.<br>
+        <strong>Acción:</strong> Evaluar acelerar la pauta digital para aprovechar el presupuesto disponible y cerrar la brecha de 37,677 leads faltantes.
+      </div>
+    </div>
+
+    <div class="alerta-card amber">
+      <div class="alerta-title">⚠️ CPL blended $22 — encima de meta</div>
+      <div class="alerta-body">
+        La meta blended (pauta + Club) es <strong>$19.34</strong>. Estamos en <strong>$22</strong>.<br>
+        El Club con CPL $0 ya está bajando el promedio desde $27 (solo pauta). Al completar los 22,000 leads del Club, el blended mejorará automáticamente.<br>
+        <strong>Acción:</strong> Priorizar completar el contacto de todos los leads del Club antes del 15 de mayo.
+      </div>
+    </div>
+
+    <div class="alerta-card amber">
+      <div class="alerta-title">⚠️ 108 Blacks para meta — el evento es el catalizador</div>
+      <div class="alerta-body">
+        Históricamente, <strong>~60% de las ventas ocurren durante el evento en vivo</strong> (Días 1 y 2).<br>
+        Con 12,105 confirmados asistiendo y tasa de conversión Blacks/Asistentes del <strong>2.53%</strong> (por encima de meta 2.13%), el potencial de cierre en vivo es alto.<br>
+        <strong>Acción:</strong> Maximizar asistencia en vivo = maximizar ventas. Cada confirmado que no asiste reduce el pipeline de cierre.
+      </div>
+    </div>
+
+    <div class="alerta-card verde">
+      <div class="alerta-title">✅ Conversión Blacks/Asistentes por encima de meta</div>
+      <div class="alerta-body">
+        La tasa <strong>2.53%</strong> está sobre la meta de <strong>2.13%</strong> y coincide con el histórico 2025.<br>
+        Esto indica que la calidad de los asistentes es buena — quien llega, compra.<br>
+        <strong>Palanca clave:</strong> El problema no es la conversión en sala, es llevar suficiente gente al evento.
+      </div>
+    </div>
+
+    <div class="alerta-card verde">
+      <div class="alerta-title">✅ Club Sinergético aporta $1.71M sin costo adicional</div>
+      <div class="alerta-body">
+        Los <strong>39 Blacks incrementales</strong> del Club generan ~<strong>$2.85M bruto</strong> adicional con $0 de inversión en pauta.<br>
+        Esto eleva el margen del evento de <strong>14% (solo pauta) a ~31.5% (pauta + Club)</strong>.<br>
+        <strong>El Club es el mayor multiplicador de rentabilidad del evento.</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROYECCIÓN SI SE MANTIENE RITMO -->
+  <div class="sec-title green">▸ Proyección — ¿Es Alcanzable la Meta?</div>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>ESCENARIO</th>
+        <th>SUPUESTO</th>
+        <th>BLACKS TOTALES</th>
+        <th>RESULTADO</th>
+        <th>VEREDICTO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="alert-row">
+        <td>🔴 Pesimista — CPL $27 se mantiene</td>
+        <td>$1.28M → 47,407 leads pauta · Club 22K leads al 30% conv. · asistencia histórica</td>
+        <td>170 + ~70 = <strong>~240</strong></td>
+        <td>$7.3M bruto</td>
+        <td><span class="tag-warn">Meta en riesgo</span></td>
+      </tr>
+      <tr>
+        <td>🟡 Base — Club al 40% confirmación</td>
+        <td>$1.28M a CPL $27 · Club 22K leads al 40% conv. · asistencia 16.81%</td>
+        <td>170 + ~108 = <strong>~278</strong></td>
+        <td>$8.6M bruto</td>
+        <td><span class="tag-ok">Meta alcanzable</span></td>
+      </tr>
+      <tr class="highlight">
+        <td>🎯 Óptimo — CPL baja y evento convierte bien</td>
+        <td>CPL baja a $20 con $1.28M → 64K leads · Club 40% · conv. evento 2.53%</td>
+        <td>170 + ~140 = <strong>~310</strong></td>
+        <td>$9.4M bruto</td>
+        <td><span class="tag-ok">Meta superada</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="background:#FFF8E1; border-left: 3px solid #D4A843; padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top:10px; font-size:11px; color:#555;">
+    <strong style="color:#1B2B5B;">Conclusión:</strong> Con $1.28M de pauta disponibles y 22,000 leads del Club, la meta de 278 Blacks es <strong>alcanzable en el escenario base</strong>. El presupuesto restante puede generar hasta 47,407 leads adicionales a $27 CPL. El trabajo de llamadas del Club esta semana y la conversión durante el evento (5, 6 y 7 de junio) son los dos palancas decisivas.
+  </div>
+
+  <!-- SUPUESTOS -->
+  <div class="sec-title" style="background:#455A64;">▸ Supuestos del Modelo</div>
+  <div class="supuesto-row"><span class="supuesto-key">Cascada de pagos</span><span class="supuesto-val">−40% del ingreso bruto (comis. 15% + banco 4% + IVA 16% + merma 5%)</span></div>
+  <div class="supuesto-row"><span class="supuesto-key">Twilio / WhatsApp API</span><span class="supuesto-val">$13 MXN por lead — aplicado SOLO a leads de pauta (~8,148 leads: $220K ÷ $27 CPL). Club no genera costo Twilio.</span></div>
+  <div class="supuesto-row"><span class="supuesto-key">LLM / Tokens IA</span><span class="supuesto-val">5% del ingreso bruto de pauta únicamente. Club no genera costo LLM.</span></div>
+  <div class="supuesto-row"><span class="supuesto-key">Speakers del evento</span><span class="supuesto-val">$150,000 MXN fijo, sin importar volumen.</span></div>
+  <div class="supuesto-row"><span class="supuesto-key">Club Sinergético</span><span class="supuesto-val">22,000 leads a $0 CPL · 39 Blacks adicionales · $2.85M ingreso bruto incremental</span></div>
+  <div class="supuesto-row"><span class="supuesto-key">Ticket promedio</span><span class="supuesto-val">$24,186 MXN / transacción (ingreso bruto ÷ transacciones de pauta)</span></div>
+  <div class="supuesto-row" style="border:none;"><span class="supuesto-key">Fuente de datos</span><span class="supuesto-val">Dashboard — Columna I "HOY (REAL JUN 2026 + CLUB SINERGÉTICO)" · 12 mayo 2026</span></div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Sinergéticos / Synergy for Education · Bootcamp Digital Junio 5–7, 2026 · Resumen ejecutivo real — 12 mayo 2026</span>
+    <span>Fuente: Dashboard Columna I · Exluye Método CEO</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Manejo de Objeciones — World Class Sales</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface2: #1c1c27;
+      --border: rgba(255,255,255,0.08);
+      --accent: #6c63ff;
+      --accent2: #ff6b6b;
+      --accent3: #ffd166;
+      --accent4: #06d6a0;
+      --text: #e8e8f0;
+      --text-dim: rgba(232,232,240,0.5);
+      --text-faint: rgba(232,232,240,0.25);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      z-index: 100;
+      padding: 28px 0 40px;
+    }
+
+    .sidebar-logo {
+      padding: 0 24px 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .sidebar-logo .brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .sidebar-logo h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .nav-section {
+      padding: 0 12px;
+      margin-bottom: 8px;
+    }
+
+    .nav-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 0 12px;
+      margin-bottom: 6px;
+      margin-top: 16px;
+    }
+
+    .nav-item {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .nav-item.active {
+      background: rgba(108,99,255,0.15);
+      color: var(--accent);
+    }
+
+    .nav-item .nav-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* MAIN */
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 48px 56px;
+      max-width: 900px;
+    }
+
+    /* SECTION */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(108,99,255,0.12);
+      border: 1px solid rgba(108,99,255,0.25);
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-tag.red { color: var(--accent2); background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.25); }
+    .section-tag.yellow { color: var(--accent3); background: rgba(255,209,102,0.1); border-color: rgba(255,209,102,0.25); }
+    .section-tag.green { color: var(--accent4); background: rgba(6,214,160,0.1); border-color: rgba(6,214,160,0.25); }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 620px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .card-title.red { color: var(--accent2); }
+    .card-title.yellow { color: var(--accent3); }
+    .card-title.green { color: var(--accent4); }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+
+    .step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.3);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-num.red { background: rgba(255,107,107,0.12); border-color: rgba(255,107,107,0.3); color: var(--accent2); }
+    .step-num.yellow { background: rgba(255,209,102,0.12); border-color: rgba(255,209,102,0.3); color: var(--accent3); }
+    .step-num.green { background: rgba(6,214,160,0.12); border-color: rgba(6,214,160,0.3); color: var(--accent4); }
+
+    .step-content { flex: 1; padding-top: 6px; }
+
+    .step-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* SCRIPT BLOCKS */
+    .script {
+      background: rgba(108,99,255,0.07);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .script.red { background: rgba(255,107,107,0.07); border-color: var(--accent2); }
+    .script.yellow { background: rgba(255,209,102,0.07); border-color: var(--accent3); }
+    .script.green { background: rgba(6,214,160,0.07); border-color: var(--accent4); }
+
+    .script-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 6px;
+      font-style: normal;
+    }
+
+    /* HIGHLIGHT */
+    .highlight {
+      background: rgba(108,99,255,0.15);
+      color: #a9a4ff;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    .highlight.red { background: rgba(255,107,107,0.15); color: #ff9a9a; }
+    .highlight.yellow { background: rgba(255,209,102,0.15); color: #ffe08a; }
+    .highlight.green { background: rgba(6,214,160,0.15); color: #4fffd4; }
+
+    /* KEY POINTS */
+    .key-points { display: flex; flex-direction: column; gap: 10px; }
+
+    .key-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .key-point::before {
+      content: "→";
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .key-point.red::before { color: var(--accent2); }
+    .key-point.yellow::before { color: var(--accent3); }
+    .key-point.green::before { color: var(--accent4); }
+
+    /* GRID */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* BIG CALLOUT */
+    .callout {
+      background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(108,99,255,0.04));
+      border: 1px solid rgba(108,99,255,0.25);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin: 20px 0;
+    }
+
+    .callout.red { background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,107,107,0.03)); border-color: rgba(255,107,107,0.2); }
+    .callout.yellow { background: linear-gradient(135deg, rgba(255,209,102,0.1), rgba(255,209,102,0.03)); border-color: rgba(255,209,102,0.2); }
+    .callout.green { background: linear-gradient(135deg, rgba(6,214,160,0.1), rgba(6,214,160,0.03)); border-color: rgba(6,214,160,0.2); }
+
+    .callout-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .callout-title.red { color: var(--accent2); }
+    .callout-title.yellow { color: var(--accent3); }
+    .callout-title.green { color: var(--accent4); }
+
+    .callout-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    /* OBJECTION HEADER CARD */
+    .objection-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 28px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .objection-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .objection-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 4px;
+    }
+
+    .objection-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">World Class Sales</div>
+    <h2>Guía de Manejo<br>de Objeciones</h2>
+  </div>
+
+  <div class="nav-label">Fundamentos</div>
+  <div class="nav-section">
+    <button class="nav-item active" onclick="show('framework')">
+      <span class="nav-dot" style="background:#6c63ff"></span>Framework 4 Pasos
+    </button>
+    <button class="nav-item" onclick="show('intentos')">
+      <span class="nav-dot" style="background:#a9a4ff"></span>Intentos Universales
+    </button>
+  </div>
+
+  <div class="nav-label">Objeciones</div>
+  <div class="nav-section">
+    <button class="nav-item" onclick="show('dinero')">
+      <span class="nav-dot" style="background:#ff6b6b"></span>No tengo dinero
+    </button>
+    <button class="nav-item" onclick="show('caro')">
+      <span class="nav-dot" style="background:#ffd166"></span>Es muy caro
+    </button>
+    <button class="nav-item" onclick="show('pareja')">
+      <span class="nav-dot" style="background:#06d6a0"></span>Necesito hablar con mi pareja
+    </button>
+    <button class="nav-item" onclick="show('pensar')">
+      <span class="nav-dot" style="background:#ff9f43"></span>Necesito pensarlo
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- ================================ FRAMEWORK ================================ -->
+  <div class="section active" id="s-framework">
+    <div class="section-header">
+      <div class="section-tag">Fundamentos</div>
+      <div class="section-title">Framework de 4 Pasos</div>
+      <p class="section-desc">Antes de conocer las objeciones específicas, debes dominar este framework. Aplica para <strong>cualquier</strong> objeción que recibas. El objetivo siempre es el mismo: entrar dentro del "no" para encontrar la verdad real.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Principio clave — NRS Formula</div>
+      <div class="callout-text">No Resistance Selling: nunca pelees la objeción de frente. El que pelea el argumento, pierde. El que no lo pelea, gana.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Los 4 Pasos</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledger (Reconocer)</div>
+            <div class="step-text">No tienes que <em>estar de acuerdo</em>, solo <em>reconocer</em>. Baja la resistencia del cliente.</div>
+            <div class="script">
+              <div class="script-label">Frases que puedes usar</div>
+              "100%..." &nbsp;|&nbsp; "Completamente entiendo..." &nbsp;|&nbsp; "Por supuesto..." &nbsp;|&nbsp; "Okay."
+            </div>
+            <div class="key-points" style="margin-top:10px">
+              <div class="key-point">No digas: "Exactamente por eso deberías unirte" — eso es pelear</div>
+              <div class="key-point">La venta es una frecuencia. Primero iguálate a su frecuencia, luego lidera</div>
+              <div class="key-point">Incluso tu postura corporal cambia: más relajado, modo cordero (lamb mode)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-label">Sell the Exit (Vender la Salida)</div>
+            <div class="step-text">Hazle saber que <strong>puede irse</strong>. Si el cliente siente que puede salir de la conversación, baja su resistencia y habla con más honestidad.</div>
+            <div class="script">
+              <div class="script-label">Ejemplo</div>
+              "100% Juan, tómate tu tiempo. Oye, ¿te importa si te mando un email con la información mientras tanto?"
+            </div>
+            <div class="key-points" style="margin-top:10px">
+              <div class="key-point">Si puedes empujarlo hacia afuera, puedes jalarlo de regreso</div>
+              <div class="key-point">Nadie comparte su verdad con alguien que lo está presionando</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-label">Ask (La Pregunta que jala de regreso)</div>
+            <div class="step-text">Después de vender la salida, haz una pregunta para entrar de nuevo y encontrar la <strong>verdad desnuda</strong> de la objeción.</div>
+            <div class="script">
+              <div class="script-label">Ejemplo</div>
+              "Oye, antes de que te mande ese email, ¿sobre qué seguías teniendo dudas hoy? ¿Era más sobre el precio, el producto o el proceso?"
+            </div>
+            <div class="key-points" style="margin-top:10px">
+              <div class="key-point">Solo puedes hacer esta pregunta si ya vendiste la salida</div>
+              <div class="key-point">Si siente que lo estás presionando, jamás te dirá la verdad</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-label">Re-present & Re-close (Representar y Re-cerrar)</div>
+            <div class="step-text">Solo cuando tienes la verdad real puedes volver a presentar y cerrar. Este derecho se <strong>gana</strong> — no puedes saltar directo aquí.</div>
+            <div class="key-points">
+              <div class="key-point">No te has ganado el re-cierre si no te pusiste en la misma frecuencia</div>
+              <div class="key-point">No te has ganado el re-cierre si no vendiste la salida</div>
+              <div class="key-point">No te has ganado el re-cierre si no hiciste la pregunta correcta</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Recuerda siempre</div>
+      <div class="callout-text">Piensa como el León, vende como el Cordero. Prospecting es rápido. Las ventas son lentas. En el momento en que llega la objeción, vuelves al modo cordero.</div>
+    </div>
+
+  </div>
+
+  <!-- ================================ INTENTOS ================================ -->
+  <div class="section" id="s-intentos">
+    <div class="section-header">
+      <div class="section-tag">Fundamentos</div>
+      <div class="section-title">Intentos Universales</div>
+      <p class="section-desc">Antes de usar el framework completo de 4 pasos, prueba estos dos intentos. Son simples, efectivos y funcionan con el 50% de las objeciones sin necesidad de más táctica.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Intento #1 — Las 2 Palabras Mágicas</div>
+      <p>Ante <strong>cualquier</strong> objeción, antes de hacer cualquier otra cosa, di solo dos palabras:</p>
+
+      <div class="callout" style="text-align:center; margin:20px 0">
+        <div class="callout-title" style="text-align:center">Las 2 palabras</div>
+        <div class="callout-text" style="font-size:28px; letter-spacing:2px">"¿Qué más?"</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">↳</div>
+          <div class="step-content">
+            <div class="step-label">¿Cómo se aplica?</div>
+            <div class="script">
+              Cliente: "Es que no tengo el dinero."<br>
+              Tú: "100%... oye, ¿qué más?"<br><br>
+              Cliente: "Necesito hablar con mi esposa."<br>
+              Tú: "Por supuesto... oye, ¿qué más?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">↳</div>
+          <div class="step-content">
+            <div class="step-label">¿Por qué funciona?</div>
+            <div class="key-points">
+              <div class="key-point">El 50% de las veces la objeción se <strong>mueve</strong> o revela la verdad real</div>
+              <div class="key-point">Actúas como el cordero: sin resistencia, curioso, tranquilo</div>
+              <div class="key-point">Si olvidas todo lo demás, estas 2 palabras siempre funcionan como primer intento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Intento #2 — El Repite</div>
+      <p>Si el primer intento no movió la objeción, simplemente <strong>repite la objeción de regreso</strong> al cliente, con tono tranquilo y curioso.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">↳</div>
+          <div class="step-content">
+            <div class="step-label">¿Cómo se aplica?</div>
+            <div class="script">
+              Cliente: "No tengo el dinero."<br>
+              Tú: "¿No tienes el dinero...?" <em>(pausa)</em><br><br>
+              Cliente: "Necesito tiempo para pensarlo."<br>
+              Tú: "¿Necesitas tiempo para pensarlo...?" <em>(pausa)</em>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">↳</div>
+          <div class="step-content">
+            <div class="step-label">¿Qué pasa después?</div>
+            <div class="key-points">
+              <div class="key-point">El cliente típicamente <strong>elabora</strong>: "Sí, es que el presupuesto está un poco ajustado..."</div>
+              <div class="key-point">La objeción se mueve: de "no tengo dinero" a "tengo algo de dinero pero hay algo más"</div>
+              <div class="key-point">Aporta <strong>claridad</strong>: ya no asumes, ahora sabes qué es realmente</div>
+              <div class="key-point">No amenaza, no presiona. El cliente siente que puede seguir hablando</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:20px">
+        <div class="callout-title">Recuerda: No uses los intentos en orden forzado</div>
+        <div class="callout-text" style="font-size:14px; font-weight:500">Eres como el agua (Bruce Lee). Lee la situación. A veces el #1 basta. A veces vas directo al #3 o al framework. Tienes herramientas — úsalas según el momento.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================ NO TENGO DINERO ================================ -->
+  <div class="section" id="s-dinero">
+    <div class="section-header">
+      <div class="section-tag red">Objeción</div>
+      <div class="section-title">💰 "No tengo el dinero"</div>
+      <p class="section-desc">La objeción más común. El 90% de las veces no es falta de dinero real — es miedo o incertidumbre disfrazada de una excusa fácil de decir.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"No tengo el dinero" / "No tenemos el dinero" / "Me pagan el próximo viernes"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title red">Lo que REALMENTE está pasando</div>
+      <div class="key-points">
+        <div class="key-point red">No dijo que el banco no tiene dinero, ni su tío, ni su mamá. Solo dijo <em>yo</em></div>
+        <div class="key-point red">Si supieran que van a recuperar el dinero y más, lo conseguirían de donde sea</div>
+        <div class="key-point red">Es la forma más fácil de decir "tengo miedo" sin decirlo — el ego lo protege</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title red">El proceso completo</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num red">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge — sin hacer del dinero el problema</div>
+            <div class="script red">
+              "Completamente entiendo, Bob. Entiendo que el presupuesto puede estar un poco ajustado en este momento."
+            </div>
+            <p style="margin-top:8px; font-size:13px;">⚠️ Nunca digas "exactamente por eso deberías unirte" ni preguntes "¿cuándo te pagan?" — eso te convierte en vendedor hambriento.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num red">2</div>
+          <div class="step-content">
+            <div class="step-label">Sell the Exit — con lenguaje indirecto sobre el dinero</div>
+            <div class="script red">
+              "En lo que consigues el capital en la próxima semana o dos, ¿te parece bien si te mando un resumen de lo que platicamos hoy por email? Así, cuando vayas a tomar la decisión, estás completamente seguro de cada punto."
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num red">3</div>
+          <div class="step-content">
+            <div class="step-label">Ask — para mover la objeción</div>
+            <div class="script red">
+              "Oye Bob, justo antes de mandarte ese email: ¿sobre qué seguías teniendo dudas hoy? ¿Era más sobre el precio comparado con otras opciones, sobre el producto en sí, o más sobre el proceso de implementación? ¿Qué pongo en el email para que estés 100% seguro cuando consigas el capital?"
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num red">4</div>
+          <div class="step-content">
+            <div class="step-label">La objeción se mueve — Re-presenta según la verdad real</div>
+            <div class="key-points">
+              <div class="key-point red">Si dice "tengo miedo de cambiar de sistema" → maneja la objeción de proceso</div>
+              <div class="key-point red">Si dice "es un poco caro" → usa precio vs. costo (ver objeción "Es muy caro")</div>
+              <div class="key-point red">Si da otra razón → ya tienes la verdad desnuda para re-presentar</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout red">
+      <div class="callout-title red">Principio clave</div>
+      <div class="callout-text">Si el valor percibido fuera suficientemente alto, el dinero aparece. Un Rolex por $100 — ¿lo compras aunque no tengas el dinero? Sí. El problema casi nunca es el dinero, es el valor percibido.</div>
+    </div>
+
+  </div>
+
+  <!-- ================================ ES MUY CARO ================================ -->
+  <div class="section" id="s-caro">
+    <div class="section-header">
+      <div class="section-tag yellow">Objeción</div>
+      <div class="section-title">💸 "Es muy caro"</div>
+      <p class="section-desc">No pelees el precio. Reencuadra la conversación de precio a valor, y usa al cliente para que él mismo justifique por qué valen lo que cuestan.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Es demasiado caro" / "Encontré algo más barato" / "No cabe en mi presupuesto"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title yellow">Estrategia 1 — Que el cliente te venda a ti</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num yellow">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge + Sell the Exit</div>
+            <div class="script yellow">
+              "Entiendo, Juan. Y mira, siendo honesto contigo, puedo mandarte por email un par de opciones que son como un 50% más baratas que nosotros. Lo hago con gusto si quieres explorar eso."
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num yellow">2</div>
+          <div class="step-content">
+            <div class="step-label">La pregunta que jala de regreso</div>
+            <div class="script yellow">
+              "Oye Juan, antes de mandarte ese email: ¿por qué crees que más de 9,000 personas se unieron a nuestro programa en los últimos 12 meses si somos un producto premium? Solo quiero entender."
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num yellow">3</div>
+          <div class="step-content">
+            <div class="step-label">Deja que el cliente responda — luego usa sus palabras</div>
+            <div class="script yellow">
+              Cliente: "Supongo que por los resultados, la calidad, el sistema..."<br><br>
+              Tú: "Exacto. Entonces, Juan, ¿buscas un precio más bajo hoy o todo lo que acabas de listar?"
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title yellow">Estrategia 2 — Precio vs. Costo</div>
+
+      <div class="callout yellow">
+        <div class="callout-title yellow">La distinción más poderosa</div>
+        <div class="callout-text"><span class="highlight yellow">Precio</span> = lo que pagas hoy &nbsp;·&nbsp; <span class="highlight yellow">Costo</span> = lo que pagas a largo plazo</div>
+      </div>
+
+      <div class="script yellow">
+        <div class="script-label">Cómo explicarlo</div>
+        "Juan, ¿me hablas del precio o del costo? Porque el precio es lo que inviertes hoy. El costo es lo que obtienes — o pierdes — a futuro. Algo barato hoy puede costarte carísimo mañana."
+      </div>
+
+      <div class="key-points" style="margin-top:16px">
+        <div class="key-point yellow"><strong>Ejemplo BMW:</strong> Compras uno usado por $50k (ahorras $20k). Chispa: $1k. Bobina: $5k. Alineación: $1k. Sistema electrónico: $9k. Reventa: $30k. Total real: $90k. El nuevo costaba $70k. Lo "barato" salió más caro.</div>
+        <div class="key-point yellow"><strong>Ejemplo vitaminas:</strong> Vitaminas baratas a $9.99 con 15 ingredientes raros. Las buenas cuestan más hoy. Los médicos cuestan más mañana.</div>
+        <div class="key-point yellow">La gente que paga precio alto hoy, típicamente tiene un costo más bajo en el futuro</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================ PAREJA ================================ -->
+  <div class="section" id="s-pareja">
+    <div class="section-header">
+      <div class="section-tag green">Objeción</div>
+      <div class="section-title">👫 "Necesito hablar con mi pareja"</div>
+      <p class="section-desc">Nunca conviertas al cliente en tu vendedor. Tú vendes tu producto mejor que cualquiera. Tu objetivo: o mover la objeción real, o conseguir a la pareja en la llamada.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Necesito hablar con mi esposo/esposa" / "Tengo que consultarlo con mi socio" / "Quiero que mi pareja lo apruebe"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title green">Camino A — Mover la objeción real</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num green">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge + Obtener el nombre de la pareja</div>
+            <div class="script green">
+              "100% Kara, completamente entiendo. Y cuando hables con Bob esta noche, ¿cuándo creen que tendrían esa conversación? ¿Esta noche, esta semana?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num green">2</div>
+          <div class="step-content">
+            <div class="step-label">Sell the Exit — con una condición honesta</div>
+            <div class="script green">
+              "Mira Kara, yo quiero que tú y Bob estén ambos 100% seguros. Porque si él dice sí y tú aún no estás completamente convencida, no quiero que se unan. ¿Tiene sentido?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num green">3</div>
+          <div class="step-content">
+            <div class="step-label">Ask — ¿Qué le mando para que revisen juntos?</div>
+            <div class="script green">
+              "¿Qué puedo ponerte en un email para que lo revisen esta noche? ¿Era más sobre el precio, el producto o el proceso? Así cuando hablen con Bob, los dos tienen toda la info."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title green">Camino B — Conseguir a la pareja en la llamada</div>
+      <p>Si después del Camino A la objeción no se movió, tu objetivo es hacer que la pareja entre a la conversación. <strong>Tú vendes mejor que el cliente.</strong></p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num green">1</div>
+          <div class="step-content">
+            <div class="step-label">Normalizar + Limpiar la agenda</div>
+            <div class="script green">
+              "Me alegra mucho que tomen este tipo de decisiones juntos. Mi trabajo no es meterlos en un conflicto — al contrario, quiero que esto fortalezca su relación. Oye Kara, ¿qué van a hacer tú y Bob esta noche a las 9pm, por unos 5-10 minutos?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num green">2</div>
+          <div class="step-content">
+            <div class="step-label">La recomendación — sin presión de compra</div>
+            <div class="script green">
+              "Te recomiendo esto: que Bob entre a una llamada de 5-10 minutos conmigo hoy a las 9. No voy a intentar venderle nada — eso lo puedes hacer tú mejor que yo. Solo voy a responder sus preguntas igual que respondí las tuyas. Así los dos tienen la misma información y pueden tomar una decisión juntos. ¿Te parece justo?"
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout green" style="margin-top:20px">
+        <div class="callout-title green">Por qué funciona</div>
+        <div class="callout-text" style="font-size:14px; font-weight:500">Vendes la salida incluso para la llamada con la pareja: "entra, hace preguntas, se va." Sin presión. Esto baja completamente la resistencia de traer al tercero.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================ PENSAR ================================ -->
+  <div class="section" id="s-pensar">
+    <div class="section-header">
+      <div class="section-tag" style="color:#ff9f43; background:rgba(255,159,67,0.1); border-color:rgba(255,159,67,0.25)">Objeción</div>
+      <div class="section-title">⏳ "Necesito tiempo para pensarlo"</div>
+      <p class="section-desc">Esta objeción tiene dos rutas: un enfoque indirecto para seguir en la conversación, y un enfoque directo que confronta la decisión-fobia para empujar a una decisión ahora.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Solo necesito tiempo para pensarlo" / "Déjame pensar y te aviso" / "No tomo decisiones así de rápido"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:#ff9f43">Enfoque Indirecto — Seguir en la conversación</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:rgba(255,159,67,0.12); border-color:rgba(255,159,67,0.3); color:#ff9f43">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge + Sell the Exit</div>
+            <div class="script" style="border-color:#ff9f43; background:rgba(255,159,67,0.07)">
+              "100% Juan, tómate tu tiempo. Oye, ¿te importa si te mando un email con información mientras tanto? Así lo que pienses tiene más contexto."
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(255,159,67,0.12); border-color:rgba(255,159,67,0.3); color:#ff9f43">2</div>
+          <div class="step-content">
+            <div class="step-label">Establecer tiempo estimado + Follow-up</div>
+            <div class="script" style="border-color:#ff9f43; background:rgba(255,159,67,0.07)">
+              "Juan, ¿cuánto tiempo necesitas aproximadamente para tomar una decisión de este tipo? ¿Una semana? ¿Un mes? ¿Cuándo te parece bien que hablemos?"
+            </div>
+            <p style="font-size:13px; margin-top:8px;">Tip: sé un poco suelto con el tono — "¿Mañana? Solo bromeaba..." Genera simpatía y liderazgo al mismo tiempo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:#ff9f43">Enfoque Directo — Confrontar el miedo a decidir</div>
+      <p>Para clientes que llevan mucho tiempo "pensando" y que claramente tienen decisión-fobia.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:rgba(255,159,67,0.12); border-color:rgba(255,159,67,0.3); color:#ff9f43">1</div>
+          <div class="step-content">
+            <div class="step-label">Descubrir cuánto tiempo llevan pensando</div>
+            <div class="script" style="border-color:#ff9f43; background:rgba(255,159,67,0.07)">
+              "Oye Juan, ¿cuánto tiempo llevas pensando en esto? ¿Fue solo la semana pasada que surgió o lleva más tiempo en tu cabeza?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(255,159,67,0.12); border-color:rgba(255,159,67,0.3); color:#ff9f43">2</div>
+          <div class="step-content">
+            <div class="step-label">Usar el pasado como espejo del futuro</div>
+            <div class="script" style="border-color:#ff9f43; background:rgba(255,159,67,0.07)">
+              "Llevas un año pensando en esto. Si hubieras dicho sí hace un año — aunque no hubiera sido con nosotros —, ¿crees que hoy estarías un poco más adelante? ¿Con un poco más de habilidades, más ventas, mejor posición?"<br><br>
+              <em>Cliente: "Sí, claro..."</em><br><br>
+              "Entonces, Juan, ¿por qué quieres repetir el pasado? El pasado ya no lo controlas. Lo que sí controlas es la decisión de hoy."
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(255,159,67,0.12); border-color:rgba(255,159,67,0.3); color:#ff9f43">3</div>
+          <div class="step-content">
+            <div class="step-label">El cierre — Mejor vs. Perfecto</div>
+            <div class="script" style="border-color:#ff9f43; background:rgba(255,159,67,0.07)">
+              "Juan, si buscas perfecto, definitivamente no somos nosotros. Y si alguien te vende perfecto, corre. Pero si buscas <strong>mejor</strong> de lo que tienes hoy — mejores habilidades, mejor oportunidad, mejor vehículo — yo tengo la solución.<br><br>
+              ¿Estás buscando mejor o estás buscando perfecto?"
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:20px; border-color:rgba(255,159,67,0.25); background:linear-gradient(135deg, rgba(255,159,67,0.1), rgba(255,159,67,0.03))">
+        <div class="callout-title" style="color:#ff9f43">El remate final</div>
+        <div class="callout-text">Cuando el cliente ya acordó que busca "mejor": "Abre el teléfono, ponme en altavoz, te guío por el proceso. Me dijiste al inicio que buscas X y Y — si eso sigue siendo tu objetivo, creo que podemos lograrlo juntos."</div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('s-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objeciones Black Access — Synergy Unlimited 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    }
+
+    :root {
+      --bg: #080508;
+      --surface: #110810;
+      --surface2: #1a0f18;
+      --border: rgba(255,255,255,0.07);
+      --red: #CC0000;
+      --red-light: #ff4444;
+      --red-dim: rgba(204,0,0,0.15);
+      --gold: #D4A843;
+      --gold-dim: rgba(212,168,67,0.15);
+      --green: #06d6a0;
+      --green-dim: rgba(6,214,160,0.12);
+      --blue: #4ea8de;
+      --blue-dim: rgba(78,168,222,0.12);
+      --orange: #ff9f43;
+      --orange-dim: rgba(255,159,67,0.12);
+      --text: #ede8f0;
+      --text-dim: rgba(237,232,240,0.5);
+      --text-faint: rgba(237,232,240,0.22);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 270px;
+      min-width: 270px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      z-index: 100;
+      padding: 28px 0 40px;
+    }
+
+    .sidebar-logo {
+      padding: 0 22px 22px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .sidebar-logo .brand {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red-light);
+      margin-bottom: 6px;
+    }
+
+    .sidebar-logo h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .sidebar-logo .event-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--red-dim);
+      border: 1px solid rgba(204,0,0,0.35);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--red-light);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 0 22px;
+      margin-bottom: 6px;
+      margin-top: 18px;
+      display: block;
+    }
+
+    .nav-section { padding: 0 10px; }
+
+    .nav-item {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover { background: var(--surface2); color: var(--text); }
+    .nav-item.active { background: var(--red-dim); color: var(--red-light); }
+
+    .nav-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    /* MAIN */
+    .main {
+      margin-left: 270px;
+      flex: 1;
+      padding: 48px 56px;
+      max-width: 900px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* HEADER */
+    .section-header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-bottom: 14px;
+      color: var(--red-light);
+      background: var(--red-dim);
+      border: 1px solid rgba(204,0,0,0.3);
+    }
+    .section-tag.gold { color: var(--gold); background: var(--gold-dim); border-color: rgba(212,168,67,0.3); }
+    .section-tag.green { color: var(--green); background: var(--green-dim); border-color: rgba(6,214,160,0.3); }
+    .section-tag.blue { color: var(--blue); background: var(--blue-dim); border-color: rgba(78,168,222,0.3); }
+    .section-tag.orange { color: var(--orange); background: var(--orange-dim); border-color: rgba(255,159,67,0.3); }
+
+    .section-title { font-size: 30px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .section-desc { font-size: 15px; color: var(--text-dim); line-height: 1.7; max-width: 640px; }
+
+    /* CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 30px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 16px;
+      color: var(--red-light);
+    }
+    .card-title.gold { color: var(--gold); }
+    .card-title.green { color: var(--green); }
+    .card-title.blue { color: var(--blue); }
+    .card-title.orange { color: var(--orange); }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 18px; }
+
+    .step { display: flex; gap: 18px; align-items: flex-start; }
+
+    .step-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      font-size: 13px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      background: var(--red-dim);
+      border: 1px solid rgba(204,0,0,0.3);
+      color: var(--red-light);
+    }
+    .step-num.gold { background: var(--gold-dim); border-color: rgba(212,168,67,0.3); color: var(--gold); }
+    .step-num.green { background: var(--green-dim); border-color: rgba(6,214,160,0.3); color: var(--green); }
+    .step-num.blue { background: var(--blue-dim); border-color: rgba(78,168,222,0.3); color: var(--blue); }
+    .step-num.orange { background: var(--orange-dim); border-color: rgba(255,159,67,0.3); color: var(--orange); }
+
+    .step-content { flex: 1; padding-top: 5px; }
+    .step-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .step-text { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+
+    /* SCRIPT */
+    .script {
+      background: var(--red-dim);
+      border-left: 3px solid var(--red);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .script.gold { background: var(--gold-dim); border-color: var(--gold); }
+    .script.green { background: var(--green-dim); border-color: var(--green); }
+    .script.blue { background: var(--blue-dim); border-color: var(--blue); }
+    .script.orange { background: var(--orange-dim); border-color: var(--orange); }
+
+    .script-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 6px;
+      font-style: normal;
+    }
+
+    /* KEY POINTS */
+    .key-points { display: flex; flex-direction: column; gap: 10px; }
+
+    .key-point {
+      display: flex; align-items: flex-start;
+      gap: 10px; font-size: 14px;
+      color: var(--text-dim); line-height: 1.6;
+    }
+    .key-point::before { content: "→"; color: var(--red-light); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .key-point.gold::before { color: var(--gold); }
+    .key-point.green::before { color: var(--green); }
+    .key-point.blue::before { color: var(--blue); }
+    .key-point.orange::before { color: var(--orange); }
+
+    /* CALLOUT */
+    .callout {
+      background: linear-gradient(135deg, var(--red-dim), rgba(204,0,0,0.03));
+      border: 1px solid rgba(204,0,0,0.22);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin: 20px 0;
+    }
+    .callout.gold { background: linear-gradient(135deg, var(--gold-dim), rgba(212,168,67,0.03)); border-color: rgba(212,168,67,0.22); }
+    .callout.green { background: linear-gradient(135deg, var(--green-dim), rgba(6,214,160,0.03)); border-color: rgba(6,214,160,0.22); }
+    .callout.blue { background: linear-gradient(135deg, var(--blue-dim), rgba(78,168,222,0.03)); border-color: rgba(78,168,222,0.22); }
+    .callout.orange { background: linear-gradient(135deg, var(--orange-dim), rgba(255,159,67,0.03)); border-color: rgba(255,159,67,0.22); }
+    .callout.dark { background: var(--surface2); border-color: var(--border); }
+
+    .callout-title {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--red-light); margin-bottom: 8px;
+    }
+    .callout-title.gold { color: var(--gold); }
+    .callout-title.green { color: var(--green); }
+    .callout-title.blue { color: var(--blue); }
+    .callout-title.orange { color: var(--orange); }
+    .callout-title.dim { color: var(--text-faint); }
+
+    .callout-text { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.6; }
+
+    /* OBJECTION CARD */
+    .objection-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 26px;
+      margin-bottom: 26px;
+      display: flex; align-items: center; gap: 18px;
+    }
+    .objection-icon { font-size: 30px; flex-shrink: 0; }
+    .objection-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-faint); margin-bottom: 4px;
+    }
+    .objection-text { font-size: 19px; font-weight: 700; color: var(--text); line-height: 1.3; }
+
+    /* VALUE STACK */
+    .value-stack {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .value-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .value-row:last-child { border-bottom: none; }
+    .value-row .item { color: var(--text-dim); }
+    .value-row .price { color: var(--gold); font-weight: 700; }
+    .value-row.total { background: var(--red-dim); }
+    .value-row.total .item { color: var(--text); font-weight: 700; font-size: 14px; }
+    .value-row.total .price { color: var(--red-light); font-size: 15px; }
+
+    /* FASES TABLE */
+    .fases-table {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .fase-row {
+      display: flex; align-items: center; gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .fase-row:last-child { border-bottom: none; }
+    .fase-name {
+      width: 130px; min-width: 130px;
+      padding: 13px 18px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.5px;
+      border-right: 1px solid var(--border);
+    }
+    .fase-dates {
+      flex: 1; padding: 13px 18px;
+      font-size: 13px; color: var(--text-dim);
+      border-right: 1px solid var(--border);
+    }
+    .fase-price {
+      width: 130px; text-align: right;
+      padding: 13px 18px;
+      font-size: 14px; font-weight: 700;
+    }
+    .fase-row.active-fase { background: var(--red-dim); }
+    .fase-row.active-fase .fase-name { color: var(--red-light); }
+    .fase-row.active-fase .fase-price { color: var(--red-light); }
+
+    /* HIGHLIGHT */
+    .hl { background: var(--red-dim); color: #ff8080; border-radius: 4px; padding: 1px 6px; font-weight: 600; font-style: normal; }
+    .hl.gold { background: var(--gold-dim); color: #f0c97a; }
+    .hl.green { background: var(--green-dim); color: #4fffd4; }
+
+    .divider { height: 1px; background: var(--border); margin: 26px 0; }
+
+    h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+    p { font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+    /* ── ACORDEÓN ── */
+    .accordion { display: flex; flex-direction: column; gap: 12px; }
+
+    .acc-item {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .acc-item.general { border-color: rgba(255,153,153,0.25); }
+    .acc-item.vip     { border-color: rgba(255,68,68,0.4); box-shadow: 0 0 20px rgba(255,68,68,0.08); }
+    .acc-item.black   { border-color: var(--red); box-shadow: 0 0 30px rgba(204,0,0,0.15); }
+
+    .acc-header {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 20px 26px;
+      background: var(--surface);
+      border: none; cursor: pointer;
+      text-align: left; gap: 16px;
+      transition: background 0.15s;
+    }
+    .acc-header:hover { background: var(--surface2); }
+    .acc-item.general .acc-header { background: rgba(26,3,3,0.9); }
+    .acc-item.vip     .acc-header { background: rgba(42,0,0,0.95); }
+    .acc-item.black   .acc-header { background: linear-gradient(135deg, #200000, #110010); }
+
+    .acc-left { display: flex; align-items: center; gap: 16px; }
+
+    .acc-badge {
+      font-size: 9px; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      border-radius: 20px; padding: 4px 12px;
+      white-space: nowrap;
+    }
+    .acc-item.general .acc-badge { color: #ff9999; background: rgba(255,153,153,0.12); border: 1px solid rgba(255,153,153,0.25); }
+    .acc-item.vip     .acc-badge { color: #FF4444; background: rgba(255,68,68,0.12); border: 1px solid rgba(255,68,68,0.3); }
+    .acc-item.black   .acc-badge { color: var(--red-light); background: var(--red-dim); border: 1px solid rgba(204,0,0,0.4); }
+
+    .acc-title { font-size: 16px; font-weight: 800; color: var(--text); }
+    .acc-item.vip   .acc-title { color: #FF4444; }
+    .acc-item.black .acc-title { color: var(--red-light); }
+
+    .acc-prices { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+    .acc-price-chip {
+      font-size: 12px; font-weight: 700;
+      border-radius: 8px; padding: 6px 14px;
+    }
+    .acc-item.general .acc-price-chip { background: rgba(255,153,153,0.1); color: #ffbbbb; }
+    .acc-item.vip     .acc-price-chip { background: rgba(255,68,68,0.1); color: #FF8888; }
+    .acc-item.black   .acc-price-chip { background: var(--red-dim); color: var(--red-light); }
+    .acc-price-label  { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: block; opacity: 0.5; margin-bottom: 2px; }
+
+    .acc-chevron {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05);
+      font-size: 12px; color: var(--text-dim);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .acc-item.open .acc-chevron { transform: rotate(180deg); }
+
+    .acc-body {
+      display: none;
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+    }
+    .acc-item.open .acc-body { display: block; }
+    .acc-body-inner { padding: 24px 26px 28px; }
+
+    .acc-section-title {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-faint); margin-bottom: 14px;
+    }
+
+    .acc-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .acc-features.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+
+    .acc-feature {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13.5px; color: var(--text-dim); line-height: 1.5;
+    }
+    .acc-feature .fi {
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; flex-shrink: 0; margin-top: 1px;
+    }
+    .acc-item.general .fi { background: rgba(255,153,153,0.12); color: #ff9999; }
+    .acc-item.vip     .fi { background: rgba(255,68,68,0.12); color: #FF4444; }
+    .acc-item.black   .fi { background: var(--red-dim); color: var(--red-light); }
+    .acc-item.black .acc-feature { color: #ffdddd; }
+
+    .acc-divider { height: 1px; background: var(--border); margin: 18px 0; }
+
+    .acc-prices-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; margin-top: 4px;
+    }
+    .acc-price-box {
+      border-radius: 12px; padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+    }
+    .acc-price-box-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-faint); margin-bottom: 4px; }
+    .acc-price-box-val { font-size: 22px; font-weight: 900; line-height: 1; }
+    .acc-price-box-sub { font-size: 11px; color: var(--text-faint); margin-top: 3px; }
+    .acc-item.general .acc-price-box-val { color: #ff9999; }
+    .acc-item.vip     .acc-price-box-val { color: #FF4444; }
+    .acc-item.black   .acc-price-box-val { color: var(--red-light); }
+
+    .fase-mini-table { margin-top: 4px; }
+    .fase-mini-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 9px 14px; border-radius: 8px; margin-bottom: 4px;
+      font-size: 13px;
+    }
+    .fase-mini-row.preventa { background: var(--red-dim); }
+    .fase-mini-row .fn { font-weight: 700; }
+    .fase-mini-row.preventa .fn { color: var(--red-light); }
+    .fase-mini-row .fd { color: var(--text-faint); font-size: 12px; }
+    .fase-mini-row .fp { font-weight: 700; color: var(--text-dim); }
+    .fase-mini-row.preventa .fp { color: var(--red-light); }
+
+    .msi-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .msi-chip {
+      border-radius: 10px; padding: 10px 16px;
+      background: var(--green-dim);
+      border: 1px solid rgba(6,214,160,0.2);
+    }
+    .msi-chip-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green); opacity: 0.7; margin-bottom: 2px; }
+    .msi-chip-val { font-size: 16px; font-weight: 800; color: var(--green); }
+    .msi-chip-sub { font-size: 10px; color: var(--text-faint); margin-top: 1px; }
+
+    /* ── SPEAKERS ── */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .speaker-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .speaker-card:hover {
+      background: var(--surface2);
+      border-color: rgba(167,139,250,0.25);
+    }
+
+    .speaker-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800;
+      flex-shrink: 0;
+      background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.2);
+      color: #a78bfa;
+      letter-spacing: -0.5px;
+    }
+
+    .speaker-info { flex: 1; min-width: 0; }
+    .speaker-name {
+      font-size: 13px; font-weight: 700;
+      color: var(--text); line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .speaker-tag {
+      font-size: 10px; font-weight: 600;
+      color: var(--text-faint);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .speaker-card.host {
+      border-color: rgba(204,0,0,0.4);
+      background: linear-gradient(135deg, rgba(204,0,0,0.08), var(--surface));
+    }
+    .speaker-card.host .speaker-avatar {
+      background: var(--red-dim);
+      border-color: rgba(204,0,0,0.4);
+      color: var(--red-light);
+    }
+    .speaker-card.host .speaker-name { color: var(--red-light); }
+
+    .speaker-card.tba {
+      border-style: dashed;
+      opacity: 0.5;
+    }
+    .speaker-card.tba .speaker-avatar {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text-faint);
+    }
+
+    .speakers-section-label {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--text-faint);
+      margin: 24px 0 12px;
+      display: block;
+    }
+
+    /* ── LINKS DE PAGO ── */
+    .links-region { margin-bottom: 32px; }
+
+    .links-region-title {
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .links-region-title.mex  { color: #ff9999; background: rgba(255,153,153,0.1); border: 1px solid rgba(255,153,153,0.2); }
+    .links-region-title.usa  { color: #60a5fa; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); }
+    .links-region-title.latam { color: var(--gold); background: var(--gold-dim); border: 1px solid rgba(212,168,67,0.2); }
+    .links-region-title.oficial { color: var(--green); background: var(--green-dim); border: 1px solid rgba(6,214,160,0.2); }
+
+    .links-group { margin-bottom: 20px; }
+    .links-group-label {
+      font-size: 9.5px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 8px; display: block;
+    }
+
+    .link-row {
+      display: flex; align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+    }
+    .link-row:hover { background: var(--surface2); }
+
+    .link-name {
+      flex: 1; font-size: 13px; font-weight: 600;
+      color: var(--text);
+    }
+    .link-price {
+      font-size: 13px; font-weight: 800;
+      white-space: nowrap;
+    }
+    .link-price.black-price { color: var(--red-light); }
+    .link-price.general-price { color: #ff9999; }
+    .link-price.vip-price { color: #FF4444; }
+    .link-price.centurion-price { color: var(--gold); }
+    .link-price.usa-price { color: #60a5fa; }
+    .link-price.latam-price { color: var(--gold); }
+
+    .btn-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 8px; border: none;
+      font-size: 11px; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+      transition: opacity 0.15s;
+      background: var(--green-dim);
+      color: var(--green);
+      border: 1px solid rgba(6,214,160,0.2);
+      text-decoration: none;
+    }
+    .btn-link:hover { opacity: 0.8; }
+    .btn-copy-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 8px; border: none;
+      font-size: 11px; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+      transition: all 0.15s;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-dim);
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-copy-link:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+    .btn-copy-link.copied { background: var(--green-dim); color: var(--green); }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">Synergy Unlimited 2026</div>
+    <h2>Objeciones<br>Black Access</h2>
+    <div class="event-badge">9 · 10 · 11 Octubre · GDL</div>
+  </div>
+
+  <span class="nav-label">Fundamentos</span>
+  <div class="nav-section">
+    <button class="nav-item active" onclick="show('framework')">
+      <span class="nav-dot" style="background:var(--red-light)"></span>Framework NRS
+    </button>
+    <button class="nav-item" onclick="show('intentos')">
+      <span class="nav-dot" style="background:#ff8080"></span>Intentos universales
+    </button>
+  </div>
+
+  <span class="nav-label">Objeciones de precio</span>
+  <div class="nav-section">
+    <button class="nav-item" onclick="show('dinero')">
+      <span class="nav-dot" style="background:var(--gold)"></span>No tengo el dinero
+    </button>
+    <button class="nav-item" onclick="show('caro')">
+      <span class="nav-dot" style="background:#f0c97a"></span>Es muy caro para un evento
+    </button>
+    <button class="nav-item" onclick="show('msi')">
+      <span class="nav-dot" style="background:var(--green)"></span>Hay opciones de pago
+    </button>
+  </div>
+
+  <span class="nav-label">Objeciones de tiempo</span>
+  <div class="nav-section">
+    <button class="nav-item" onclick="show('pensar')">
+      <span class="nav-dot" style="background:var(--orange)"></span>Necesito pensarlo
+    </button>
+    <button class="nav-item" onclick="show('pareja')">
+      <span class="nav-dot" style="background:var(--blue)"></span>Necesito hablar con mi pareja
+    </button>
+  </div>
+
+  <span class="nav-label">Objeciones de valor</span>
+  <div class="nav-section">
+    <button class="nav-item" onclick="show('gratis')">
+      <span class="nav-dot" style="background:#c084fc"></span>El Bootcamp fue gratis
+    </button>
+    <button class="nav-item" onclick="show('viajar')">
+      <span class="nav-dot" style="background:#fb923c"></span>Tengo que viajar / no puedo ir
+    </button>
+    <button class="nav-item" onclick="show('youtube')">
+      <span class="nav-dot" style="background:#f87171"></span>Ya sigo a Jorge en redes
+    </button>
+  </div>
+
+  <span class="nav-label">Referencia</span>
+  <div class="nav-section">
+    <button class="nav-item" onclick="show('accesos')">
+      <span class="nav-dot" style="background:var(--gold)"></span>Tipos de acceso
+    </button>
+    <button class="nav-item" onclick="show('speakers')">
+      <span class="nav-dot" style="background:#a78bfa"></span>Speakers Synergy 2026
+    </button>
+    <button class="nav-item" onclick="show('links')">
+      <span class="nav-dot" style="background:var(--green)"></span>Links de pago
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ===== FRAMEWORK ===== -->
+  <div class="section active" id="s-framework">
+    <div class="section-header">
+      <div class="section-tag">Fundamentos</div>
+      <div class="section-title">Framework NRS — 4 Pasos</div>
+      <p class="section-desc">No Resistance Selling. El mismo framework aplica para todas las objeciones. Antes de ir a cualquier objeción específica, domina estos 4 pasos. El objetivo siempre es el mismo: entrar dentro del "no" para encontrar la verdad real.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Principio clave</div>
+      <div class="callout-text">El que pelea el argumento, pierde. El que no lo pelea, gana. Piensa como el León, vende como el Cordero.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Los 4 Pasos</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge — Reconocer</div>
+            <div class="step-text">No tienes que estar de acuerdo, solo reconocer. Baja la resistencia. Iguálate a su frecuencia antes de liderarla.</div>
+            <div class="script">
+              <div class="script-label">Frases que puedes usar</div>
+              "100%..." &nbsp;·&nbsp; "Completamente entiendo..." &nbsp;·&nbsp; "Por supuesto..." &nbsp;·&nbsp; "Okay."
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-label">Sell the Exit — Vender la salida</div>
+            <div class="step-text">Hazle saber que puede irse. Cuando el cliente siente que puede salir, baja su guardia y habla con más honestidad.</div>
+            <div class="script">
+              <div class="script-label">Ejemplo</div>
+              "100% [nombre], tómate el tiempo que necesitas. Oye, mientras tanto ¿te importa si te mando la info por WhatsApp para que la tengas?"
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-label">Ask — La pregunta que jala de regreso</div>
+            <div class="step-text">Después de vender la salida, haz una pregunta para entrar de nuevo y encontrar la verdad real detrás de la objeción.</div>
+            <div class="script">
+              <div class="script-label">Ejemplo</div>
+              "Oye, antes de mandarte eso: ¿sobre qué seguías teniendo dudas? ¿Era más sobre el precio, sobre qué incluye, o sobre si es el momento correcto para ti?"
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-label">Re-present & Re-close — Representar y Re-cerrar</div>
+            <div class="step-text">Solo cuando tienes la verdad real puedes volver a presentar y cerrar. Este derecho se gana — no puedes saltar directo aquí.</div>
+            <div class="key-points">
+              <div class="key-point">No te has ganado el re-cierre si no reconociste la objeción</div>
+              <div class="key-point">No te has ganado el re-cierre si no vendiste la salida</div>
+              <div class="key-point">No te has ganado el re-cierre si no hiciste la pregunta correcta</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout dark">
+      <div class="callout-title dim">Contexto Black Access</div>
+      <div class="callout-text" style="font-size:14px; font-weight:500; color: var(--text-dim)">La mayoría de quienes objetan <strong style="color:var(--text)">ya quieren ir</strong> — estuvieron 3 días en el Bootcamp y algo les movió. Tu trabajo no es convencerlos de que quieran; es ayudarlos a resolver lo que los frena.</div>
+    </div>
+  </div>
+
+  <!-- ===== INTENTOS ===== -->
+  <div class="section" id="s-intentos">
+    <div class="section-header">
+      <div class="section-tag">Fundamentos</div>
+      <div class="section-title">Intentos Universales</div>
+      <p class="section-desc">Antes de entrar al framework completo, prueba estos dos intentos. Son los más simples y resuelven el 50% de las objeciones sin más táctica.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Intento #1 — Las 2 palabras mágicas</div>
+      <p>Ante <strong>cualquier</strong> objeción, como primer movimiento, di solo esto:</p>
+      <div class="callout" style="text-align:center">
+        <div class="callout-title" style="text-align:center">Las 2 palabras</div>
+        <div class="callout-text" style="font-size:26px; letter-spacing:2px">"¿Qué más?"</div>
+      </div>
+      <div class="script">
+        <div class="script-label">Ejemplos en contexto Black Access</div>
+        Cliente: "Es que está muy caro."<br>
+        Tú: "100%... oye, ¿qué más?"<br><br>
+        Cliente: "Necesito pensarlo."<br>
+        Tú: "Por supuesto... oye, ¿qué más?"<br><br>
+        Cliente: "No sé si voy a poder ir a Guadalajara."<br>
+        Tú: "Entiendo... oye, ¿qué más?"
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Intento #2 — El Repite</div>
+      <p>Si el intento #1 no movió la objeción, repite exactamente lo que dijo el cliente, con tono tranquilo y curioso. Sin agregar nada.</p>
+      <div class="script">
+        <div class="script-label">Ejemplos en contexto Black Access</div>
+        Cliente: "Es que no tengo el dinero."<br>
+        Tú: "¿No tienes el dinero...?" <em>(pausa, déjalo hablar)</em><br><br>
+        Cliente: "Es que me queda muy lejos."<br>
+        Tú: "¿Te queda muy lejos...?" <em>(pausa)</em><br><br>
+        Cliente: "Es que ya vi el Bootcamp gratis."<br>
+        Tú: "¿Ya viste el Bootcamp...?" <em>(pausa)</em>
+      </div>
+      <div class="key-points" style="margin-top:14px">
+        <div class="key-point">El cliente elabora y revela la objeción real</div>
+        <div class="key-point">Actúas desde la curiosidad, no desde la presión</div>
+        <div class="key-point">Si olvidas todo lo demás, estos 2 intentos siempre funcionan como primer paso</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NO TENGO DINERO ===== -->
+  <div class="section" id="s-dinero">
+    <div class="section-header">
+      <div class="section-tag gold">Objeción · Precio</div>
+      <div class="section-title">💰 "No tengo el dinero"</div>
+      <p class="section-desc">La objeción más común. El 90% de las veces no es falta de dinero real — es miedo o incertidumbre disfrazada de la excusa más fácil de decir.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"No tengo el dinero" / "Ahorita no puedo" / "Estoy un poco apretado"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title gold">Lo que realmente está pasando</div>
+      <div class="key-points">
+        <div class="key-point gold">No dijo que el banco no tiene dinero, ni su familia. Solo dijo <em>yo</em></div>
+        <div class="key-point gold">Si supieran con certeza que van a recuperarlo y más, lo conseguirían de donde sea</div>
+        <div class="key-point gold">Es la forma más fácil de decir "tengo miedo" sin decirlo — el ego lo protege</div>
+        <div class="key-point gold">Estuvieron 3 días en el Bootcamp. Si no les interesara, no estarían en esta conversación</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title gold">El proceso</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num gold">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge — sin hacer del dinero el problema</div>
+            <div class="script gold">
+              "Completamente entiendo, [nombre]. Y entiendo que el presupuesto puede estar un poco ajustado en este momento."
+            </div>
+            <p style="margin-top:8px; font-size:13px; color:var(--text-faint)">⚠️ No digas: "Exactamente por eso deberías aprovechar." Eso te convierte en vendedor hambriento.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num gold">2</div>
+          <div class="step-content">
+            <div class="step-label">Sell the Exit — con opciones de pago como salida</div>
+            <div class="script gold">
+              "Mira, si quieres, también tenemos opciones de pago en mensualidades que hacen que se sienta mucho más ligero. Pero en lo que lo decides, ¿te parece bien si te mando la información por WhatsApp para que lo tengas?"
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num gold">3</div>
+          <div class="step-content">
+            <div class="step-label">Ask — para mover la objeción a la verdad real</div>
+            <div class="script gold">
+              "Oye [nombre], antes de mandarte eso: ¿sobre qué seguías teniendo dudas? ¿Era más sobre el precio, sobre qué incluye exactamente el Black, o sobre si este es el momento correcto para ti?"
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num gold">4</div>
+          <div class="step-content">
+            <div class="step-label">Re-presenta según la verdad real que revele</div>
+            <div class="key-points">
+              <div class="key-point gold">Si dice "tengo miedo de que no valga la pena" → ve a objeción "Es muy caro para un evento"</div>
+              <div class="key-point gold">Si dice "tengo que consultarlo" → ve a objeción de pareja/tiempo</div>
+              <div class="key-point gold">Si aún insiste en dinero → muéstrale las opciones de MSI</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <div class="callout-title gold">Principio clave</div>
+      <div class="callout-text">Si el valor percibido fuera suficientemente alto, el dinero aparece. Un Rolex por $100 — ¿lo compras aunque no tengas el dinero? Sí. El problema casi nunca es el dinero, es el valor percibido. Por eso primero mueves la objeción, no el dinero.</div>
+    </div>
+  </div>
+
+  <!-- ===== ES MUY CARO PARA UN EVENTO ===== -->
+  <div class="section" id="s-caro">
+    <div class="section-header">
+      <div class="section-tag gold">Objeción · Precio</div>
+      <div class="section-title">💸 "Es muy caro para un evento"</div>
+      <p class="section-desc">Esta objeción mezcla el precio con la percepción de que un "evento" no merece esa inversión. Tu trabajo es cambiar el marco: esto no es un evento, es una experiencia que vale $4,991 USD.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Es demasiado para un evento" / "Nunca he pagado tanto por algo así" / "No me convence el precio"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Stack de valor — úsalo para re-encuadrar</div>
+      <div class="value-stack">
+        <div class="value-row"><span class="item">Acceso zona preferencial 3 días</span><span class="price">$1,997 USD</span></div>
+        <div class="value-row"><span class="item">Estación de snacks 3 días</span><span class="price">$299 USD</span></div>
+        <div class="value-row"><span class="item">Kit de bienvenida Black</span><span class="price">$399 USD</span></div>
+        <div class="value-row"><span class="item">Firma de libros privado</span><span class="price">$399 USD</span></div>
+        <div class="value-row"><span class="item">Meet & Greet / Fotos con speakers</span><span class="price">$399 USD</span></div>
+        <div class="value-row"><span class="item">Comida con speakers los 3 días</span><span class="price">$999 USD</span></div>
+        <div class="value-row"><span class="item">Acceso preferencial al show</span><span class="price">$499 USD</span></div>
+        <div class="value-row"><span class="item">Fiesta de Casino con Alfombra Roja</span><span class="price">$799 USD</span></div>
+        <div class="value-row"><span class="item">Synergy Unlimited Sessions (mentoría con Jorge)</span><span class="price">$1,999 USD</span></div>
+        <div class="value-row"><span class="item">Grabación del Bootcamp</span><span class="price">$499 USD</span></div>
+        <div class="value-row"><span class="item">Grupo de High Networking</span><span class="price">$499 USD</span></div>
+        <div class="value-row"><span class="item">Kit de libros de speakers</span><span class="price">$200 USD</span></div>
+        <div class="value-row"><span class="item">Capital Sinergético + Club Sinergético</span><span class="price">$1,999 USD</span></div>
+        <div class="value-row total"><span class="item">Valor total del paquete</span><span class="price">$10,985+ USD</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">El proceso — Que el cliente se venda a sí mismo</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge + Sell the Exit</div>
+            <div class="script">
+              "Completamente entiendo, [nombre]. Y mira, siendo honesto contigo, si buscas solo el evento puedes tomar el acceso General y es mucho más accesible. Con mucho gusto te mando esa información."
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-label">Ask — La pregunta que jala de regreso</div>
+            <div class="script">
+              "Oye [nombre], antes de mandarte eso: ¿tú crees que el Black Access es solo la entrada al evento, o hay algo más que no has visto todavía?"
+            </div>
+            <p style="margin-top:8px; font-size:13px;">Deja que responda. Si no sabe qué incluye, ahí está tu oportunidad.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-label">Re-presenta — El reencuadre de precio vs. valor</div>
+            <div class="script">
+              "[Nombre], déjame mostrarte algo. Lo que estás viendo como '$1,997 por un evento' en realidad son más de $10,000 USD en beneficios juntos — la experiencia de 3 días en zona preferencial, la comida con los speakers, la sesión de fotos, la mentoría con Jorge, la fiesta de gala, el kit de libros, los bonos digitales...<br><br>
+              La pregunta no es si es caro. La pregunta es: si tuvieras que comprar cada cosa por separado, ¿lo pagarías? Porque ahorita todo eso está junto, en preventa, por $1,997 USD. Después de hoy sube."
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Precio vs. Costo</div>
+      <div class="callout-text">Precio es lo que pagas hoy. Costo es lo que pierdes si no vas — las conexiones que no haces, los negocios que no cierras, la mentoría que no recibes. Una conexión en Synergy Unlimited puede valer más que los $1,997.</div>
+    </div>
+  </div>
+
+  <!-- ===== OPCIONES MSI ===== -->
+  <div class="section" id="s-msi">
+    <div class="section-header">
+      <div class="section-tag green">Herramienta · Precio</div>
+      <div class="section-title">💳 Opciones de pago a meses</div>
+      <p class="section-desc">Cuando el precio es la barrera real, las mensualidades son tu mejor aliado. Úsalas para hacer la inversión psicológicamente accesible — no como primer recurso, sino después de mover la objeción.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title green">Las opciones disponibles</div>
+      <div class="fases-table">
+        <div class="fase-row">
+          <div class="fase-name" style="color:var(--green)">12 MSI</div>
+          <div class="fase-dates">Tarjetas de crédito mexicanas</div>
+          <div class="fase-price" style="color:var(--green)">$3,583 MXN/mes</div>
+        </div>
+        <div class="fase-row">
+          <div class="fase-name" style="color:var(--gold)">24 MSI</div>
+          <div class="fase-dates">Tarjetas de crédito mexicanas · Sujeto a autorización bancaria</div>
+          <div class="fase-price" style="color:var(--gold)">$1,791 MXN/mes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title green">Cómo presentarlo</div>
+      <div class="script green">
+        <div class="script-label">Cuando el cliente dice que no alcanza</div>
+        "[Nombre], lo que a mucha gente le ayuda es verlo así: puedes hacer tu inversión en 12 mensualidades de $3,583 pesos — que son menos de $120 pesos al día. O si prefieres, hasta 24 pagos de $1,791 pesos al mes.<br><br>
+        ¿Con qué tarjeta mexicana estás trabajando hoy? Te ayudo a ver cuál opción encaja mejor contigo."
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title green">Reencuadre por día</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num green">↳</div>
+          <div class="step-content">
+            <div class="step-label">Divide el precio contado en días</div>
+            <div class="script green">
+              "Si lo ves en contado son $1,997 USD. Pero hay algo más poderoso: ¿cuánto dinero gastas tú en un mes en cosas que no te acercan a donde quieres llegar? Netflix, salidas, suscripciones... La inversión en Black Access probablemente es menos de lo que ya gastas mensualmente en cosas que no te mueven."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title green">Importante</div>
+      <div class="callout-text">No ofrezcas las mensualidades como lo primero que dices. Primero mueve la objeción real. Las MSI son la herramienta del cierre, no de la conversación.</div>
+    </div>
+  </div>
+
+  <!-- ===== PENSAR ===== -->
+  <div class="section" id="s-pensar">
+    <div class="section-header">
+      <div class="section-tag orange">Objeción · Tiempo</div>
+      <div class="section-title">⏳ "Necesito pensarlo"</div>
+      <p class="section-desc">Esta objeción tiene urgencia real: el precio del Black Access sube en fases concretas. Usar eso correctamente no es presión — es información honesta que le sirve al cliente.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Déjame pensarlo" / "No tomo decisiones así de rápido" / "Dame unos días"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title orange">La urgencia es real — úsala con honestidad</div>
+      <div class="fases-table">
+        <div class="fase-row active-fase">
+          <div class="fase-name">PREVENTA</div>
+          <div class="fase-dates">6 y 7 de Junio (Bootcamp)</div>
+          <div class="fase-price">$1,997 USD</div>
+        </div>
+        <div class="fase-row">
+          <div class="fase-name" style="color:var(--text-dim)">FASE 1</div>
+          <div class="fase-dates">8 al 30 de Junio</div>
+          <div class="fase-price" style="color:var(--text-dim)">$2,297 USD</div>
+        </div>
+        <div class="fase-row">
+          <div class="fase-name" style="color:var(--text-dim)">FASE 2</div>
+          <div class="fase-dates">1 Julio al 31 Agosto</div>
+          <div class="fase-price" style="color:var(--text-dim)">$2,497 USD</div>
+        </div>
+        <div class="fase-row">
+          <div class="fase-name" style="color:var(--text-dim)">FASE 3</div>
+          <div class="fase-dates">1 Septiembre al 1 Octubre</div>
+          <div class="fase-price" style="color:var(--text-dim)">$3,997 USD</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title orange">El proceso</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num orange">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge + Sell the Exit</div>
+            <div class="script orange">
+              "100% [nombre], tómate tu tiempo. Oye, ¿te parece bien si te mando la información de lo que incluye por WhatsApp para que lo tengas mientras decides?"
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num orange">2</div>
+          <div class="step-content">
+            <div class="step-label">Ask — Descubrir la objeción real</div>
+            <div class="script orange">
+              "Oye [nombre], antes de mandarte eso: ¿sobre qué seguías teniendo dudas específicamente? ¿Era más sobre el precio, sobre qué incluye, o sobre si puedes ir a Guadalajara?"
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num orange">3</div>
+          <div class="step-content">
+            <div class="step-label">Informar sobre las fases — sin presión, con honestidad</div>
+            <div class="script orange">
+              "Mira, yo quiero que tomes la decisión que sea correcta para ti. Lo que sí te cuento, porque me parece importante que lo sepas: el precio de preventa del Bootcamp es $1,997 USD. Cuando termina hoy, el siguiente precio es $2,297. Y antes del evento llega a $3,997.<br><br>
+              No te digo esto para presionarte — te lo digo porque si en unos días decides que sí quieres ir, vas a pagar $300 más por la misma experiencia. Y eso sería una lástima."
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num orange">4</div>
+          <div class="step-content">
+            <div class="step-label">El cierre — Mejor vs. Perfecto</div>
+            <div class="script orange">
+              "[Nombre], si buscas perfecto, no existe. Pero si buscas <em>mejor</em> de lo que tienes hoy — mejores conexiones, mejores herramientas, mejor red — eso es exactamente para lo que está hecho el Black Access.<br><br>
+              ¿Estás buscando mejor, o estás buscando perfecto?"
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <div class="callout-title orange">El espejo del pasado</div>
+      <div class="callout-text">Si el cliente lleva tiempo "pensando en crecer": "¿Cuánto tiempo llevas con ganas de dar ese siguiente paso? Si hubieras tomado la decisión hace un año, ¿hoy estarías más adelante? El pasado no lo controlas — la decisión de hoy sí."</div>
+    </div>
+  </div>
+
+  <!-- ===== PAREJA ===== -->
+  <div class="section" id="s-pareja">
+    <div class="section-header">
+      <div class="section-tag blue">Objeción · Tiempo</div>
+      <div class="section-title">👫 "Necesito hablar con mi pareja"</div>
+      <p class="section-desc">Nunca conviertas al cliente en tu vendedor. Tú vendes mejor que él. El objetivo es mover la objeción real o conseguir a la pareja en la conversación.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Tengo que consultarlo con mi pareja / esposo / esposa" / "Tomo estas decisiones con mi cónyuge"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title blue">Camino A — Mover la objeción real</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num blue">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge + Obtener el nombre</div>
+            <div class="script blue">
+              "Me parece muy bien que tomen las decisiones importantes juntos. Oye, y cuando hables con [nombre de la pareja], ¿cuándo creen que tendrían esa conversación? ¿Esta noche, mañana?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num blue">2</div>
+          <div class="step-content">
+            <div class="step-label">Sell the Exit — con condición honesta</div>
+            <div class="script blue">
+              "Mira, yo quiero que tú y [pareja] estén ambos 100% seguros. Si él o ella dice sí pero tú todavía tienes dudas, no quiero que se unan así. Tiene que tener sentido para los dos. ¿Tiene sentido?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num blue">3</div>
+          <div class="step-content">
+            <div class="step-label">Ask — ¿Qué necesita saber la pareja?</div>
+            <div class="script blue">
+              "¿Qué crees que le va a importar más a [pareja] saber? ¿El precio, qué incluye, las fechas? Así cuando hablen tienen toda la información."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title blue">Camino B — Conseguir a la pareja en la conversación</div>
+      <p>Si la objeción no se movió y la pareja es quien tomará la decisión final, tráela a la conversación. <strong>Tú vendes mejor que el cliente.</strong></p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num blue">1</div>
+          <div class="step-content">
+            <div class="step-label">Normalizar + Limpiar la agenda</div>
+            <div class="script blue">
+              "Me alegra mucho que compartan este tipo de decisiones. Oye, ¿qué están haciendo tú y [pareja] esta noche? ¿Tienen 5-10 minutitos libres?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num blue">2</div>
+          <div class="step-content">
+            <div class="step-label">La recomendación — sin promesa de presión</div>
+            <div class="script blue">
+              "Te propongo algo: que [pareja] entre a una llamada de 5-10 minutos conmigo hoy. No le voy a vender nada — de eso tú te encargas mejor que yo. Solo voy a responder sus preguntas igual que respondí las tuyas. Así los dos tienen la misma información y toman la decisión juntos. ¿Te parece justo?"
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="callout blue" style="margin-top:18px">
+        <div class="callout-title blue">¿Por qué funciona?</div>
+        <div class="callout-text" style="font-size:14px; font-weight:500">Vendiste la salida incluso para esa llamada: "entra, pregunta, se va." Sin presión. Eso baja completamente la resistencia de traer al tercero a la conversación.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EL BOOTCAMP FUE GRATIS ===== -->
+  <div class="section" id="s-gratis">
+    <div class="section-header">
+      <div class="section-tag" style="color:#c084fc; background:rgba(192,132,252,0.1); border-color:rgba(192,132,252,0.3)">Objeción · Valor</div>
+      <div class="section-title">🎟️ "El Bootcamp fue gratis, ¿por qué cobran esto?"</div>
+      <p class="section-desc">El cliente confunde los dos productos. El Bootcamp fue el aperitivo. Synergy Unlimited Black Access es el restaurante completo. Tu trabajo es que entienda la diferencia sin que suene a trampa.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Si el Bootcamp fue gratis, ¿por qué ahora me cobran casi $2,000 dólares?" / "¿No me lo iban a dar gratis?"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:#c084fc">La diferencia entre los dos productos</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:rgba(192,132,252,0.12); border-color:rgba(192,132,252,0.3); color:#c084fc">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge sin defensiva</div>
+            <div class="script" style="border-color:#c084fc; background:rgba(192,132,252,0.07)">
+              "Completamente entiendo la pregunta, [nombre], y tiene todo el sentido. El Bootcamp y el Black Access son dos cosas muy diferentes."
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(192,132,252,0.12); border-color:rgba(192,132,252,0.3); color:#c084fc">2</div>
+          <div class="step-content">
+            <div class="step-label">Explicar el modelo con una analogía</div>
+            <div class="script" style="border-color:#c084fc; background:rgba(192,132,252,0.07)">
+              "El Bootcamp fue como una degustación — 3 días increíbles con los mejores speakers, completamente gratis. Eso fue nuestro regalo para ti. El Black Access es otra cosa: es estar ahí en vivo en Guadalajara, con acceso a zona preferencial, comiendo con los speakers, con kit de bienvenida, sesión de fotos, mentoría con Jorge... Es como pasar de ver el partido en tele a estar en el campo."
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(192,132,252,0.12); border-color:rgba(192,132,252,0.3); color:#c084fc">3</div>
+          <div class="step-content">
+            <div class="step-label">Anclar con el valor total</div>
+            <div class="script" style="border-color:#c084fc; background:rgba(192,132,252,0.07)">
+              "Y lo que estamos ofreciendo hoy en preventa del Bootcamp — son más de $10,000 USD en beneficios juntos, por $1,997 USD. El Bootcamp te dio el conocimiento. El Black Access te da las conexiones, la experiencia y el acceso que no se consiguen en ningún otro lugar."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="border-color:rgba(192,132,252,0.25); background:linear-gradient(135deg, rgba(192,132,252,0.08), rgba(192,132,252,0.02))">
+      <div class="callout-title" style="color:#c084fc">Reencuadre clave</div>
+      <div class="callout-text">El Bootcamp gratuito fue para darte las herramientas. Synergy Unlimited Black Access es para darte las conexiones. El conocimiento se puede encontrar en internet. Las conexiones con José Hernández, Rosario Marín, Marco Antonio Regil y 20+ speakers más — esas solo se hacen en persona.</div>
+    </div>
+  </div>
+
+  <!-- ===== VIAJAR ===== -->
+  <div class="section" id="s-viajar">
+    <div class="section-header">
+      <div class="section-tag orange">Objeción · Valor</div>
+      <div class="section-title">✈️ "Tengo que viajar / No puedo ir a Guadalajara"</div>
+      <p class="section-desc">Esta objeción parece logística pero casi siempre es de valor: si estuviera convencido del 100%, el boleto de avión no sería el problema. Mueve primero el valor, después resuelve la logística.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Vivo muy lejos" / "Es en Guadalajara y no soy de ahí" / "Tendría que pagar vuelo y hotel además"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title orange">El proceso</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num orange">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge + Sell the Exit</div>
+            <div class="script orange">
+              "Entiendo, [nombre], y es una consideración válida. Mira, si quieres, podríamos ver opciones de vuelo que son bastante accesibles desde [ciudad]. Pero oye, antes de que lo revisemos, ¿te importa si te hago una pregunta?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num orange">2</div>
+          <div class="step-content">
+            <div class="step-label">Ask — ¿Es logística o valor?</div>
+            <div class="script orange">
+              "Si vivieras aquí en Guadalajara, ¿irías al evento? ¿El viaje es lo único que te frena o también hay algo más?"
+            </div>
+            <p style="margin-top:8px; font-size:13px; color:var(--text-faint)">Si dice que sí iría → el problema es solo logístico, resuélvelo. Si duda → hay una objeción de valor detrás, ve a esa primero.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num orange">3</div>
+          <div class="step-content">
+            <div class="step-label">Si el problema es solo logístico — Resolver con perspectiva</div>
+            <div class="script orange">
+              "[Nombre], considera esto: el Black Access incluye comida con los speakers los 3 días, kit de bienvenida, fiesta de gala, mentoría con Jorge Serratos... Incluso si el vuelo y el hotel te cuestan $5,000–$8,000 pesos, estás invirtiendo eso en algo que vale más de $10,000 USD en beneficios. ¿Cuánto cuesta una conexión que puede cambiar el rumbo de tu negocio?"
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <div class="callout-title orange">Contexto del evento</div>
+      <div class="callout-text">Synergy Unlimited 2026 es en Expo Guadalajara — el recinto más importante de eventos en Latinoamérica. Gente viene de toda Latinoamérica. El viaje es parte de la inversión, no un obstáculo.</div>
+    </div>
+  </div>
+
+  <!-- ===== YA SIGO A JORGE ===== -->
+  <div class="section" id="s-youtube">
+    <div class="section-header">
+      <div class="section-tag" style="color:#f87171; background:rgba(248,113,113,0.1); border-color:rgba(248,113,113,0.3)">Objeción · Valor</div>
+      <div class="section-title">📱 "Ya sigo a Jorge en redes / Ya veo su contenido"</div>
+      <p class="section-desc">El cliente confunde consumir contenido con estar en la sala. Las conexiones, las conversaciones y la energía de un evento en vivo no existen en ninguna pantalla.</p>
+    </div>
+
+    <div class="objection-card">
+      <div class="objection-icon">💭</div>
+      <div>
+        <div class="objection-label">Lo que el cliente dice</div>
+        <div class="objection-text">"Ya sigo a Jorge en Instagram" / "Ya veo sus videos en YouTube" / "Ya tomé el Bootcamp gratis"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:#f87171">El proceso</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:rgba(248,113,113,0.12); border-color:rgba(248,113,113,0.3); color:#f87171">1</div>
+          <div class="step-content">
+            <div class="step-label">Acknowledge — Validar sin ceder</div>
+            <div class="script" style="border-color:#f87171; background:rgba(248,113,113,0.07)">
+              "Qué bueno, [nombre], significa que ya sabes el nivel del contenido que genera Jorge. Eso es una ventaja enorme para aprovechar el evento."
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(248,113,113,0.12); border-color:rgba(248,113,113,0.3); color:#f87171">2</div>
+          <div class="step-content">
+            <div class="step-label">Sell the Exit + Ask — Mover el marco</div>
+            <div class="script" style="border-color:#f87171; background:rgba(248,113,113,0.07)">
+              "Oye [nombre], una pregunta: ¿cuántos negocios has cerrado viendo sus videos? ¿Cuántas conexiones tienes hoy con los speakers que van a estar en Synergy Unlimited — José Hernández, Marco Antonio Regil, Rosario Marín...?"
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:rgba(248,113,113,0.12); border-color:rgba(248,113,113,0.3); color:#f87171">3</div>
+          <div class="step-content">
+            <div class="step-label">Re-presenta — Contenido vs. Conexión</div>
+            <div class="script" style="border-color:#f87171; background:rgba(248,113,113,0.07)">
+              "[Nombre], el contenido de Jorge está en internet y es gratis. El Black Access no te vende contenido — te da acceso. Acceso a comer con los speakers durante los 3 días. A tomarle la foto. A que te firme el libro. A estar en la sala con personas que están en el mismo nivel al que tú quieres llegar.<br><br>
+              La gente de éxito no busca más información. Busca las conexiones correctas. Y esas solo se hacen en persona."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="border-color:rgba(248,113,113,0.25); background:linear-gradient(135deg, rgba(248,113,113,0.08), rgba(248,113,113,0.02))">
+      <div class="callout-title" style="color:#f87171">La distinción más poderosa</div>
+      <div class="callout-text">Ver un partido por televisión vs. estar en el estadio. Ambos ven el mismo juego. Solo uno vive la experiencia, hace conexiones con los que están ahí y sale transformado.</div>
+    </div>
+  </div>
+
+  <!-- ===== ACCESOS ===== -->
+  <div class="section" id="s-accesos">
+    <div class="section-header">
+      <div class="section-tag gold">Referencia</div>
+      <div class="section-title">🎟️ Tipos de acceso — Synergy Unlimited 2026</div>
+      <p class="section-desc">Toda la información de los tres accesos en un solo lugar. Úsala para comparar, responder preguntas rápidas o presentar opciones al cliente. Haz clic en cada acceso para ver los detalles.</p>
+    </div>
+
+    <div class="accordion">
+
+      <!-- ── GENERAL ── -->
+      <div class="acc-item general" id="acc-general">
+        <button class="acc-header" onclick="toggleAcc('general')">
+          <div class="acc-left">
+            <div class="acc-badge">General</div>
+            <div class="acc-title">Synergy General Access</div>
+          </div>
+          <div class="acc-prices">
+            <div class="acc-price-chip">
+              <span class="acc-price-label">Pauta</span>$5,997 MXN
+            </div>
+            <div class="acc-price-chip">
+              <span class="acc-price-label">Club</span>$3,997 MXN
+            </div>
+          </div>
+          <div class="acc-chevron">▼</div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-section-title">Qué incluye</div>
+            <div class="acc-features">
+              <div class="acc-feature"><div class="fi">✓</div>Acceso General al evento los 3 días (9, 10, 11 Octubre)</div>
+              <div class="acc-feature"><div class="fi">✓</div>Kit de bienvenida General</div>
+              <div class="acc-feature"><div class="fi">✓</div>Asientos Generales en el recinto</div>
+              <div class="acc-feature"><div class="fi">✓</div>Comunidad de Networking General</div>
+              <div class="acc-feature"><div class="fi">✓</div>Acceso a los shows en vivo</div>
+              <div class="acc-feature"><div class="fi">✓</div>Membresía 1 año Club Sinergético — Plan Esencial <em style="font-size:11.5px; opacity:0.6">(solo canal Pauta)</em></div>
+            </div>
+            <div class="acc-divider"></div>
+            <div class="acc-section-title">Precios</div>
+            <div class="acc-prices-grid">
+              <div class="acc-price-box">
+                <div class="acc-price-box-label">Canal Pauta Digital</div>
+                <div class="acc-price-box-val">$5,997</div>
+                <div class="acc-price-box-sub">MXN · pago único</div>
+              </div>
+              <div class="acc-price-box">
+                <div class="acc-price-box-label">Club Sinergético</div>
+                <div class="acc-price-box-val">$3,997</div>
+                <div class="acc-price-box-sub">MXN · precio exclusivo socios</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── VIP ── -->
+      <div class="acc-item vip" id="acc-vip">
+        <button class="acc-header" onclick="toggleAcc('vip')">
+          <div class="acc-left">
+            <div class="acc-badge">VIP</div>
+            <div class="acc-title">Synergy VIP Access</div>
+          </div>
+          <div class="acc-prices">
+            <div class="acc-price-chip">
+              <span class="acc-price-label">Pauta</span>$7,997 MXN
+            </div>
+            <div class="acc-price-chip">
+              <span class="acc-price-label">Club</span>$5,997 MXN
+            </div>
+          </div>
+          <div class="acc-chevron">▼</div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="acc-section-title">Qué incluye</div>
+            <div class="acc-features">
+              <div class="acc-feature"><div class="fi">✓</div>Acceso VIP al evento los 3 días (9, 10, 11 Octubre)</div>
+              <div class="acc-feature"><div class="fi">✓</div>Kit de bienvenida VIP</div>
+              <div class="acc-feature"><div class="fi">✓</div>Asientos VIP en el recinto (zona preferencial frente al escenario)</div>
+              <div class="acc-feature"><div class="fi">✓</div>Comunidad de Networking VIP</div>
+              <div class="acc-feature"><div class="fi">✓</div>Shows en vivo — categoría VIP</div>
+              <div class="acc-feature"><div class="fi">✓</div>Membresía 1 año Club Sinergético — Plan Esencial <em style="font-size:11.5px; opacity:0.6">(solo canal Pauta)</em></div>
+            </div>
+            <div class="acc-divider"></div>
+            <div class="acc-section-title">Precios</div>
+            <div class="acc-prices-grid">
+              <div class="acc-price-box">
+                <div class="acc-price-box-label">Canal Pauta Digital</div>
+                <div class="acc-price-box-val">$7,997</div>
+                <div class="acc-price-box-sub">MXN · pago único</div>
+              </div>
+              <div class="acc-price-box">
+                <div class="acc-price-box-label">Club Sinergético</div>
+                <div class="acc-price-box-val">$5,997</div>
+                <div class="acc-price-box-sub">MXN · precio exclusivo socios</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BLACK ── -->
+      <div class="acc-item black" id="acc-black">
+        <button class="acc-header" onclick="toggleAcc('black')">
+          <div class="acc-left">
+            <div class="acc-badge">★ Black Access</div>
+            <div class="acc-title">Synergy Black Access</div>
+          </div>
+          <div class="acc-prices">
+            <div class="acc-price-chip">
+              <span class="acc-price-label">Preventa Bootcamp</span>$1,997 USD
+            </div>
+            <div class="acc-price-chip">
+              <span class="acc-price-label">MXN Individual</span>$36,997 MXN
+            </div>
+          </div>
+          <div class="acc-chevron">▼</div>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+
+            <div class="acc-section-title">Experiencia presencial — en Expo Guadalajara</div>
+            <div class="acc-features grid2">
+              <div class="acc-feature"><div class="fi">★</div>Acceso zona preferencial los 3 días</div>
+              <div class="acc-feature"><div class="fi">★</div>Estación de Snacks los 3 días</div>
+              <div class="acc-feature"><div class="fi">★</div>Kit de bienvenida Black</div>
+              <div class="acc-feature"><div class="fi">★</div>Firma de libros privado Black</div>
+              <div class="acc-feature"><div class="fi">★</div>Meet & Greet / Sesión de fotos con speakers</div>
+              <div class="acc-feature"><div class="fi">★</div>Comida con speakers los 3 días</div>
+              <div class="acc-feature"><div class="fi">★</div>Acceso preferencial al show</div>
+              <div class="acc-feature"><div class="fi">★</div>Fiesta de Casino con Alfombra Roja</div>
+              <div class="acc-feature"><div class="fi">★</div>5× boletos para sorteo del auto</div>
+            </div>
+
+            <div class="acc-divider"></div>
+            <div class="acc-section-title">Bonos digitales incluidos</div>
+            <div class="acc-features grid2">
+              <div class="acc-feature"><div class="fi">✓</div>Grabación completa del Bootcamp</div>
+              <div class="acc-feature"><div class="fi">✓</div>Grupo de High Networking</div>
+              <div class="acc-feature"><div class="fi">✓</div>Synergy Unlimited Sessions — Mentoría digital con Jorge Serratos</div>
+              <div class="acc-feature"><div class="fi">✓</div>Kit de libros de speakers de SU 2026</div>
+              <div class="acc-feature"><div class="fi">✓</div>Entrenamiento "Capital Sinergético"</div>
+              <div class="acc-feature"><div class="fi">✓</div>Club Sinergético + cursos (IA para Negocios, Meta Ads, Voice Power, Maestría de la Viralidad, y más)</div>
+            </div>
+
+            <div class="acc-divider"></div>
+            <div class="acc-section-title">Precio por fases</div>
+            <div class="fase-mini-table">
+              <div class="fase-mini-row preventa">
+                <span class="fn">Preventa — Bootcamp</span>
+                <span class="fd">6 y 7 de Junio</span>
+                <span class="fp">$1,997 USD / $36,997 MXN</span>
+              </div>
+              <div class="fase-mini-row">
+                <span class="fn" style="color:var(--text-dim)">Fase 1</span>
+                <span class="fd">8 al 30 de Junio</span>
+                <span class="fp">$2,297 USD</span>
+              </div>
+              <div class="fase-mini-row">
+                <span class="fn" style="color:var(--text-dim)">Fase 2</span>
+                <span class="fd">1 Julio — 31 Agosto</span>
+                <span class="fp">$2,497 USD</span>
+              </div>
+              <div class="fase-mini-row">
+                <span class="fn" style="color:var(--text-dim)">Fase 3</span>
+                <span class="fd">1 Sept — 1 Octubre</span>
+                <span class="fp">$3,997 USD</span>
+              </div>
+            </div>
+
+            <div class="acc-divider"></div>
+            <div class="acc-section-title">Opciones de pago a meses (preventa)</div>
+            <div class="msi-chips">
+              <div class="msi-chip">
+                <div class="msi-chip-label">12 MSI</div>
+                <div class="msi-chip-val">$3,583 MXN</div>
+                <div class="msi-chip-sub">Solo TDC mexicanas</div>
+              </div>
+              <div class="msi-chip">
+                <div class="msi-chip-label">24 MSI</div>
+                <div class="msi-chip-val">$1,791 MXN</div>
+                <div class="msi-chip-sub">Sujeto a autorización bancaria</div>
+              </div>
+            </div>
+
+            <div class="acc-divider"></div>
+            <div class="acc-section-title">Precio doble</div>
+            <div class="acc-prices-grid">
+              <div class="acc-price-box">
+                <div class="acc-price-box-label">2 accesos (pareja o socio)</div>
+                <div class="acc-price-box-val">$55,497</div>
+                <div class="acc-price-box-sub">MXN · precio especial</div>
+              </div>
+              <div class="acc-price-box">
+                <div class="acc-price-box-label">Valor total del paquete</div>
+                <div class="acc-price-box-val" style="color:var(--gold)">$10,985+</div>
+                <div class="acc-price-box-sub">USD en beneficios incluidos</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </div>
+
+  <!-- ===== SPEAKERS ===== -->
+  <div class="section" id="s-speakers">
+    <div class="section-header">
+      <div class="section-tag" style="color:#a78bfa; background:rgba(167,139,250,0.1); border-color:rgba(167,139,250,0.25)">Referencia</div>
+      <div class="section-title">🎤 Speakers — Synergy Unlimited 2026</div>
+      <p class="section-desc">Todos los speakers confirmados para el evento del 9, 10 y 11 de Octubre en Expo Guadalajara. Úsalos como argumento de valor al hablar del Black Access — la comida y las fotos con estas personas son exclusivas del tier Black.</p>
+    </div>
+
+    <div class="callout" style="border-color:rgba(167,139,250,0.25); background:linear-gradient(135deg, rgba(167,139,250,0.08), rgba(167,139,250,0.02)); margin-bottom:28px;">
+      <div class="callout-title" style="color:#a78bfa">Argumento de venta</div>
+      <div class="callout-text">El Black Access incluye comida con estos speakers los 3 días y sesión de fotos con ellos. Una conexión con cualquiera de estos nombres puede transformar un negocio.</div>
+    </div>
+
+    <span class="speakers-section-label">Host del evento</span>
+    <div class="speakers-grid">
+      <div class="speaker-card host">
+        <div class="speaker-avatar">JS</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Jorge Serratos</div>
+          <div class="speaker-tag">Host · CEO Grupo SERLO</div>
+        </div>
+      </div>
+    </div>
+
+    <span class="speakers-section-label">Speakers confirmados</span>
+    <div class="speakers-grid">
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">AR</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Arnoldo de la Rocha</div>
+          <div class="speaker-tag">Liderazgo · Negocios</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">JR</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Jorge Rosas</div>
+          <div class="speaker-tag">Emprendimiento</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">SH</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Spencer Hoffmann</div>
+          <div class="speaker-tag">Mentalidad · Alto Rendimiento</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">NE</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Nayo Escobar</div>
+          <div class="speaker-tag">Ventas · Negocios</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">LF</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Luis Fallas</div>
+          <div class="speaker-tag">Desarrollo Humano</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">RM</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Rosario Marín</div>
+          <div class="speaker-tag">Ex Secretaria del Tesoro de EE.UU.</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">PP</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Paola Padilla</div>
+          <div class="speaker-tag">Marketing · Redes Sociales</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">JCB</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Juan Carlos Barrios</div>
+          <div class="speaker-tag">Negocios · Estrategia</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">JH</div>
+        <div class="speaker-info">
+          <div class="speaker-name">José Hernández</div>
+          <div class="speaker-tag">Astronauta NASA · Liderazgo</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">MQP</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Miguel Quintana Pali</div>
+          <div class="speaker-tag">CEO Grupo Xcaret · @xcaretpark</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">ND</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Nery D</div>
+          <div class="speaker-tag">Redes Sociales · Contenido</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">DA</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Diego Argaiz</div>
+          <div class="speaker-tag">Emprendimiento · Inversión</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">AK</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Alejandro Kasuga</div>
+          <div class="speaker-tag">Mejora continua · Ex Yakult Japón & Deloitte</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">ML</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Manuel de León</div>
+          <div class="speaker-tag">Negocios · Liderazgo</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">MAR</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Marco Antonio Regil</div>
+          <div class="speaker-tag">Comunicador · Bienestar</div>
+        </div>
+      </div>
+
+      <div class="speaker-card">
+        <div class="speaker-avatar">CP</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Carlos Páez</div>
+          <div class="speaker-tag">Supervivencia · Resiliencia</div>
+        </div>
+      </div>
+
+    </div>
+
+    <span class="speakers-section-label">Por anunciar</span>
+    <div class="speakers-grid">
+      <div class="speaker-card tba">
+        <div class="speaker-avatar">?</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Por revelar</div>
+          <div class="speaker-tag">Próximamente</div>
+        </div>
+      </div>
+      <div class="speaker-card tba">
+        <div class="speaker-avatar">?</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Por revelar</div>
+          <div class="speaker-tag">Próximamente</div>
+        </div>
+      </div>
+      <div class="speaker-card tba">
+        <div class="speaker-avatar">?</div>
+        <div class="speaker-info">
+          <div class="speaker-name">Por revelar</div>
+          <div class="speaker-tag">Próximamente</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout dark" style="margin-top:8px">
+      <div class="callout-title dim">Dato útil para ventas</div>
+      <div class="callout-text" style="font-size:14px; font-weight:500; color:var(--text-dim)">
+        El acceso General y VIP permite <strong style="color:var(--text)">ver</strong> a estos speakers desde el público. El <strong style="color:var(--red-light)">Black Access</strong> permite <strong style="color:var(--text)">convivir</strong> con ellos — comida los 3 días, firma de libros privada, sesión de fotos. Esa diferencia es el corazón del argumento de valor.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== LINKS DE PAGO ===== -->
+  <div class="section" id="s-links">
+    <div class="section-header">
+      <div class="section-tag green">Referencia</div>
+      <div class="section-title">🔗 Links de pago</div>
+      <p class="section-desc">Todos los links de pago organizados por región y tipo de acceso. Copia el link o ábrelo directamente para enviárselo al cliente.</p>
+    </div>
+
+    <!-- OFICIALES -->
+    <div class="links-region">
+      <div class="links-region-title oficial">✅ Links oficiales con registro</div>
+      <div class="links-group">
+        <span class="links-group-label">Black Access — Checkout oficial (todo el mundo)</span>
+        <div class="link-row">
+          <div class="link-name">Checkout Black Access Oficial</div>
+          <div class="link-price black-price"></div>
+          <button class="btn-copy-link" onclick="copiarLink('https://synergyunlimited.com/', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://synergyunlimited.com/" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MÉXICO -->
+    <div class="links-region">
+      <div class="links-region-title mex">🇲🇽 México</div>
+
+      <div class="links-group">
+        <span class="links-group-label">Black Access — Contado</span>
+        <div class="link-row">
+          <div class="link-name">Black Access Individual</div>
+          <div class="link-price black-price">$36,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/bEcVEwrw', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/bEcVEwrw" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Pase Doble Black Access</div>
+          <div class="link-price black-price">$55,497 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/SkQRGRbe', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/SkQRGRbe" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Black Access — A meses</span>
+        <div class="link-row">
+          <div class="link-name">Black Access Individual a meses</div>
+          <div class="link-price black-price">$42,916 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/eVq28s5wo4k28fgetg7Rk1e', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/eVq28s5wo4k28fgetg7Rk1e" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Pase Doble Black Access a meses</div>
+          <div class="link-price black-price">$64,376 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/7sY00k9MEg2K3Z01Gu7Rk1f', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/7sY00k9MEg2K3Z01Gu7Rk1f" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Black Access — Apartado contado</span>
+        <div class="link-row">
+          <div class="link-name">Apartado Black Access Individual</div>
+          <div class="link-price black-price">$9,999 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/QW4bS32r', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/QW4bS32r" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Apartado Pase Doble Black Access</div>
+          <div class="link-price black-price">$15,999 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/nMxUDpQp', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/nMxUDpQp" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Black Access — Apartado a meses</span>
+        <div class="link-row">
+          <div class="link-name">Apartado Black Access Individual a meses</div>
+          <div class="link-price black-price">$11,599 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/9B6cN68IAaIq8fgcl87Rk1g', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/9B6cN68IAaIq8fgcl87Rk1g" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Apartado Pase Doble Black Access a meses</div>
+          <div class="link-price black-price">$18,558 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/7sYeVebUMdUCgLMgBo7Rk1h', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/7sYeVebUMdUCgLMgBo7Rk1h" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">General Access</span>
+        <div class="link-row">
+          <div class="link-name">General — Contado Pauta</div>
+          <div class="link-price general-price">$5,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/sHf5tG7W', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/sHf5tG7W" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">General — A meses Pauta</div>
+          <div class="link-price general-price">$6,837 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/5kQcN69ME7we6783OC7Rk1i', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/5kQcN69ME7we6783OC7Rk1i" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">General — Contado Club</div>
+          <div class="link-price general-price">$3,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/Q4LogqdV', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/Q4LogqdV" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">General — A meses Club</div>
+          <div class="link-price general-price">$4,556 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/dRmcN65wo6sa5345WK7Rk1j', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/dRmcN65wo6sa5345WK7Rk1j" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">VIP Access</span>
+        <div class="link-row">
+          <div class="link-name">VIP — Contado Pauta</div>
+          <div class="link-price vip-price">$7,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/8dLZZrus', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/8dLZZrus" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">VIP — A meses Pauta</div>
+          <div class="link-price vip-price">$9,116 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/eVqdRa2kc4k20MOad07Rk1k', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/eVqdRa2kc4k20MOad07Rk1k" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">VIP — Contado Club</div>
+          <div class="link-price vip-price">$5,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/vFAPaM3B', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/vFAPaM3B" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">VIP — A meses Club</div>
+          <div class="link-price vip-price">$6,836 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/6oU8wQ6As2bU7bc0Cq7Rk1l', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/6oU8wQ6As2bU7bc0Cq7Rk1l" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Centurión — Contado</span>
+        <div class="link-row">
+          <div class="link-name">Centurión Individual</div>
+          <div class="link-price centurion-price">$90,000 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/VoBDAjgW', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/VoBDAjgW" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Centurión Doble</div>
+          <div class="link-price centurion-price">$144,000 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/wfLpTKeQ', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/wfLpTKeQ" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Centurión — A meses</span>
+        <div class="link-row">
+          <div class="link-name">Centurión Individual a meses</div>
+          <div class="link-price centurion-price">$104,000 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/bJedRacYQ6sa9jk0Cq7Rk1m', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/bJedRacYQ6sa9jk0Cq7Rk1m" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Centurión Doble a meses</div>
+          <div class="link-price centurion-price">$167,000 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/14AbJ2bUM3fY8fg84S7Rk1n', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/14AbJ2bUM3fY8fg84S7Rk1n" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Centurión — Abono contado</span>
+        <div class="link-row">
+          <div class="link-name">Abono Centurión Individual</div>
+          <div class="link-price centurion-price">$55,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/LJtVB2Dm', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/LJtVB2Dm" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Abono Centurión Doble</div>
+          <div class="link-price centurion-price">$91,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/tPTU7xdQ', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/tPTU7xdQ" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Centurión — Abono a meses</span>
+        <div class="link-row">
+          <div class="link-name">Abono Centurión Individual a meses</div>
+          <div class="link-price centurion-price">$64,997 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/dRm5kEcYQ4k2cvwgBo7Rk1o', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/dRm5kEcYQ4k2cvwgBo7Rk1o" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Abono Centurión Doble a meses</div>
+          <div class="link-price centurion-price">$106,716 MXN</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://buy.stripe.com/8x228s2kcaIqeDE5WK7Rk1p', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://buy.stripe.com/8x228s2kcaIqeDE5WK7Rk1p" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- USA -->
+    <div class="links-region">
+      <div class="links-region-title usa">🇺🇸 USA — USD</div>
+
+      <div class="links-group">
+        <span class="links-group-label">Black Access</span>
+        <div class="link-row">
+          <div class="link-name">Black Access Individual</div>
+          <div class="link-price usa-price">$1,997 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/ttDoMbie', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/ttDoMbie" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Pase Doble Black Access</div>
+          <div class="link-price usa-price">$2,997 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/5Frzbkfk', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/5Frzbkfk" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">General Access</span>
+        <div class="link-row">
+          <div class="link-name">General — Pauta</div>
+          <div class="link-price usa-price">$297 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/oyzBqqCj', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/oyzBqqCj" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">General — Club</div>
+          <div class="link-price usa-price">$197 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/uNJqZNRV', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/uNJqZNRV" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">VIP Access</span>
+        <div class="link-row">
+          <div class="link-name">VIP — Pauta</div>
+          <div class="link-price usa-price">$397 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/cipSNDwV', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/cipSNDwV" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">VIP — Club</div>
+          <div class="link-price usa-price">$297 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/4x5wRKH4', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/4x5wRKH4" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+
+      <div class="links-group">
+        <span class="links-group-label">Centurión</span>
+        <div class="link-row">
+          <div class="link-name">Centurión Individual</div>
+          <div class="link-price usa-price">$4,997 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/rdpUDkve', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/rdpUDkve" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Centurión Doble</div>
+          <div class="link-price usa-price">$7,997 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/LA9tfSqF', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/LA9tfSqF" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Abono Centurión Individual</div>
+          <div class="link-price usa-price">$3,000 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/2muzVugM', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/2muzVugM" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Abono Centurión Doble</div>
+          <div class="link-price usa-price">$5,000 USD</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://www.synergyforeducation.com/offers/ry6JizC2', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://www.synergyforeducation.com/offers/ry6JizC2" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LATAM -->
+    <div class="links-region">
+      <div class="links-region-title latam">🌎 LATAM — Hotmart</div>
+      <div class="links-group">
+        <span class="links-group-label">Black Access</span>
+        <div class="link-row">
+          <div class="link-name">Black Access Individual — LATAM</div>
+          <div class="link-price latam-price">Hotmart</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://pay.hotmart.com/Q106162772V?off=5o7ja6fi', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://pay.hotmart.com/Q106162772V?off=5o7ja6fi" target="_blank">↗ Abrir</a>
+        </div>
+        <div class="link-row">
+          <div class="link-name">Pase Doble Black Access — LATAM</div>
+          <div class="link-price latam-price">Hotmart</div>
+          <button class="btn-copy-link" onclick="copiarLink('https://pay.hotmart.com/O106162861G?off=y0uogpak', this)">📋 Copiar</button>
+          <a class="btn-link" href="https://pay.hotmart.com/O106162861G?off=y0uogpak" target="_blank">↗ Abrir</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('s-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function copiarLink(url, btn) {
+    navigator.clipboard.writeText(url).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copiado';
+      btn.style.background = 'rgba(6,214,160,0.2)';
+      btn.style.color = 'var(--green)';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 2000);
+    });
+  }
+
+  function toggleAcc(id) {
+    const item = document.getElementById('acc-' + id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>

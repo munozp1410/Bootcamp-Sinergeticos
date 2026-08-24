@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synergy Unlimited 2026 — Accesos y Precios</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    background: #0d0000;
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 52px 20px 36px;
+    background: radial-gradient(ellipse at top, #6b0000 0%, #0d0000 65%);
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #CC0000;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1.05;
+    margin-bottom: 6px;
+  }
+  .hero h1 span { color: #CC0000; }
+  .hero-meta {
+    font-size: 12px;
+    color: #7a3030;
+    font-weight: 600;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+  }
+
+  /* TABS */
+  .tabs-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 44px;
+    padding: 0 20px;
+  }
+  .tabs {
+    display: inline-flex;
+    background: #1a0505;
+    border: 1px solid #3a0808;
+    border-radius: 50px;
+    padding: 5px;
+    gap: 4px;
+  }
+  .tab-btn {
+    padding: 10px 26px;
+    border-radius: 40px;
+    border: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #7a3030;
+    background: transparent;
+  }
+  .tab-btn.active {
+    background: #CC0000;
+    color: #fff;
+  }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* REGION BADGE */
+  .region-label {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 0 20px;
+  }
+  .region-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(204,0,0,0.1);
+    border: 1px solid rgba(204,0,0,0.25);
+    border-radius: 30px;
+    padding: 6px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #CC0000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* CHANNEL TOGGLE (Pauta / Club) */
+  .channel-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+    gap: 8px;
+  }
+  .ch-btn {
+    padding: 7px 20px;
+    border-radius: 30px;
+    border: 1px solid #3a0808;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #7a3030;
+    background: transparent;
+  }
+  .ch-btn.active {
+    background: rgba(204,0,0,0.15);
+    border-color: #CC0000;
+    color: #ff6666;
+  }
+
+  /* CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto 16px;
+    padding: 0 20px;
+    align-items: start;
+  }
+  .card {
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); }
+  .card-inner {
+    background: #160303;
+    border: 1px solid #3a0808;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 100%;
+  }
+  .card-top {
+    padding: 24px 22px 18px;
+    position: relative;
+  }
+  .card-tier {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .card-name {
+    font-size: 19px;
+    font-weight: 900;
+    margin-bottom: 3px;
+  }
+  .card-sub {
+    font-size: 10.5px;
+    color: #7a3030;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+  }
+  .price-main {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .price-main sup { font-size: 13px; vertical-align: super; }
+  .price-cur {
+    font-size: 10px;
+    font-weight: 700;
+    color: #7a3030;
+    text-transform: uppercase;
+  }
+  .price-alt {
+    font-size: 11px;
+    font-weight: 600;
+    color: #7a3030;
+    margin-top: 4px;
+  }
+  .price-alt strong { color: #ff9999; }
+  .badge-popular {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: #CC0000;
+    color: #fff;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .card-divider { height: 1px; margin: 0 22px; background: #2a0606; }
+  .card-features { padding: 16px 22px 22px; }
+  .feat-title {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #7a3030;
+    margin-bottom: 12px;
+  }
+  .feat {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #c8c0c0;
+    line-height: 1.4;
+  }
+  .feat .ic {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    margin-top: 1px;
+  }
+
+  /* BUY BUTTONS */
+  .card-cta { padding: 0 22px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .btn-buy {
+    display: block;
+    width: 100%;
+    padding: 11px 16px;
+    border-radius: 10px;
+    border: none;
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn-buy:hover { opacity: 0.85; }
+  .btn-primary { background: #CC0000; color: #fff; }
+  .btn-secondary {
+    background: rgba(204,0,0,0.1);
+    color: #ff6666;
+    border: 1px solid rgba(204,0,0,0.3);
+  }
+  .btn-note {
+    font-size: 9.5px;
+    color: #5a2020;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* TIER COLORS */
+  .card-general .card-tier { color: #ff9999; }
+  .card-general .card-name { color: #fff; }
+  .card-general .price-main { color: #fff; }
+  .card-general .ic { background: rgba(255,153,153,0.12); color: #ff9999; }
+
+  .card-vip .card-inner { border-color: #5a0000; box-shadow: 0 0 20px rgba(204,0,0,0.15); }
+  .card-vip .card-tier { color: #ff5555; }
+  .card-vip .card-name { color: #ff5555; }
+  .card-vip .price-main { color: #ff5555; }
+  .card-vip .ic { background: rgba(255,68,68,0.12); color: #ff5555; }
+
+  .card-black .card-inner { border-color: #CC0000; background: #110000; box-shadow: 0 0 40px rgba(204,0,0,0.2); }
+  .card-black .card-tier { color: #CC0000; }
+  .card-black .card-name { color: #CC0000; }
+  .card-black .price-main { color: #CC0000; }
+  .card-black .price-cur { color: #6a0000; }
+  .card-black .price-alt { color: #6a0000; }
+  .card-black .feat { color: #ffcccc; }
+  .card-black .feat-title { color: #6a0000; }
+  .card-black .ic { background: rgba(204,0,0,0.12); color: #CC0000; }
+  .card-black .card-divider { background: #2a0000; }
+
+  .card-centurion .card-inner { border-color: #D4A843; background: #0d0a00; box-shadow: 0 0 40px rgba(212,168,67,0.12); }
+  .card-centurion .card-top { background: linear-gradient(135deg, #180e00 0%, #0d0a00 100%); }
+  .card-centurion .card-tier { color: #D4A843; }
+  .card-centurion .card-name { color: #D4A843; }
+  .card-centurion .price-main { color: #D4A843; }
+  .card-centurion .price-cur { color: #6a5010; }
+  .card-centurion .price-alt strong { color: #D4A843; }
+  .card-centurion .feat { color: #f5e4b0; }
+  .card-centurion .feat-title { color: #6a5010; }
+  .card-centurion .ic { background: rgba(212,168,67,0.12); color: #D4A843; }
+  .card-centurion .card-divider { background: #2a1a00; }
+  .card-centurion .btn-primary { background: #D4A843; color: #000; }
+  .card-centurion .btn-secondary { background: rgba(212,168,67,0.1); color: #D4A843; border-color: rgba(212,168,67,0.3); }
+
+  /* BLACK — PRECIO BOX GRID */
+  .black-price-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .bp-box {
+    background: rgba(204,0,0,0.07);
+    border: 1px solid rgba(204,0,0,0.15);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .bp-label { font-size: 9px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #6a0000; margin-bottom: 3px; }
+  .bp-val { font-size: 22px; font-weight: 900; color: #CC0000; letter-spacing: -0.5px; line-height: 1; }
+  .bp-val sup { font-size: 10px; vertical-align: super; }
+  .bp-sub { font-size: 9px; color: #6a0000; margin-top: 2px; }
+
+  /* CENTURION — PRECIO BOX */
+  .centurion-price-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .cp-box {
+    background: rgba(212,168,67,0.06);
+    border: 1px solid rgba(212,168,67,0.15);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .cp-label { font-size: 9px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #6a5010; margin-bottom: 3px; }
+  .cp-val { font-size: 20px; font-weight: 900; color: #D4A843; letter-spacing: -0.5px; line-height: 1; }
+  .cp-val sup { font-size: 10px; vertical-align: super; }
+  .cp-sub { font-size: 9px; color: #6a5010; margin-top: 2px; }
+
+  /* RENOVACIÓN */
+  .renov-section {
+    max-width: 1100px;
+    margin: 8px auto 20px;
+    padding: 0 20px;
+  }
+  .renov-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .renov-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.25);
+    border-radius: 30px;
+    padding: 5px 16px;
+    font-size: 10px;
+    font-weight: 800;
+    color: #38bdf8;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .card-renov .card-inner { border-color: rgba(56,189,248,0.35); background: #00060d; box-shadow: 0 0 24px rgba(56,189,248,0.08); }
+  .card-renov .card-tier { color: #38bdf8; }
+  .card-renov .card-name { color: #38bdf8; }
+  .card-renov .price-main { color: #38bdf8; }
+  .card-renov .price-cur { color: #1a4a60; }
+  .card-renov .feat { color: #c0e8f5; }
+  .card-renov .feat-title { color: #1a4a60; }
+  .card-renov .ic { background: rgba(56,189,248,0.1); color: #38bdf8; }
+  .card-renov .card-divider { background: rgba(56,189,248,0.1); }
+  .card-renov .btn-primary { background: #0284c7; color: #fff; }
+  .card-renov .btn-secondary { background: rgba(56,189,248,0.08); color: #38bdf8; border-color: rgba(56,189,248,0.25); }
+
+  /* LATAM */
+  .latam-note {
+    text-align: center;
+    padding: 20px;
+    color: #D4A843;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .latam-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 560px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+  }
+  .latam-row {
+    background: #110000;
+    border: 1px solid #CC0000;
+    border-radius: 14px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .latam-row-info { flex: 1; min-width: 160px; }
+  .latam-row-tier { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #CC0000; margin-bottom: 4px; }
+  .latam-row-name { font-size: 16px; font-weight: 900; color: #CC0000; }
+  .latam-row-sub { font-size: 11px; color: #6a0000; margin-top: 2px; }
+  .latam-row-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* FOOTER */
+  .footer-note {
+    text-align: center;
+    padding: 8px 20px 52px;
+    font-size: 10.5px;
+    color: #5a2020;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .footer-note strong { color: #CC0000; }
+
+  /* MSI CHIPS */
+  .msi-chip {
+    display: inline-flex;
+    background: rgba(212,168,67,0.1);
+    border: 1px solid rgba(212,168,67,0.25);
+    border-radius: 6px;
+    padding: 4px 9px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #D4A843;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .black-price-grid, .centurion-price-grid { grid-template-columns: 1fr; }
+    .tab-btn { padding: 9px 16px; font-size: 11px; }
+    .latam-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Sinergéticos · Synergy for Education</div>
+  <h1>Synergy <span>Unlimited</span> 2026</h1>
+  <div class="hero-meta">9 · 10 · 11 de Octubre · Expo Guadalajara</div>
+
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="tab('mex', this)">🇲🇽 México</button>
+      <button class="tab-btn" onclick="tab('usa', this)">🇺🇸 USA</button>
+      <button class="tab-btn" onclick="tab('latam', this)">🌎 LATAM</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     PANEL MÉXICO
+══════════════════════════════════════ -->
+<div class="panel active" id="p-mex">
+  <div class="region-label">
+    <span class="region-badge">🇲🇽 Precios en pesos mexicanos (MXN)</span>
+  </div>
+
+  <div class="channel-toggle">
+    <button class="ch-btn active" onclick="canal('mex', 'pauta', this)">📣 Pauta Digital</button>
+    <button class="ch-btn" onclick="canal('mex', 'club', this)">⭐ Club Sinergético</button>
+  </div>
+
+  <!-- PAUTA -->
+  <div id="mex-pauta">
+    <div class="cards-grid">
+
+      <!-- GENERAL PAUTA -->
+      <div class="card card-general">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-tier">General</div>
+            <div class="card-name">General Access</div>
+            <div class="card-sub">Acceso General · 3 días</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>5,997</div>
+              <div class="price-cur">MXN</div>
+            </div>
+            <div class="price-alt">A meses: <strong>$6,837 MXN</strong></div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida General</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área General</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking General</div>
+            <div class="feat"><div class="ic">✓</div>Acceso a los shows en vivo</div>
+            <div class="feat"><div class="ic">✓</div>Membresía Club Sinergético (Plan Esencial)</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/sHf5tG7W" target="_blank">Comprar — $5,997 MXN</a>
+            <a class="btn-buy btn-secondary" href="https://buy.stripe.com/5kQcN69ME7we6783OC7Rk1i" target="_blank">A meses — $6,837 MXN</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP PAUTA -->
+      <div class="card card-vip">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="badge-popular">Más popular</div>
+            <div class="card-tier">VIP</div>
+            <div class="card-name">VIP Access</div>
+            <div class="card-sub">Acceso VIP · 3 días</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>7,997</div>
+              <div class="price-cur">MXN</div>
+            </div>
+            <div class="price-alt">A meses: <strong>$9,116 MXN</strong></div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso VIP al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida VIP</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área VIP</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking VIP</div>
+            <div class="feat"><div class="ic">✓</div>Shows en vivo — categoría VIP</div>
+            <div class="feat"><div class="ic">✓</div>Membresía Club Sinergético (Plan Esencial)</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/8dLZZrus" target="_blank">Comprar — $7,997 MXN</a>
+            <a class="btn-buy btn-secondary" href="https://buy.stripe.com/eVqdRa2kc4k20MOad07Rk1k" target="_blank">A meses — $9,116 MXN</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BLACK PAUTA (full width) -->
+    <div style="max-width:1100px;margin:0 auto 16px;padding:0 20px;">
+    <div class="card card-black" style="grid-column:unset;">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">— La experiencia completa —</div>
+          <div class="card-name">Black Access</div>
+          <div class="card-sub">Acceso Black · 4 días (incl. Cena Black 8 Oct) · Experiencia premium</div>
+          <div class="black-price-grid">
+            <div class="bp-box">
+              <div class="bp-label">Individual</div>
+              <div class="bp-val"><sup>$</sup>36,997</div>
+              <div class="bp-sub">MXN · contado</div>
+            </div>
+            <div class="bp-box">
+              <div class="bp-label">Pase Doble</div>
+              <div class="bp-val"><sup>$</sup>55,497</div>
+              <div class="bp-sub">MXN · 2 accesos</div>
+            </div>
+            <div class="bp-box">
+              <div class="bp-label">Individual — a meses</div>
+              <div class="bp-val"><sup>$</sup>42,916</div>
+              <div class="bp-sub">MXN</div>
+            </div>
+            <div class="bp-box">
+              <div class="bp-label">Pase Doble — a meses</div>
+              <div class="bp-val"><sup>$</sup>64,376</div>
+              <div class="bp-sub">MXN</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:10px;color:#6a0000;font-weight:600;">Apartado individual: $9,999 MXN contado · $11,599 MXN a meses &nbsp;|&nbsp; Apartado doble: $15,999 MXN · $18,558 a meses</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Todo lo que incluye</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;">
+            <div class="feat"><div class="ic">✓</div>Acceso zona preferencial los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Estación de snacks los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida Black</div>
+            <div class="feat"><div class="ic">★</div>Firma de libros privado Black</div>
+            <div class="feat"><div class="ic">★</div>Meet &amp; Greet / Fotos con speakers</div>
+            <div class="feat"><div class="ic">★</div>Comida con speakers los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Acceso preferencial al show</div>
+            <div class="feat"><div class="ic">★</div>Cena Black — 8 Oct (Fiesta Casino / Alfombra Roja)</div>
+            <div class="feat"><div class="ic">★</div>5× boletos para sorteo del auto</div>
+            <div class="feat"><div class="ic">✓</div>Grabación del Bootcamp</div>
+            <div class="feat"><div class="ic">✓</div>Grupo High Networking</div>
+            <div class="feat"><div class="ic">✓</div>Synergy Unlimited Sessions con Jorge Serratos</div>
+            <div class="feat"><div class="ic">✓</div>Kit de libros de speakers SU 2026</div>
+            <div class="feat"><div class="ic">✓</div>Entrenamiento digital Capital Sinergético</div>
+            <div class="feat"><div class="ic">✓</div>Acceso Club Sinergético + certificaciones</div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/bEcVEwrw" target="_blank">Comprar Individual — $36,997 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/SkQRGRbe" target="_blank">Pase Doble — $55,497 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/eVq28s5wo4k28fgetg7Rk1e" target="_blank">A meses Individual — $42,916 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/7sY00k9MEg2K3Z01Gu7Rk1f" target="_blank">A meses Doble — $64,376 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/QW4bS32r" target="_blank">Apartado Individual — $9,999 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/nMxUDpQp" target="_blank">Apartado Doble — $15,999 MXN</a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- CENTURIÓN PAUTA (full width) -->
+    <div style="max-width:1100px;margin:0 auto 16px;padding:0 20px;">
+    <div class="card card-centurion" style="grid-column:unset;">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">— Tier máximo —</div>
+          <div class="card-name">Centurión</div>
+          <div class="card-sub">Acceso Centurión · Experiencia exclusiva</div>
+          <div class="centurion-price-grid">
+            <div class="cp-box">
+              <div class="cp-label">Individual contado</div>
+              <div class="cp-val"><sup>$</sup>90,000</div>
+              <div class="cp-sub">MXN</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Doble contado</div>
+              <div class="cp-val"><sup>$</sup>144,000</div>
+              <div class="cp-sub">MXN · 2 accesos</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Individual a meses</div>
+              <div class="cp-val"><sup>$</sup>104,000</div>
+              <div class="cp-sub">MXN</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Doble a meses</div>
+              <div class="cp-val"><sup>$</sup>167,000</div>
+              <div class="cp-sub">MXN</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:10px;color:#6a5010;font-weight:600;">Abono Individual: $55,997 contado · $64,997 a meses &nbsp;|&nbsp; Abono Doble: $91,997 · $106,716 a meses</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Incluye todo lo de Black Access +</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;">
+            <div class="feat"><div class="ic">★</div>Mesa Centurión exclusiva los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Experiencia VIP diferenciada</div>
+            <div class="feat"><div class="ic">★</div>Acceso a zonas exclusivas Centurión</div>
+            <div class="feat"><div class="ic">★</div>Reconocimiento especial en el evento</div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/VoBDAjgW" target="_blank">Comprar Individual — $90,000 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/wfLpTKeQ" target="_blank">Doble — $144,000 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/bJedRacYQ6sa9jk0Cq7Rk1m" target="_blank">A meses Individual — $104,000 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/14AbJ2bUM3fY8fg84S7Rk1n" target="_blank">A meses Doble — $167,000 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/LJtVB2Dm" target="_blank">Abono Individual — $55,997 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/tPTU7xdQ" target="_blank">Abono Doble — $91,997 MXN</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div><!-- /mex-pauta -->
+
+  <!-- CLUB -->
+  <div id="mex-club" style="display:none;">
+    <div class="cards-grid">
+
+      <!-- GENERAL CLUB -->
+      <div class="card card-general">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-tier">General</div>
+            <div class="card-name">General Access</div>
+            <div class="card-sub">Acceso General · 3 días · Precio Club</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>3,997</div>
+              <div class="price-cur">MXN</div>
+            </div>
+            <div class="price-alt">A meses: <strong>$4,556 MXN</strong></div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida General</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área General</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking General</div>
+            <div class="feat"><div class="ic">✓</div>Acceso a los shows en vivo</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/Q4LogqdV" target="_blank">Comprar — $3,997 MXN</a>
+            <a class="btn-buy btn-secondary" href="https://buy.stripe.com/dRmcN65wo6sa5345WK7Rk1j" target="_blank">A meses — $4,556 MXN</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP CLUB -->
+      <div class="card card-vip">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="badge-popular">Más popular</div>
+            <div class="card-tier">VIP</div>
+            <div class="card-name">VIP Access</div>
+            <div class="card-sub">Acceso VIP · 3 días · Precio Club</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>5,997</div>
+              <div class="price-cur">MXN</div>
+            </div>
+            <div class="price-alt">A meses: <strong>$6,836 MXN</strong></div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso VIP al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida VIP</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área VIP</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking VIP</div>
+            <div class="feat"><div class="ic">✓</div>Shows en vivo — categoría VIP</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/vFAPaM3B" target="_blank">Comprar — $5,997 MXN</a>
+            <a class="btn-buy btn-secondary" href="https://buy.stripe.com/6oU8wQ6As2bU7bc0Cq7Rk1l" target="_blank">A meses — $6,836 MXN</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BLACK CLUB (mismo precio que pauta) -->
+    <div style="max-width:1100px;margin:0 auto 16px;padding:0 20px;">
+    <div class="card card-black">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">— La experiencia completa —</div>
+          <div class="card-name">Black Access</div>
+          <div class="card-sub">Acceso Black · 4 días (incl. Cena Black 8 Oct) · Experiencia premium</div>
+          <div class="black-price-grid">
+            <div class="bp-box">
+              <div class="bp-label">Individual</div>
+              <div class="bp-val"><sup>$</sup>36,997</div>
+              <div class="bp-sub">MXN · contado</div>
+            </div>
+            <div class="bp-box">
+              <div class="bp-label">Pase Doble</div>
+              <div class="bp-val"><sup>$</sup>55,497</div>
+              <div class="bp-sub">MXN · 2 accesos</div>
+            </div>
+            <div class="bp-box">
+              <div class="bp-label">Individual — a meses</div>
+              <div class="bp-val"><sup>$</sup>42,916</div>
+              <div class="bp-sub">MXN</div>
+            </div>
+            <div class="bp-box">
+              <div class="bp-label">Pase Doble — a meses</div>
+              <div class="bp-val"><sup>$</sup>64,376</div>
+              <div class="bp-sub">MXN</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Todo lo que incluye</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;">
+            <div class="feat"><div class="ic">✓</div>Acceso zona preferencial los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Estación de snacks los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida Black</div>
+            <div class="feat"><div class="ic">★</div>Firma de libros privado Black</div>
+            <div class="feat"><div class="ic">★</div>Meet &amp; Greet / Fotos con speakers</div>
+            <div class="feat"><div class="ic">★</div>Comida con speakers los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Acceso preferencial al show</div>
+            <div class="feat"><div class="ic">★</div>Cena Black — 8 Oct (Fiesta Casino / Alfombra Roja)</div>
+            <div class="feat"><div class="ic">★</div>5× boletos para sorteo del auto</div>
+            <div class="feat"><div class="ic">✓</div>Grabación del Bootcamp</div>
+            <div class="feat"><div class="ic">✓</div>Grupo High Networking</div>
+            <div class="feat"><div class="ic">✓</div>Synergy Unlimited Sessions con Jorge Serratos</div>
+            <div class="feat"><div class="ic">✓</div>Kit de libros de speakers SU 2026</div>
+            <div class="feat"><div class="ic">✓</div>Entrenamiento digital Capital Sinergético</div>
+            <div class="feat"><div class="ic">✓</div>Acceso Club Sinergético + certificaciones</div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/bEcVEwrw" target="_blank">Comprar Individual — $36,997 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/SkQRGRbe" target="_blank">Pase Doble — $55,497 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/eVq28s5wo4k28fgetg7Rk1e" target="_blank">A meses Individual — $42,916 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/7sY00k9MEg2K3Z01Gu7Rk1f" target="_blank">A meses Doble — $64,376 MXN</a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- CENTURIÓN CLUB (mismo) -->
+    <div style="max-width:1100px;margin:0 auto 16px;padding:0 20px;">
+    <div class="card card-centurion">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">— Tier máximo —</div>
+          <div class="card-name">Centurión</div>
+          <div class="card-sub">Acceso Centurión · Experiencia exclusiva</div>
+          <div class="centurion-price-grid">
+            <div class="cp-box">
+              <div class="cp-label">Individual contado</div>
+              <div class="cp-val"><sup>$</sup>90,000</div>
+              <div class="cp-sub">MXN</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Doble contado</div>
+              <div class="cp-val"><sup>$</sup>144,000</div>
+              <div class="cp-sub">MXN</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Individual a meses</div>
+              <div class="cp-val"><sup>$</sup>104,000</div>
+              <div class="cp-sub">MXN</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Doble a meses</div>
+              <div class="cp-val"><sup>$</sup>167,000</div>
+              <div class="cp-sub">MXN</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Incluye todo lo de Black Access +</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;">
+            <div class="feat"><div class="ic">★</div>Mesa Centurión exclusiva los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Experiencia VIP diferenciada</div>
+            <div class="feat"><div class="ic">★</div>Acceso a zonas exclusivas Centurión</div>
+            <div class="feat"><div class="ic">★</div>Reconocimiento especial en el evento</div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/VoBDAjgW" target="_blank">Comprar Individual — $90,000 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/wfLpTKeQ" target="_blank">Doble — $144,000 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/bJedRacYQ6sa9jk0Cq7Rk1m" target="_blank">A meses Individual — $104,000 MXN</a>
+          <a class="btn-buy btn-secondary" href="https://buy.stripe.com/14AbJ2bUM3fY8fg84S7Rk1n" target="_blank">A meses Doble — $167,000 MXN</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div><!-- /mex-club -->
+
+  <!-- RENOVACIÓN MÉX -->
+  <div class="renov-section">
+    <div class="renov-header"><span class="renov-badge">🔄 Renovación Club Sinergético</span></div>
+    <div class="card card-renov">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">Renovación</div>
+          <div class="card-name">Renovación México</div>
+          <div class="card-sub">Membresía anual + 2 boletos Synergy Unlimited 2026</div>
+          <div class="price-row">
+            <div class="price-main"><sup>$</sup>5,997</div>
+            <div class="price-cur">MXN</div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Incluye</div>
+          <div class="feat"><div class="ic">✓</div>1 año de Club Sinergético</div>
+          <div class="feat"><div class="ic">✓</div>1 año de Skool</div>
+          <div class="feat"><div class="ic">✓</div>2 boletos zona General — Synergy Unlimited 2026</div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://checkout.synergyforeducation.com/pay/pl_d5a368bddbdd56eac7c049c65fe3d6c9" target="_blank">Renovar — $5,997 MXN</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /p-mex -->
+
+
+<!-- ══════════════════════════════════════
+     PANEL USA
+══════════════════════════════════════ -->
+<div class="panel" id="p-usa">
+  <div class="region-label">
+    <span class="region-badge">🇺🇸 Precios en dólares americanos (USD)</span>
+  </div>
+
+  <div class="channel-toggle">
+    <button class="ch-btn active" onclick="canal('usa', 'pauta', this)">📣 Pauta Digital</button>
+    <button class="ch-btn" onclick="canal('usa', 'club', this)">⭐ Club Sinergético</button>
+  </div>
+
+  <!-- USA PAUTA -->
+  <div id="usa-pauta">
+    <div class="cards-grid">
+
+      <!-- GENERAL USA PAUTA -->
+      <div class="card card-general">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-tier">General</div>
+            <div class="card-name">General Access</div>
+            <div class="card-sub">Acceso General · 3 días</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>297</div>
+              <div class="price-cur">USD</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida General</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área General</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking General</div>
+            <div class="feat"><div class="ic">✓</div>Acceso a los shows en vivo</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/oyzBqqCj" target="_blank">Comprar — $297 USD</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP USA PAUTA -->
+      <div class="card card-vip">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="badge-popular">Más popular</div>
+            <div class="card-tier">VIP</div>
+            <div class="card-name">VIP Access</div>
+            <div class="card-sub">Acceso VIP · 3 días</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>397</div>
+              <div class="price-cur">USD</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso VIP al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida VIP</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área VIP</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking VIP</div>
+            <div class="feat"><div class="ic">✓</div>Shows en vivo — categoría VIP</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/cipSNDwV" target="_blank">Comprar — $397 USD</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BLACK USA -->
+    <div style="max-width:1100px;margin:0 auto 16px;padding:0 20px;">
+    <div class="card card-black">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">— La experiencia completa —</div>
+          <div class="card-name">Black Access</div>
+          <div class="card-sub">Acceso Black · 4 días (incl. Cena Black 8 Oct) · Experiencia premium</div>
+          <div class="black-price-grid">
+            <div class="bp-box">
+              <div class="bp-label">Individual</div>
+              <div class="bp-val"><sup>$</sup>1,997</div>
+              <div class="bp-sub">USD</div>
+            </div>
+            <div class="bp-box">
+              <div class="bp-label">Pase Doble</div>
+              <div class="bp-val"><sup>$</sup>2,997</div>
+              <div class="bp-sub">USD · 2 accesos</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Todo lo que incluye</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;">
+            <div class="feat"><div class="ic">✓</div>Acceso zona preferencial los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Estación de snacks los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida Black</div>
+            <div class="feat"><div class="ic">★</div>Firma de libros privado Black</div>
+            <div class="feat"><div class="ic">★</div>Meet &amp; Greet / Fotos con speakers</div>
+            <div class="feat"><div class="ic">★</div>Comida con speakers los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Acceso preferencial al show</div>
+            <div class="feat"><div class="ic">★</div>Cena Black — 8 Oct (Fiesta Casino / Alfombra Roja)</div>
+            <div class="feat"><div class="ic">★</div>5× boletos para sorteo del auto</div>
+            <div class="feat"><div class="ic">✓</div>Grabación del Bootcamp</div>
+            <div class="feat"><div class="ic">✓</div>Grupo High Networking</div>
+            <div class="feat"><div class="ic">✓</div>Synergy Unlimited Sessions con Jorge Serratos</div>
+            <div class="feat"><div class="ic">✓</div>Kit de libros de speakers SU 2026</div>
+            <div class="feat"><div class="ic">✓</div>Entrenamiento digital Capital Sinergético</div>
+            <div class="feat"><div class="ic">✓</div>Acceso Club Sinergético + certificaciones</div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/ttDoMbie" target="_blank">Comprar Individual — $1,997 USD</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/5Frzbkfk" target="_blank">Pase Doble — $2,997 USD</a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- CENTURIÓN USA -->
+    <div style="max-width:1100px;margin:0 auto 16px;padding:0 20px;">
+    <div class="card card-centurion">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">— Tier máximo —</div>
+          <div class="card-name">Centurión</div>
+          <div class="card-sub">Acceso Centurión · Experiencia exclusiva</div>
+          <div class="centurion-price-grid">
+            <div class="cp-box">
+              <div class="cp-label">Individual</div>
+              <div class="cp-val"><sup>$</sup>4,997</div>
+              <div class="cp-sub">USD</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Doble</div>
+              <div class="cp-val"><sup>$</sup>7,997</div>
+              <div class="cp-sub">USD · 2 accesos</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Abono Individual</div>
+              <div class="cp-val"><sup>$</sup>3,000</div>
+              <div class="cp-sub">USD</div>
+            </div>
+            <div class="cp-box">
+              <div class="cp-label">Abono Doble</div>
+              <div class="cp-val"><sup>$</sup>5,000</div>
+              <div class="cp-sub">USD</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Incluye todo lo de Black Access +</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;">
+            <div class="feat"><div class="ic">★</div>Mesa Centurión exclusiva los 3 días</div>
+            <div class="feat"><div class="ic">★</div>Experiencia VIP diferenciada</div>
+            <div class="feat"><div class="ic">★</div>Acceso a zonas exclusivas Centurión</div>
+            <div class="feat"><div class="ic">★</div>Reconocimiento especial en el evento</div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/rdpUDkve" target="_blank">Comprar Individual — $4,997 USD</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/LA9tfSqF" target="_blank">Doble — $7,997 USD</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/2muzVugM" target="_blank">Abono Individual — $3,000 USD</a>
+          <a class="btn-buy btn-secondary" href="https://www.synergyforeducation.com/offers/ry6JizC2" target="_blank">Abono Doble — $5,000 USD</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div><!-- /usa-pauta -->
+
+  <!-- USA CLUB -->
+  <div id="usa-club" style="display:none;">
+    <div class="cards-grid">
+
+      <div class="card card-general">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="card-tier">General</div>
+            <div class="card-name">General Access</div>
+            <div class="card-sub">Acceso General · 3 días · Precio Club</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>197</div>
+              <div class="price-cur">USD</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida General</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área General</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking General</div>
+            <div class="feat"><div class="ic">✓</div>Acceso a los shows en vivo</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/uNJqZNRV" target="_blank">Comprar — $197 USD</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-vip">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="badge-popular">Más popular</div>
+            <div class="card-tier">VIP</div>
+            <div class="card-name">VIP Access</div>
+            <div class="card-sub">Acceso VIP · 3 días · Precio Club</div>
+            <div class="price-row">
+              <div class="price-main"><sup>$</sup>297</div>
+              <div class="price-cur">USD</div>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-features">
+            <div class="feat-title">Incluye</div>
+            <div class="feat"><div class="ic">✓</div>Acceso VIP al evento los 3 días</div>
+            <div class="feat"><div class="ic">✓</div>Kit de bienvenida VIP</div>
+            <div class="feat"><div class="ic">✓</div>Asientos área VIP</div>
+            <div class="feat"><div class="ic">✓</div>Comunidad de Networking VIP</div>
+            <div class="feat"><div class="ic">✓</div>Shows en vivo — categoría VIP</div>
+          </div>
+          <div class="card-cta">
+            <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/4x5wRKH4" target="_blank">Comprar — $297 USD</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /usa-club -->
+
+  <!-- RENOVACIÓN USA -->
+  <div class="renov-section">
+    <div class="renov-header"><span class="renov-badge">🔄 Renovación Club Sinergético</span></div>
+    <div class="card card-renov">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">Renovación</div>
+          <div class="card-name">Renovación USA</div>
+          <div class="card-sub">Membresía anual + boletos Synergy Unlimited 2026</div>
+          <div class="price-row">
+            <div class="price-main"><sup>$</sup>999</div>
+            <div class="price-cur">USD</div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Incluye</div>
+          <div class="feat"><div class="ic">✓</div>1 año de Club Sinergético</div>
+          <div class="feat"><div class="ic">✓</div>1 año de Skool</div>
+          <div class="feat"><div class="ic">✓</div>2 boletos zona VIP — Synergy Unlimited México</div>
+          <div class="feat"><div class="ic">✓</div>2 boletos zona General — Synergy Unlimited USA</div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://www.synergyforeducation.com/offers/moLFo6Pi" target="_blank">Renovar — $999 USD</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /p-usa -->
+
+
+<!-- ══════════════════════════════════════
+     PANEL LATAM
+══════════════════════════════════════ -->
+<div class="panel" id="p-latam">
+  <div class="region-label">
+    <span class="region-badge">🌎 Latinoamérica · Vía Hotmart</span>
+  </div>
+
+  <div class="latam-note">Solo disponible Black Access para LATAM a través de Hotmart</div>
+
+  <div class="latam-cards">
+    <div class="latam-row">
+      <div class="latam-row-info">
+        <div class="latam-row-tier">Black Access</div>
+        <div class="latam-row-name">Black Access Individual</div>
+        <div class="latam-row-sub">1 acceso · Vía Hotmart</div>
+      </div>
+      <div class="latam-row-btns">
+        <a class="btn-buy btn-primary" style="white-space:nowrap;" href="https://pay.hotmart.com/Q106162772V?off=5o7ja6fi" target="_blank">Comprar en Hotmart</a>
+      </div>
+    </div>
+    <div class="latam-row">
+      <div class="latam-row-info">
+        <div class="latam-row-tier">Black Access</div>
+        <div class="latam-row-name">Pase Doble Black Access</div>
+        <div class="latam-row-sub">2 accesos · Vía Hotmart</div>
+      </div>
+      <div class="latam-row-btns">
+        <a class="btn-buy btn-primary" style="white-space:nowrap;" href="https://pay.hotmart.com/O106162861G?off=y0uogpak" target="_blank">Comprar en Hotmart</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RENOVACIÓN LATAM -->
+  <div class="renov-section">
+    <div class="renov-header"><span class="renov-badge">🔄 Renovación Club Sinergético</span></div>
+    <div class="card card-renov">
+      <div class="card-inner">
+        <div class="card-top">
+          <div class="card-tier">Renovación</div>
+          <div class="card-name">Renovación LATAM</div>
+          <div class="card-sub">Membresía anual + 2 boletos Synergy Unlimited 2026</div>
+          <div class="price-row">
+            <div class="price-main"><sup>$</sup>299</div>
+            <div class="price-cur">USD</div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-features">
+          <div class="feat-title">Incluye</div>
+          <div class="feat"><div class="ic">✓</div>1 año de Club Sinergético</div>
+          <div class="feat"><div class="ic">✓</div>1 año de Skool</div>
+          <div class="feat"><div class="ic">✓</div>2 boletos zona General — Synergy Unlimited 2026</div>
+        </div>
+        <div class="card-cta">
+          <a class="btn-buy btn-primary" href="https://pay.hotmart.com/D106300176V?off=ill2992e" target="_blank">Renovar — $299 USD · Hotmart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /p-latam -->
+
+
+<!-- FOOTER -->
+<div class="footer-note">
+  <strong>★</strong> Beneficios exclusivos del Black Access · <strong>✓</strong> Incluidos en el acceso<br>
+  Precios sujetos a cambio sin previo aviso · MSI disponibles solo con tarjetas mexicanas<br>
+  Synergy Unlimited 2026 · 9, 10 y 11 de octubre · Expo Guadalajara
+</div>
+
+<script>
+  function tab(id, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('p-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function canal(region, ch, btn) {
+    const parent = btn.closest('.panel');
+    parent.querySelectorAll('.ch-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(region + '-pauta').style.display = ch === 'pauta' ? '' : 'none';
+    document.getElementById(region + '-club').style.display = ch === 'club' ? '' : 'none';
+  }
+</script>
+
+</body>
+</html>

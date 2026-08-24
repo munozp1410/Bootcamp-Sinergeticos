@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotizadora · Synergy Unlimited 2026</title>
+<style>
+/* ─── TOKENS ──────────────────────────────────────────────── */
+:root {
+  --bg:          #060407;
+  --panel:       #0C0910;
+  --surface:     #160E1C;
+  --surface-2:   #1E1428;
+  --border:      #2C1E38;
+  --border-soft: #1E1428;
+  --red:         #CC0000;
+  --red-dim:     rgba(204,0,0,0.12);
+  --red-glow:    rgba(204,0,0,0.25);
+  --gold:        #C89030;
+  --gold-dim:    rgba(200,144,48,0.12);
+  --text:        #EDE8F0;
+  --text-2:      #A090B0;
+  --text-3:      #5A4870;
+  --green:       #22C55E;
+  --doc-bg:      #120D18;
+  --doc-border:  #2A1A38;
+  --radius:      10px;
+  --radius-lg:   16px;
+}
+
+/* ─── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body {
+  font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TOPBAR ──────────────────────────────────────────────── */
+.topbar {
+  height: 56px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-left { display: flex; align-items: center; gap: 14px; }
+.topbar-logo {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.topbar-sep { width: 1px; height: 20px; background: var(--border); }
+.topbar-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.cot-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-variant-numeric: tabular-nums;
+}
+.btn-nueva {
+  height: 34px;
+  padding: 0 16px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn-nueva:hover { opacity: 0.82; }
+
+/* ─── LAYOUT ──────────────────────────────────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+/* ─── LEFT PANEL ──────────────────────────────────────────── */
+.left {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 0;
+}
+.left-section {
+  padding: 20px 20px 0;
+}
+.left-section + .left-section {
+  padding-top: 16px;
+  margin-top: 0;
+}
+
+.sec-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-soft);
+}
+
+/* FIELD */
+.field { margin-bottom: 12px; }
+.field-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 5px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px var(--red-dim);
+}
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235A4870' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+.field select option { background: #160E1C; }
+.field textarea { resize: none; height: 68px; line-height: 1.5; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* TIPO TOGGLE */
+.tipo-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.tipo-btn {
+  padding: 9px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--surface);
+  color: var(--text-3);
+  transition: all 0.15s;
+  text-align: center;
+  line-height: 1.3;
+}
+.tipo-btn small { display: block; font-weight: 400; font-size: 9.5px; opacity: 0.7; margin-top: 1px; }
+.tipo-btn.sel-normal {
+  background: var(--red-dim);
+  border-color: var(--red);
+  color: #FF6666;
+}
+.tipo-btn.sel-regalo {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* LINE TOTAL */
+.line-total-bar {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.line-total-label { font-size: 10.5px; font-weight: 600; color: var(--text-3); }
+.line-total-val {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+}
+
+.btn-add {
+  width: 100%;
+  padding: 11px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  margin-bottom: 20px;
+}
+.btn-add:hover { opacity: 0.85; }
+.btn-add:active { transform: scale(0.98); }
+
+/* ─── RIGHT PANEL ─────────────────────────────────────────── */
+.right {
+  overflow-y: auto;
+  padding: 32px 36px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── DOCUMENT ────────────────────────────────────────────── */
+.doc {
+  background: var(--doc-bg);
+  border: 1px solid var(--doc-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.04) inset,
+    0 24px 64px rgba(0,0,0,0.5),
+    0 2px 8px rgba(0,0,0,0.4);
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* DOC HEADER */
+.doc-head {
+  padding: 28px 32px 24px;
+  background: linear-gradient(160deg, #1E0A28 0%, #160E1C 60%);
+  border-bottom: 1px solid var(--doc-border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+}
+.doc-brand-name {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--red);
+  letter-spacing: -0.5px;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.doc-brand-sub {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.doc-meta { text-align: right; }
+.doc-meta-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.doc-meta-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-top: 3px;
+}
+
+/* DOC CLIENTE */
+.doc-cliente {
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border-soft);
+  display: none;
+}
+.doc-cliente.show { display: block; }
+.doc-cliente-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 5px;
+}
+.doc-cliente-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+/* DOC ITEMS */
+.doc-items { padding: 0 32px; }
+.doc-items-empty {
+  padding: 52px 0;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 13px;
+}
+.doc-items-empty .empty-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+/* TABLE */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+.items-table thead tr {
+  border-bottom: 1px solid var(--border-soft);
+}
+.items-table th {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 16px 0 12px;
+  text-align: left;
+}
+.items-table th:not(:first-child) { text-align: right; padding-left: 20px; }
+.items-table tbody tr {
+  border-bottom: 1px solid var(--border-soft);
+  transition: background 0.1s;
+}
+.items-table tbody tr:last-child { border-bottom: none; }
+.items-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+.items-table td {
+  padding: 14px 0;
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+.items-table td:not(:first-child) { text-align: right; padding-left: 20px; }
+.td-desc { max-width: 300px; }
+.td-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge-regalo {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid rgba(200,144,48,0.25);
+  border-radius: 20px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.badge-valor {
+  font-size: 10.5px;
+  color: var(--text-3);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+.td-cant {
+  font-size: 13px;
+  color: var(--text-2);
+  font-weight: 600;
+  min-width: 50px;
+}
+.td-precio {
+  font-size: 13px;
+  color: var(--text-2);
+  font-weight: 500;
+  min-width: 90px;
+}
+.td-total {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  min-width: 110px;
+}
+.td-total.es-regalo { color: var(--gold); }
+.td-del {
+  min-width: 36px;
+  padding-left: 12px !important;
+}
+.btn-del {
+  width: 24px;
+  height: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-3);
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  font-family: inherit;
+  margin-left: auto;
+}
+.btn-del:hover {
+  background: var(--red-dim);
+  border-color: var(--red);
+  color: #FF6666;
+}
+
+/* DOC TOTALS */
+.doc-totals {
+  padding: 20px 32px 24px;
+  border-top: 1px solid var(--border-soft);
+  margin-top: 0;
+  display: none;
+}
+.doc-totals.show { display: block; }
+.totals-rows { max-width: 300px; margin-left: auto; }
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 12.5px;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+.total-row.highlight {
+  color: var(--gold);
+  font-weight: 700;
+}
+.total-divider { height: 1px; background: var(--border-soft); margin: 10px 0; }
+.total-final {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.total-final-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.total-final-val {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.total-currency {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-top: 3px;
+  text-align: right;
+}
+
+/* DOC NOTES */
+.doc-notes {
+  padding: 16px 32px 24px;
+  border-top: 1px solid var(--border-soft);
+  display: none;
+}
+.doc-notes.show { display: block; }
+.doc-notes-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+.doc-notes-text {
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+/* DOC FOOTER */
+.doc-footer {
+  padding: 14px 32px;
+  border-top: 1px solid var(--border-soft);
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.doc-footer-info {
+  font-size: 10px;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+.doc-footer-red { width: 4px; height: 24px; background: var(--red); border-radius: 2px; flex-shrink: 0; }
+
+/* ACTIONS BAR */
+.actions-bar {
+  display: flex;
+  gap: 10px;
+  padding: 20px 0 4px;
+  max-width: 760px;
+  margin: 0 auto;
+  width: 100%;
+}
+.btn-action {
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  letter-spacing: 0.3px;
+}
+.btn-action:hover { opacity: 0.8; }
+.btn-print { background: var(--red); color: #fff; }
+.btn-copy-txt {
+  background: var(--surface-2);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+
+/* ─── PRINT ───────────────────────────────────────────────── */
+@media print {
+  .topbar, .left, .actions-bar { display: none !important; }
+  body { background: #fff; color: #111; }
+  .layout { display: block; height: auto; }
+  .right { padding: 0; background: #fff; }
+  .doc {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 100%;
+  }
+  .doc-head {
+    background: #fff !important;
+    border-bottom: 2px solid #CC0000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .doc-brand-name { color: #CC0000 !important; }
+  .doc-brand-sub, .doc-meta-num { color: #888 !important; }
+  .doc-meta-date { color: #444 !important; }
+  .doc-cliente-label, .doc-notes-label, .doc-footer-info { color: #888 !important; }
+  .doc-cliente-name, .td-name, .td-total, .total-final-val { color: #111 !important; }
+  .td-cant, .td-precio, .total-row { color: #555 !important; }
+  .total-row.highlight { color: #8B6914 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .badge-regalo { background: #FEF9E7 !important; border-color: #C89030 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .badge-valor { color: #aaa !important; }
+  .items-table th { color: #888 !important; border-color: #e0e0e0 !important; }
+  .items-table tbody tr { border-color: #f0f0f0 !important; }
+  .doc-totals { border-color: #e0e0e0 !important; }
+  .total-divider { background: #e0e0e0 !important; }
+  .doc-footer { background: #f8f8f8 !important; border-color: #e0e0e0 !important; }
+  .doc-footer-red { background: #CC0000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .doc-notes { border-color: #e0e0e0 !important; }
+  .doc-notes-text { color: #555 !important; }
+  .btn-del { display: none !important; }
+  .items-table th:last-child, .items-table td:last-child { display: none; }
+}
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; height: auto; overflow: visible; }
+  .left { height: auto; }
+  .right { padding: 20px 16px; }
+  .doc-head { grid-template-columns: 1fr; }
+  .doc-meta { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-logo">Synergy 2026</span>
+    <div class="topbar-sep"></div>
+    <span class="topbar-title">Cotizadora de Boletos</span>
+  </div>
+  <div class="topbar-right">
+    <span class="cot-badge" id="badge-num">COT · #001</span>
+    <button class="btn-nueva" onclick="nuevaCotizacion()">+ Nueva</button>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- ── LEFT ─────────────────────────────────────────────── -->
+  <div class="left">
+
+    <div class="left-section" style="padding-top:20px;">
+      <div class="sec-label">Cliente</div>
+      <div class="field">
+        <label class="field-label">Nombre o empresa</label>
+        <input type="text" id="clienteNombre" placeholder="Ej. Empresa XYZ · Juan Pérez" oninput="actualizarDoc()">
+      </div>
+      <div class="field">
+        <label class="field-label">Notas / condiciones</label>
+        <textarea id="clienteNotas" placeholder="Vigencia, instrucciones especiales..." oninput="actualizarDoc()"></textarea>
+      </div>
+    </div>
+
+    <div class="left-section" style="padding-top:20px;">
+      <div class="sec-label">Agregar línea</div>
+
+      <div class="tipo-wrap">
+        <button class="tipo-btn sel-normal" id="btn-normal" onclick="setTipo('normal')">
+          🎟️ Boleto
+          <small>Precio normal</small>
+        </button>
+        <button class="tipo-btn" id="btn-regalo" onclick="setTipo('regalo')">
+          🎁 Regalo
+          <small>Cortesía / $0</small>
+        </button>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Tipo de boleto</label>
+        <select id="itemSelect" onchange="autoFill()">
+          <option value="">— Selecciona —</option>
+          <optgroup label="General Access">
+            <option value="General Access" data-precio="4997">General Access — $4,997 MXN</option>
+            <option value="General Access (Club)" data-precio="3997">General Access Club — $3,997 MXN</option>
+            <option value="General Access USD" data-precio="297">General Access — $297 USD</option>
+          </optgroup>
+          <optgroup label="VIP Access">
+            <option value="VIP Access" data-precio="7997">VIP Access — $7,997 MXN</option>
+            <option value="VIP Access (Club)" data-precio="5997">VIP Access Club — $5,997 MXN</option>
+            <option value="VIP Access USD" data-precio="397">VIP Access — $397 USD</option>
+          </optgroup>
+          <optgroup label="Black Access">
+            <option value="Black Access" data-precio="36997">Black Access — $36,997 MXN</option>
+            <option value="Pase Doble Black Access" data-precio="55497">Pase Doble Black — $55,497 MXN</option>
+            <option value="Black Access USD" data-precio="1997">Black Access — $1,997 USD</option>
+          </optgroup>
+          <optgroup label="Centurión">
+            <option value="Centurión" data-precio="90000">Centurión — $90,000 MXN</option>
+            <option value="Centurión USD" data-precio="4997">Centurión — $4,997 USD</option>
+          </optgroup>
+          <optgroup label="Renovación">
+            <option value="Renovación Club MX" data-precio="5997">Renovación MX — $5,997 MXN</option>
+            <option value="Renovación Club USA" data-precio="999">Renovación USA — $999 USD</option>
+            <option value="Renovación LATAM" data-precio="299">Renovación LATAM — $299 USD</option>
+          </optgroup>
+          <option value="custom">Otro (personalizado)</option>
+        </select>
+      </div>
+
+      <div class="field" id="custom-field" style="display:none;">
+        <label class="field-label">Descripción personalizada</label>
+        <input type="text" id="customDesc" placeholder="Ej. Pase grupal empresarial">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Cantidad</label>
+          <input type="number" id="itemCant" value="1" min="1" oninput="calcLine()">
+        </div>
+        <div class="field">
+          <label class="field-label" id="lbl-precio">Precio unitario</label>
+          <input type="number" id="itemPrecio" placeholder="0" oninput="calcLine()">
+        </div>
+      </div>
+
+      <div class="field" id="valor-field" style="display:none;">
+        <label class="field-label">Valor de lista (para mostrar ahorro)</label>
+        <input type="number" id="itemValor" placeholder="Ej. 36997">
+      </div>
+
+      <div class="line-total-bar">
+        <span class="line-total-label">Subtotal esta línea</span>
+        <span class="line-total-val" id="lineTotal">$0</span>
+      </div>
+
+      <button class="btn-add" onclick="agregarItem()">＋ Agregar a la cotización</button>
+    </div>
+  </div>
+
+  <!-- ── RIGHT ─────────────────────────────────────────────── -->
+  <div class="right">
+
+    <div class="doc">
+
+      <!-- MEMBRETE -->
+      <div class="doc-head">
+        <div>
+          <div class="doc-brand-name">Synergy Unlimited 2026</div>
+          <div class="doc-brand-sub">Sinergéticos · Synergy for Education · 9–10–11 Octubre · Expo Guadalajara</div>
+        </div>
+        <div class="doc-meta">
+          <div class="doc-meta-num" id="doc-num">COTIZACIÓN #001</div>
+          <div class="doc-meta-date" id="doc-date"></div>
+        </div>
+      </div>
+
+      <!-- CLIENTE -->
+      <div class="doc-cliente" id="doc-cliente">
+        <div class="doc-cliente-label">Cotización para</div>
+        <div class="doc-cliente-name" id="doc-cliente-name"></div>
+      </div>
+
+      <!-- ITEMS -->
+      <div class="doc-items">
+        <div class="doc-items-empty" id="empty-state">
+          <div class="empty-icon">🎟️</div>
+          Agrega boletos desde el panel izquierdo
+        </div>
+        <table class="items-table" id="items-table" style="display:none;">
+          <thead>
+            <tr>
+              <th>Descripción</th>
+              <th>Cant.</th>
+              <th>P. Unitario</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="items-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- TOTALES -->
+      <div class="doc-totals" id="doc-totals">
+        <div class="totals-rows">
+          <div class="total-row" id="row-subtotal">
+            <span>Subtotal</span>
+            <span id="val-subtotal">$0</span>
+          </div>
+          <div class="total-row highlight" id="row-ahorro" style="display:none;">
+            <span>🎁 Valor en regalos incluidos</span>
+            <span id="val-ahorro"></span>
+          </div>
+          <div class="total-divider"></div>
+          <div class="total-final">
+            <span class="total-final-label">Total a pagar</span>
+            <span class="total-final-val" id="val-total">$0</span>
+          </div>
+          <div class="total-currency" id="val-currency">MXN</div>
+        </div>
+      </div>
+
+      <!-- NOTAS -->
+      <div class="doc-notes" id="doc-notes">
+        <div class="doc-notes-label">Notas</div>
+        <div class="doc-notes-text" id="doc-notes-text"></div>
+      </div>
+
+      <!-- PIE -->
+      <div class="doc-footer">
+        <div class="doc-footer-red"></div>
+        <div class="doc-footer-info">
+          Cotización generada por Sinergéticos · Synergy for Education<br>
+          Precios sujetos a disponibilidad y vigencia · 9, 10 y 11 de Octubre 2026 · Expo Guadalajara
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="actions-bar">
+      <button class="btn-action btn-print" onclick="window.print()">🖨️ Imprimir · Guardar PDF</button>
+      <button class="btn-action btn-copy-txt" onclick="copiarTexto()">📋 Copiar como texto</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let items = [];
+  let tipo = 'normal';
+  let cotNum = 1;
+
+  // Fecha
+  document.getElementById('doc-date').textContent = new Date().toLocaleDateString('es-MX', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
+
+  /* TIPO */
+  function setTipo(t) {
+    tipo = t;
+    document.getElementById('btn-normal').className = 'tipo-btn ' + (t === 'normal' ? 'sel-normal' : '');
+    document.getElementById('btn-regalo').className = 'tipo-btn ' + (t === 'regalo' ? 'sel-regalo' : '');
+    document.getElementById('valor-field').style.display = t === 'regalo' ? '' : 'none';
+    document.getElementById('lbl-precio').textContent = t === 'regalo' ? 'Precio (0 = cortesía)' : 'Precio unitario';
+    if (t === 'regalo') document.getElementById('itemPrecio').value = '0';
+    calcLine();
+  }
+
+  /* AUTOFILL */
+  function autoFill() {
+    const sel = document.getElementById('itemSelect');
+    const opt = sel.options[sel.selectedIndex];
+    document.getElementById('custom-field').style.display = sel.value === 'custom' ? '' : 'none';
+    if (opt.dataset.precio) document.getElementById('itemPrecio').value = opt.dataset.precio;
+    calcLine();
+  }
+
+  /* CALC LINE */
+  function calcLine() {
+    const c = parseInt(document.getElementById('itemCant').value) || 0;
+    const p = parseFloat(document.getElementById('itemPrecio').value) || 0;
+    document.getElementById('lineTotal').textContent = '$' + (c * p).toLocaleString('es-MX');
+  }
+
+  /* AGREGAR */
+  function agregarItem() {
+    const sel = document.getElementById('itemSelect');
+    let desc = sel.value === 'custom'
+      ? (document.getElementById('customDesc').value.trim() || 'Boleto personalizado')
+      : sel.value;
+    if (!desc) { sel.focus(); return; }
+
+    const cant  = parseInt(document.getElementById('itemCant').value)  || 1;
+    const precio = parseFloat(document.getElementById('itemPrecio').value) || 0;
+    const valor  = parseFloat(document.getElementById('itemValor').value)  || 0;
+
+    items.push({ desc, cant, precio, valor, tipo });
+
+    // reset
+    document.getElementById('itemSelect').value = '';
+    document.getElementById('itemCant').value   = 1;
+    document.getElementById('itemPrecio').value = '';
+    document.getElementById('itemValor').value  = '';
+    document.getElementById('custom-field').style.display = 'none';
+    document.getElementById('lineTotal').textContent = '$0';
+
+    render();
+  }
+
+  /* ELIMINAR */
+  function eliminar(i) { items.splice(i, 1); render(); }
+
+  /* RENDER */
+  function render() {
+    const empty  = document.getElementById('empty-state');
+    const table  = document.getElementById('items-table');
+    const tbody  = document.getElementById('items-tbody');
+    const totals = document.getElementById('doc-totals');
+
+    if (items.length === 0) {
+      empty.style.display = '';
+      table.style.display = 'none';
+      totals.classList.remove('show');
+      return;
+    }
+
+    empty.style.display = 'none';
+    table.style.display = '';
+    totals.classList.add('show');
+
+    let subtotal = 0, valorRegalos = 0, html = '';
+
+    items.forEach((it, i) => {
+      const lineT = it.cant * it.precio;
+      subtotal += lineT;
+      if (it.tipo === 'regalo') {
+        valorRegalos += it.valor > 0 ? it.valor * it.cant : lineT;
+      }
+
+      const totalTxt = it.tipo === 'regalo' && it.precio === 0
+        ? 'Incluido'
+        : '$' + lineT.toLocaleString('es-MX');
+      const precioTxt = it.precio === 0 ? '—' : '$' + it.precio.toLocaleString('es-MX');
+      const regaloBadge = it.tipo === 'regalo' ? '<span class="badge-regalo">🎁 Regalo</span>' : '';
+      const valorBadge  = it.tipo === 'regalo' && it.valor > 0
+        ? `<span class="badge-valor">valor $${(it.valor).toLocaleString('es-MX')}</span>` : '';
+      const totalClass  = it.tipo === 'regalo' ? 'td-total es-regalo' : 'td-total';
+
+      html += `<tr>
+        <td class="td-desc">
+          <span class="td-name">${it.desc} ${regaloBadge} ${valorBadge}</span>
+        </td>
+        <td class="td-cant">${it.cant}</td>
+        <td class="td-precio">${precioTxt}</td>
+        <td class="${totalClass}">${totalTxt}</td>
+        <td class="td-del"><button class="btn-del" onclick="eliminar(${i})">✕</button></td>
+      </tr>`;
+    });
+
+    tbody.innerHTML = html;
+
+    document.getElementById('val-subtotal').textContent = '$' + subtotal.toLocaleString('es-MX');
+    document.getElementById('val-total').textContent    = '$' + subtotal.toLocaleString('es-MX');
+
+    const rowA = document.getElementById('row-ahorro');
+    if (valorRegalos > 0) {
+      rowA.style.display = '';
+      document.getElementById('val-ahorro').textContent = '+$' + valorRegalos.toLocaleString('es-MX') + ' en valor';
+    } else {
+      rowA.style.display = 'none';
+    }
+  }
+
+  /* ACTUALIZAR DOC */
+  function actualizarDoc() {
+    const nombre = document.getElementById('clienteNombre').value.trim();
+    const notas  = document.getElementById('clienteNotas').value.trim();
+
+    const cl = document.getElementById('doc-cliente');
+    cl.classList.toggle('show', !!nombre);
+    document.getElementById('doc-cliente-name').textContent = nombre;
+
+    const nl = document.getElementById('doc-notes');
+    nl.classList.toggle('show', !!notas);
+    document.getElementById('doc-notes-text').textContent = notas;
+  }
+
+  /* NUEVA */
+  function nuevaCotizacion() {
+    if (items.length > 0 && !confirm('¿Empezar una nueva cotización? Se borrarán los ítems actuales.')) return;
+    items = [];
+    cotNum++;
+    const num = '#' + String(cotNum).padStart(3, '0');
+    document.getElementById('badge-num').textContent = 'COT · ' + num;
+    document.getElementById('doc-num').textContent = 'COTIZACIÓN ' + num;
+    document.getElementById('doc-date').textContent = new Date().toLocaleDateString('es-MX', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+    document.getElementById('clienteNombre').value = '';
+    document.getElementById('clienteNotas').value  = '';
+    document.getElementById('itemSelect').value    = '';
+    document.getElementById('itemCant').value      = 1;
+    document.getElementById('itemPrecio').value    = '';
+    document.getElementById('lineTotal').textContent = '$0';
+    actualizarDoc();
+    render();
+  }
+
+  /* COPIAR TEXTO */
+  function copiarTexto() {
+    const nombre = document.getElementById('clienteNombre').value.trim();
+    let txt = `COTIZACIÓN — Synergy Unlimited 2026\n9, 10 y 11 de Octubre · Expo Guadalajara\n`;
+    if (nombre) txt += `Para: ${nombre}\n`;
+    txt += `\n`;
+    items.forEach(it => {
+      const t = it.cant * it.precio;
+      const tag = it.tipo === 'regalo' ? ' [REGALO]' : '';
+      const ts  = it.precio === 0 ? 'Incluido' : '$' + t.toLocaleString('es-MX');
+      txt += `• ${it.cant}× ${it.desc}${tag} — ${ts}\n`;
+    });
+    const tot = items.reduce((s, it) => s + it.cant * it.precio, 0);
+    txt += `\nTOTAL: $${tot.toLocaleString('es-MX')}`;
+    const notas = document.getElementById('clienteNotas').value.trim();
+    if (notas) txt += `\n\nNotas: ${notas}`;
+    navigator.clipboard.writeText(txt).then(() => {
+      const b = document.querySelector('.btn-copy-txt');
+      const orig = b.textContent;
+      b.textContent = '✅ Copiado';
+      setTimeout(() => b.textContent = orig, 2000);
+    });
+  }
+
+  render();
+</script>
+</body>
+</html>

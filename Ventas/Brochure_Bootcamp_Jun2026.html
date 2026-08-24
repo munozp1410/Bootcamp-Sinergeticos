@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootcamp de Aceleración de Emprendimiento · Junio 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SHARED UTILS ─────────────────────────────────────────── */
+    .section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .orange-text   { color: #FF6B1A; }
+    .cyan-text     { color: #00D4D4; }
+    .muted         { color: #aaa; }
+    .white         { color: #fff; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #E85D04, #F48C06);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── SECTION 1 · PORTADA ──────────────────────────────────── */
+    #portada {
+      background-color: #0d0d0d;
+      text-align: center;
+    }
+
+    #portada::before {
+      content: '';
+      position: absolute;
+      bottom: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(ellipse at center, rgba(232,93,4,0.38) 0%, rgba(232,93,4,0.1) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #portada > * { position: relative; z-index: 1; }
+
+    .logo-img {
+      width: 300px;
+      max-width: 90%;
+      display: block;
+      margin: 0 auto 24px;
+    }
+
+    .portada-subtitle {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: #FF6B1A;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .portada-headline {
+      font-size: clamp(1.6rem, 4vw, 2.9rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: #fff;
+      max-width: 820px;
+      margin: 0 auto 48px;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.6);
+    }
+
+    .portada-headline span { color: #00D4D4; }
+
+    .pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(232,93,4,0.45);
+      border-radius: 50px;
+      padding: 12px 22px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(6px);
+      white-space: nowrap;
+    }
+
+    .pill span.emoji { margin-right: 6px; }
+
+    /* ─── SECTION 2 · ES PARA TI ───────────────────────────────── */
+    #para-ti {
+      background-color: #111;
+    }
+
+    #para-ti::before {
+      content: 'ES PARA TI';
+      position: absolute;
+      font-size: clamp(5rem, 13vw, 12rem);
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .para-ti-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .para-ti-logo {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 90px;
+      opacity: 0.7;
+    }
+
+    .para-ti-left {
+      padding-top: 30px;
+    }
+
+    .para-ti-left .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: #FF6B1A;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .para-ti-left h2 {
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .para-ti-left h2 em {
+      font-style: normal;
+      color: #FF6B1A;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .si-card {
+      background: #1a1a1a;
+      border: 1px solid rgba(232,93,4,0.0);
+      border-radius: 14px;
+      padding: 22px 20px;
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: #ddd;
+      line-height: 1.55;
+      box-shadow: 0 0 0 1px rgba(232,93,4,0.25), 0 4px 30px rgba(232,93,4,0.08);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .si-card:hover {
+      box-shadow: 0 0 0 1.5px rgba(232,93,4,0.7), 0 8px 40px rgba(232,93,4,0.2);
+      transform: translateY(-3px);
+    }
+
+    .si-card strong { color: #FF6B1A; font-weight: 700; }
+
+    /* ─── SECTION 3 · LOS 3 DÍAS ───────────────────────────────── */
+    #tres-dias {
+      background-color: #0d0d0d;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      text-align: center;
+      letter-spacing: 0.04em;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .section-title .accent { color: #FF6B1A; }
+
+    .section-subtitle {
+      font-size: 0.88rem;
+      color: #aaa;
+      text-align: center;
+      margin-bottom: 56px;
+      letter-spacing: 0.05em;
+    }
+
+    .dias-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      width: 100%;
+      margin-bottom: 52px;
+    }
+
+    .dia-card {
+      border-radius: 18px;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dia-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      opacity: 0.12;
+      z-index: 0;
+    }
+
+    .dia-card > * { position: relative; z-index: 1; }
+
+    .dia-card.mentalidad {
+      background: linear-gradient(145deg, #1a0f2e, #0f0a1e);
+      border: 1px solid rgba(94,53,177,0.5);
+      box-shadow: 0 0 40px rgba(94,53,177,0.15);
+    }
+
+    .dia-card.mentalidad::before { background: #5E35B1; }
+
+    .dia-card.negocios {
+      background: linear-gradient(145deg, #0a1628, #060e1e);
+      border: 1px solid rgba(21,101,192,0.5);
+      box-shadow: 0 0 40px rgba(21,101,192,0.15);
+    }
+
+    .dia-card.negocios::before { background: #1565C0; }
+
+    .dia-card.escalamiento {
+      background: linear-gradient(145deg, #0a1e10, #060f09);
+      border: 1px solid rgba(46,125,50,0.5);
+      box-shadow: 0 0 40px rgba(46,125,50,0.15);
+    }
+
+    .dia-card.escalamiento::before { background: #2E7D32; }
+
+    .dia-number {
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .mentalidad .dia-number { color: #9575CD; }
+    .negocios   .dia-number { color: #5C9FD6; }
+    .escalamiento .dia-number { color: #66BB6A; }
+
+    .dia-card h3 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .dia-date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #aaa;
+    }
+
+    .dia-separator {
+      height: 2px;
+      width: 50px;
+      border-radius: 2px;
+    }
+
+    .mentalidad .dia-separator { background: #7E57C2; }
+    .negocios   .dia-separator { background: #1976D2; }
+    .escalamiento .dia-separator { background: #388E3C; }
+
+    .dia-desc {
+      font-size: 0.85rem;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .benefit-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .benefit-pill {
+      background: rgba(255,107,26,0.1);
+      border: 1px solid rgba(255,107,26,0.4);
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      color: #FF6B1A;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTION 4 · CONFERENCISTAS ──────────────────────────── */
+    #conferencistas {
+      background-color: #111;
+    }
+
+    .day-block {
+      width: 100%;
+      max-width: 1100px;
+      margin-bottom: 60px;
+    }
+
+    .day-label {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+    }
+
+    .day-label.purple { background: rgba(94,53,177,0.25); color: #9575CD; border: 1px solid rgba(94,53,177,0.4); }
+    .day-label.blue   { background: rgba(21,101,192,0.25); color: #5C9FD6; border: 1px solid rgba(21,101,192,0.4); }
+    .day-label.green  { background: rgba(46,125,50,0.25);  color: #66BB6A; border: 1px solid rgba(46,125,50,0.4); }
+
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .speaker-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-left: 3px solid transparent;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .day-block.d1 .speaker-card { border-left-color: #7E57C2; }
+    .day-block.d2 .speaker-card { border-left-color: #1976D2; }
+    .day-block.d3 .speaker-card { border-left-color: #388E3C; }
+
+    .speaker-num {
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: #555;
+      text-transform: uppercase;
+    }
+
+    .day-block.d1 .speaker-num { color: #7E57C2; }
+    .day-block.d2 .speaker-num { color: #1976D2; }
+    .day-block.d3 .speaker-num { color: #388E3C; }
+
+    .speaker-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    .speaker-creds {
+      font-size: 0.7rem;
+      color: #777;
+      line-height: 1.4;
+    }
+
+    .speaker-topic {
+      font-size: 0.73rem;
+      color: #aaa;
+      font-style: italic;
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    /* ─── SECTION 5 · CÓMO ACCEDER ─────────────────────────────── */
+    #acceder {
+      background-color: #0d0d0d;
+    }
+
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto 48px;
+    }
+
+    .step-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 32px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-top: 3px solid #E85D04;
+      position: relative;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .step-card:hover {
+      box-shadow: 0 8px 32px rgba(232,93,4,0.2);
+      transform: translateY(-4px);
+    }
+
+    .step-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #E85D04, #F48C06);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .step-desc {
+      font-size: 0.8rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .step-desc a {
+      color: #00D4D4;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .no-grabar-note {
+      max-width: 700px;
+      text-align: center;
+      background: rgba(232,93,4,0.08);
+      border: 1px solid rgba(232,93,4,0.3);
+      border-radius: 12px;
+      padding: 20px 30px;
+      font-size: 0.82rem;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .no-grabar-note strong { color: #FF6B1A; }
+
+    /* ─── SECTION 6 · CIERRE / CTA ─────────────────────────────── */
+    #cierre {
+      background: linear-gradient(160deg, #1a0800 0%, #2d0e00 40%, #0d0d0d 100%);
+      text-align: center;
+      position: relative;
+    }
+
+    #cierre::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(ellipse at center, rgba(232,93,4,0.3) 0%, rgba(232,93,4,0.08) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #cierre > * { position: relative; z-index: 1; }
+
+    .cierre-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: #FF6B1A;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .cierre-headline {
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 28px;
+      text-shadow: 0 4px 60px rgba(232,93,4,0.3);
+    }
+
+    .cierre-sub {
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      color: #ccc;
+      max-width: 640px;
+      line-height: 1.7;
+      margin: 0 auto 44px;
+    }
+
+    .cta-url {
+      display: inline-block;
+      background: linear-gradient(135deg, #E85D04, #F48C06);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      padding: 20px 48px;
+      border-radius: 60px;
+      text-decoration: none;
+      text-transform: uppercase;
+      box-shadow: 0 8px 40px rgba(232,93,4,0.45);
+      transition: box-shadow 0.3s, transform 0.3s;
+      margin-bottom: 40px;
+    }
+
+    .cta-url:hover {
+      box-shadow: 0 12px 60px rgba(232,93,4,0.65);
+      transform: translateY(-3px);
+    }
+
+    .event-dates-reminder {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 56px;
+    }
+
+    .event-dates-reminder span { color: #FF6B1A; }
+
+    footer {
+      font-size: 0.68rem;
+      color: #444;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .para-ti-inner   { grid-template-columns: 1fr; gap: 40px; }
+      .dias-grid       { grid-template-columns: 1fr; max-width: 520px; }
+      .steps-container { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .section         { padding: 60px 20px; }
+      .cards-grid      { grid-template-columns: 1fr; }
+      .steps-container { grid-template-columns: 1fr; }
+      .speakers-grid   { grid-template-columns: 1fr; }
+      .portada-headline { font-size: 1.5rem; }
+    }
+
+    /* ─── PRINT ─────────────────────────────────────────────────── */
+    @media print {
+      * { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; }
+
+      body { background-color: #0d0d0d !important; }
+
+      .section { page-break-after: always; min-height: 100vh; }
+
+      #cierre  { page-break-after: avoid; }
+
+      .speaker-card, .si-card, .step-card, .dia-card {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 1 · PORTADA
+  ══════════════════════════════════════════════════════════════ -->
+  <section id="portada" class="section">
+    <img src="../LOGO BOOTCAMP.png" alt="Bootcamp Logo" class="logo-img" />
+
+    <p class="portada-subtitle">De Aceleración de Emprendimiento</p>
+
+    <h1 class="portada-headline">
+      ¡Rompe tus límites y <span>acelera tu negocio</span><br />en 3 días de inmersión total!
+    </h1>
+
+    <div class="pills-row">
+      <div class="pill"><span class="emoji">📅</span>5, 6 y 7 de Junio 2026</div>
+      <div class="pill"><span class="emoji">🕘</span>9:00 AM – 7:00 PM · CST</div>
+      <div class="pill"><span class="emoji">📺</span>100% Digital · YouTube Live</div>
+      <div class="pill"><span class="emoji">🎟️</span>Incluido en tu membresía</div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 2 · ESTE BOOTCAMP ES PARA TI
+  ══════════════════════════════════════════════════════════════ -->
+  <section id="para-ti" class="section">
+    <div class="para-ti-inner">
+      <!-- Izquierda -->
+      <div class="para-ti-left">
+        <p class="label">Descubre si aplica para ti</p>
+        <h2>Este<br />Bootcamp<br /><em>ES PARA TI</em></h2>
+      </div>
+
+      <!-- Derecha · 2×2 tarjetas -->
+      <div class="cards-grid">
+        <div class="si-card">
+          Si quieres <strong>romper los bloqueos mentales</strong> que frenan tu crecimiento
+        </div>
+        <div class="si-card">
+          Si tienes ventas planas y no sabes <strong>cómo conseguir más clientes</strong>
+        </div>
+        <div class="si-card">
+          Si quieres <strong>escalar tu negocio</strong> sin que todo dependa de ti
+        </div>
+        <div class="si-card">
+          Si buscas <strong>estrategias probadas</strong> de los mejores líderes internacionales
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 3 · LOS 3 DÍAS
+  ══════════════════════════════════════════════════════════════ -->
+  <section id="tres-dias" class="section">
+    <h2 class="section-title">3 DÍAS · <span class="accent">3 TRANSFORMACIONES</span></h2>
+    <p class="section-subtitle">Cada día diseñado para un eje específico de tu crecimiento</p>
+
+    <div class="dias-grid">
+      <!-- DÍA 1 -->
+      <div class="dia-card mentalidad">
+        <p class="dia-number">Día 1</p>
+        <h3>MENTALIDAD</h3>
+        <p class="dia-date">Jueves 5 de Junio · 9:00 AM – 7:00 PM</p>
+        <div class="dia-separator"></div>
+        <p class="dia-desc">Para quien se sabotea, procrastina o tiene miedo al siguiente nivel.</p>
+      </div>
+
+      <!-- DÍA 2 -->
+      <div class="dia-card negocios">
+        <p class="dia-number">Día 2</p>
+        <h3>NEGOCIOS</h3>
+        <p class="dia-date">Viernes 6 de Junio · 9:00 AM – 7:00 PM</p>
+        <div class="dia-separator"></div>
+        <p class="dia-desc">Para quien tiene ventas planas, no consigue clientes o no tiene claridad en su oferta.</p>
+      </div>
+
+      <!-- DÍA 3 -->
+      <div class="dia-card escalamiento">
+        <p class="dia-number">Día 3</p>
+        <h3>ESCALAMIENTO</h3>
+        <p class="dia-date">Sábado 7 de Junio · 9:00 AM – 7:00 PM</p>
+        <div class="dia-separator"></div>
+        <p class="dia-desc">Para quien quiere crecer su equipo, delegar y salir del día a día.</p>
+      </div>
+    </div>
+
+    <!-- Pills de beneficios -->
+    <div class="benefit-pills">
+      <span class="benefit-pill">Innovación</span>
+      <span class="benefit-pill">Estrategias Claras</span>
+      <span class="benefit-pill">Mentalidad de Éxito</span>
+      <span class="benefit-pill">Networking</span>
+      <span class="benefit-pill">Sinergia</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 4 · 24 CONFERENCISTAS
+  ══════════════════════════════════════════════════════════════ -->
+  <section id="conferencistas" class="section">
+    <h2 class="section-title" style="margin-bottom:8px;">
+      <span class="accent">21</span> CONFERENCISTAS INTERNACIONALES
+    </h2>
+    <p class="section-subtitle">Expertos seleccionados para los 3 ejes del Bootcamp</p>
+
+    <!-- ── DÍA 1 · MENTALIDAD ── -->
+    <div class="day-block d1">
+      <span class="day-label purple">DÍA 1 · MENTALIDAD</span>
+      <div class="speakers-grid">
+
+        <div class="speaker-card">
+          <span class="speaker-num">#01</span>
+          <p class="speaker-name">Efrén Martínez</p>
+          <p class="speaker-creds">PhD en logoterapia · Autor de 25 libros · 1M seguidores</p>
+          <p class="speaker-topic">"Hazte dueño de ti: romper las programaciones mentales que te sabotean"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#02</span>
+          <p class="speaker-name">Luis Fallas</p>
+          <p class="speaker-creds">CEO Centro de Superación Personal · +25 años transformando vidas</p>
+          <p class="speaker-topic">"Potencial máximo: cómo el desarrollo personal desbloquea ingresos reales"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#03</span>
+          <p class="speaker-name">Memo Serrano</p>
+          <p class="speaker-creds">Business &amp; Mindset Mentor · Proctor Gallagher Institute</p>
+          <p class="speaker-topic">"Cómo reprogramar tu mentalidad financiera para escalar sin límites"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#04</span>
+          <p class="speaker-name">Ricardo Perret</p>
+          <p class="speaker-creds">Neurocientífico del comportamiento · TEDx speaker · Autor</p>
+          <p class="speaker-topic">"El cerebro que vende: neuromarketing aplicado a tu negocio"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#05</span>
+          <p class="speaker-name">Coral Mujaes</p>
+          <p class="speaker-creds">Mentora de ventas digitales #1 LATAM · +4M seguidores · Top 25 infoproductores Hotmart · +1M alumnos</p>
+          <p class="speaker-topic">"Cómo monetizar tu conocimiento y construir un negocio digital escalable desde cero"</p>
+        </div>
+
+      </div>
+    </div><!-- /d1 -->
+
+    <!-- ── DÍA 2 · NEGOCIOS ── -->
+    <div class="day-block d2">
+      <span class="day-label blue">DÍA 2 · NEGOCIOS</span>
+      <div class="speakers-grid">
+
+        <div class="speaker-card">
+          <span class="speaker-num">#06</span>
+          <p class="speaker-name">Jorge Serratos</p>
+          <p class="speaker-creds">CEO Grupo Serlo · Podcast #1 Negocios México · +11M seguidores</p>
+          <p class="speaker-topic">"Cómo construir un movimiento, no solo un negocio"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#07</span>
+          <p class="speaker-name">Salvador Alva</p>
+          <p class="speaker-creds">Empresario y speaker · Estrategia comercial y escalamiento</p>
+          <p class="speaker-topic">"Estrategia sin excusas: decisiones que funcionan"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#08</span>
+          <p class="speaker-name">Pavo Gómez</p>
+          <p class="speaker-creds">Especialista en ventas digitales · +500K seguidores</p>
+          <p class="speaker-topic">"El sistema de ventas que no depende de ti"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#09</span>
+          <p class="speaker-name">Alejandro Cardona</p>
+          <p class="speaker-creds">Marketing digital y personal branding</p>
+          <p class="speaker-topic">"Tu marca personal es tu activo más rentable"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#10</span>
+          <p class="speaker-name">Regina Carrot</p>
+          <p class="speaker-creds">Consultora de imagen y marca personal · +300K seguidores</p>
+          <p class="speaker-topic">"La imagen que vende: cómo lo que proyectas define lo que cobras"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#11</span>
+          <p class="speaker-name">Fer León</p>
+          <p class="speaker-creds">Copywriter y estratega de contenido · Especialista en conversión</p>
+          <p class="speaker-topic">"Las palabras que venden: copywriting que convierte"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#12</span>
+          <p class="speaker-name">Fernando Anzures</p>
+          <p class="speaker-creds">Gurú del marketing latinoamericano · Autor de 8 libros · +30 países</p>
+          <p class="speaker-topic">"El nuevo consumidor: cómo venderle a quien ya no quiere que le vendan"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#13</span>
+          <p class="speaker-name">Claudia Lizaldi</p>
+          <p class="speaker-creds">Conductora y empresaria · Emprendedora serial · +1M seguidores</p>
+          <p class="speaker-topic">"De la pantalla al negocio: cómo construí un emprendimiento desde cero"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#14</span>
+          <p class="speaker-name">Milena Sandoval</p>
+          <p class="speaker-creds">Experta en e-commerce y ventas online</p>
+          <p class="speaker-topic">"Vende sin inventario, sin bodega y sin límites"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#15</span>
+          <p class="speaker-name">César Sánchez</p>
+          <p class="speaker-creds">Coach de ventas y liderazgo · Formador de equipos</p>
+          <p class="speaker-topic">"El vendedor que no vende: influencia ética para cerrar sin presionar"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#16</span>
+          <p class="speaker-name">Daniel García</p>
+          <p class="speaker-creds">Especialista en LinkedIn y ventas B2B</p>
+          <p class="speaker-topic">"LinkedIn como máquina de clientes: prospectos sin pagar publicidad"</p>
+        </div>
+
+      </div>
+    </div><!-- /d2 -->
+
+    <!-- ── DÍA 3 · ESCALAMIENTO ── -->
+    <div class="day-block d3">
+      <span class="day-label green">DÍA 3 · ESCALAMIENTO</span>
+      <div class="speakers-grid">
+
+        <div class="speaker-card">
+          <span class="speaker-num">#17</span>
+          <p class="speaker-name">Manuel de León</p>
+          <p class="speaker-creds">CEO fundador de múltiples empresas · Especialista en franquicias</p>
+          <p class="speaker-topic">"Escala o muere: replica tu modelo sin que todo dependa de ti"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#18</span>
+          <p class="speaker-name">Susi Vereecken</p>
+          <p class="speaker-creds">Experta en productividad y sistemas · Consultora de operaciones</p>
+          <p class="speaker-topic">"Sistemas que liberan: procesos que corren solos"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#19</span>
+          <p class="speaker-name">Alejandro Saracho</p>
+          <p class="speaker-creds">Inversión y finanzas empresariales · Educador financiero</p>
+          <p class="speaker-topic">"El dinero que no ves: finanzas para que el negocio crezca"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#20</span>
+          <p class="speaker-name">Brando Angulo</p>
+          <p class="speaker-creds">Fundador Brada Grupo Inmobiliario · Premio Joven Empresario 2017</p>
+          <p class="speaker-topic">"Patrimonio desde cero: inversión inmobiliaria como libertad financiera"</p>
+        </div>
+
+        <div class="speaker-card">
+          <span class="speaker-num">#21</span>
+          <p class="speaker-name">Daniel Marcos</p>
+          <p class="speaker-creds">CEO Growth Institute · Experto en escalamiento · Autor internacional</p>
+          <p class="speaker-topic">"Scaling Up: el método de las empresas de alto crecimiento"</p>
+        </div>
+
+      </div>
+        <div class="speaker-card">
+          <div class="spk-num">22</div>
+          <div class="spk-info">
+            <div class="spk-name">Dr. Roch</div>
+            <div class="spk-creds">Doctor en Comportamiento Organizacional · Neurocientífico · Consultor FEMSA, Disney, Coca-Cola · Autor de 10+ libros</div>
+            <div class="spk-topic">"Mentalidad de alto rendimiento: cómo programar tu cerebro para vender más y liderar mejor"</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="spk-num">23</div>
+          <div class="spk-info">
+            <div class="spk-name">Tito Luzardo</div>
+            <div class="spk-creds">Emprendedor venezolano · Creador del método Hackea Tu Mente · De -$800K a +$1.5M/año</div>
+            <div class="spk-topic">"Transformar la crisis en negocio: de perder todo a escalar a 7 cifras"</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="spk-num">24</div>
+          <div class="spk-info">
+            <div class="spk-name">Víctor Heras</div>
+            <div class="spk-creds">Experto en marca personal · +500K seguidores en 5 meses · Fundador de PostMe, agencia de marca personal #1 España</div>
+            <div class="spk-topic">"Contenido viral, comunidades gigantes y ganar dinero con redes sociales"</div>
+          </div>
+        </div>
+    </div><!-- /d3 -->
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 5 · CÓMO ACCEDER
+  ══════════════════════════════════════════════════════════════ -->
+  <section id="acceder" class="section">
+    <h2 class="section-title" style="margin-bottom:10px;">
+      ¿CÓMO <span class="accent">ACCEDER</span> AL BOOTCAMP?
+    </h2>
+    <p class="section-subtitle" style="margin-bottom:52px;">4 pasos simples para asegurarte tu lugar</p>
+
+    <div class="steps-container">
+
+      <div class="step-card">
+        <span class="step-number">01</span>
+        <p class="step-title">Regístrate</p>
+        <p class="step-desc">
+          Confirma tu lugar en
+          <a href="https://bootcampsinergetico.com" target="_blank">bootcampsinergetico.com</a>
+          — es tu bono como miembro del Club. Es gratis.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">02</span>
+        <p class="step-title">Únete al grupo de WhatsApp</p>
+        <p class="step-desc">
+          Tu asesor te agregará al grupo oficial del evento. Ahí recibirás toda la información.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">03</span>
+        <p class="step-title">Recibe tu boleto</p>
+        <p class="step-desc">
+          Te llegará tu boleto digital de acceso al Bootcamp.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">04</span>
+        <p class="step-title">El día del evento</p>
+        <p class="step-desc">
+          Recibirás el link de YouTube en el grupo de WhatsApp y en tu boleto. Conéctate a las 9:00 AM.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="no-grabar-note">
+      <strong>Importante:</strong> Este Bootcamp es 100% en vivo. <strong>NO se graba.</strong>
+      Si no asistes en vivo, no accedes al contenido.
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SECCIÓN 6 · CIERRE / CTA
+  ══════════════════════════════════════════════════════════════ -->
+  <section id="cierre" class="section">
+    <p class="cierre-eyebrow">Sinergéticos · Synergy for Education</p>
+
+    <h2 class="cierre-headline">
+      TU LUGAR<br />YA ESTÁ<br />RESERVADO.
+    </h2>
+
+    <p class="cierre-sub">
+      Como miembro del Club Sinergético, este Bootcamp ya está incluido en tu membresía.
+      Lo único que necesitas hacer es confirmar.
+    </p>
+
+    <a class="cta-url" href="https://bootcampsinergetico.com" target="_blank">
+      bootcampsinergetico.com
+    </a>
+
+    <p class="event-dates-reminder">
+      Junio <span>5 · 6 · 7</span> · 2026 &nbsp;·&nbsp; 9:00 AM – 7:00 PM CST
+    </p>
+
+    <footer>Sinergéticos / Synergy for Education &nbsp;·&nbsp; Bootcamp Digital Junio 2026</footer>
+  </section>
+
+</body>
+</html>

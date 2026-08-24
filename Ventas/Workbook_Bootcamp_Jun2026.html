@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuaderno de Trabajo — Bootcamp Digital Junio 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      background: #f0f0f0;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       PAGE
+    ============================================================ */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 16px auto;
+      padding: 14mm 14mm 12mm 14mm;
+      background: #ffffff;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      position: relative;
+    }
+
+    /* ============================================================
+       WRITING LINES
+    ============================================================ */
+    .line {
+      border-bottom: 1px solid #ddd;
+      height: 24px;
+      margin-bottom: 4px;
+      display: block;
+      width: 100%;
+    }
+
+    .line-wide {
+      border-bottom: 1px solid #ddd;
+      height: 28px;
+      margin-bottom: 5px;
+      display: block;
+      width: 100%;
+    }
+
+    /* ============================================================
+       COVER PAGE
+    ============================================================ */
+    .cover {
+      background: #1B2B5B;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 297mm;
+      padding: 20mm 18mm;
+      text-align: center;
+    }
+
+    .cover-logo {
+      max-width: 250px;
+      width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .cover-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #D4A843;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .cover-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: #c8d3f0;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .cover-dates {
+      font-size: 16px;
+      font-weight: 600;
+      color: #D4A843;
+      margin-bottom: 40px;
+      letter-spacing: 0.08em;
+    }
+
+    .cover-divider {
+      width: 60px;
+      height: 2px;
+      background: #D4A843;
+      margin: 0 auto 36px auto;
+    }
+
+    .cover-fields {
+      width: 100%;
+      max-width: 340px;
+      text-align: left;
+    }
+
+    .cover-field-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #D4A843;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+      margin-top: 22px;
+    }
+
+    .cover-line {
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      height: 28px;
+      display: block;
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .cover-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       SECTION HEADERS (day banners)
+    ============================================================ */
+    .section-header {
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    .section-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .section-header .day-sub {
+      font-size: 10px;
+      font-weight: 400;
+      margin-top: 2px;
+      opacity: 0.85;
+    }
+
+    /* Day colors */
+    .day1-header  { background: #5E35B1; color: #fff; }
+    .day2-header  { background: #1565C0; color: #fff; }
+    .day3-header  { background: #2E7D32; color: #fff; }
+
+    /* ============================================================
+       SPEAKER BLOCKS — common
+    ============================================================ */
+    .speaker-block {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 10px;
+    }
+
+    .speaker-block:last-of-type {
+      border-bottom: none;
+    }
+
+    .speaker-header {
+      padding: 7px 10px;
+      margin-bottom: 8px;
+      border-radius: 3px;
+    }
+
+    .speaker-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1B2B5B;
+    }
+
+    .speaker-creds {
+      font-size: 9px;
+      color: #666;
+      margin-top: 1px;
+      line-height: 1.4;
+    }
+
+    .speaker-topic {
+      font-size: 10px;
+      font-style: italic;
+      color: #333;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    /* Day 1 — purple */
+    .day1 .speaker-header { background: #EDE7F6; border-left: 4px solid #5E35B1; }
+    /* Day 2 — blue */
+    .day2 .speaker-header { background: #E3F2FD; border-left: 4px solid #1565C0; }
+    /* Day 3 — green */
+    .day3 .speaker-header { background: #E8F5E9; border-left: 4px solid #2E7D32; }
+
+    /* ============================================================
+       NOTE AREAS
+    ============================================================ */
+    .note-area {
+      margin-bottom: 7px;
+    }
+
+    .note-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 3px;
+    }
+
+    /* Action line — gold accent */
+    .action-area {
+      background: #FFF8E1;
+      border-left: 3px solid #D4A843;
+      padding: 5px 8px;
+      border-radius: 0 3px 3px 0;
+      margin-bottom: 0;
+    }
+
+    .action-area .note-label {
+      color: #8a6200;
+    }
+
+    .action-area .line {
+      border-bottom-color: #e8c96a;
+    }
+
+    /* ============================================================
+       DAY SUMMARY BOXES
+    ============================================================ */
+    .day-summary {
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      page-break-inside: avoid;
+    }
+
+    .day1-summary { background: #FFF8E1; border: 1px solid #D4A843; }
+    .day2-summary { background: #E3F2FD; border: 1px solid #1565C0; }
+    .day3-summary { background: #E8F5E9; border: 1px solid #2E7D32; }
+
+    .summary-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .day1-summary .summary-title { color: #8a6200; }
+    .day2-summary .summary-title { color: #0d47a1; }
+    .day3-summary .summary-title { color: #1b5e20; }
+
+    .summary-sub {
+      font-size: 10px;
+      font-weight: 600;
+      color: #333;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .numbered-line {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      margin-bottom: 4px;
+    }
+
+    .numbered-line .num {
+      font-size: 10px;
+      font-weight: 700;
+      color: #888;
+      min-width: 14px;
+      padding-bottom: 2px;
+    }
+
+    .numbered-line .line {
+      flex: 1;
+    }
+
+    /* ============================================================
+       INSTRUCTIONS PAGE
+    ============================================================ */
+    .instructions-page {}
+
+    .instructions-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1B2B5B;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #D4A843;
+    }
+
+    .tip-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .tip-list li {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+
+    .tip-num {
+      min-width: 28px;
+      height: 28px;
+      background: #1B2B5B;
+      color: #D4A843;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .tip-text {
+      font-size: 12px;
+      color: #222;
+      line-height: 1.6;
+      padding-top: 4px;
+    }
+
+    .remember-box {
+      border: 2px solid #1B2B5B;
+      border-radius: 4px;
+      padding: 14px 16px;
+      background: #f7f8ff;
+    }
+
+    .remember-box p {
+      font-size: 12px;
+      color: #1B2B5B;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       FINAL ACTION PLAN PAGE
+    ============================================================ */
+    .action-page-header {
+      background: #1B2B5B;
+      color: #D4A843;
+      padding: 14px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .action-page-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .action-section {
+      margin-bottom: 18px;
+    }
+
+    .action-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #1B2B5B;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+      padding-left: 8px;
+      border-left: 3px solid #D4A843;
+    }
+
+    .meta-box {
+      border: 2px solid #D4A843;
+      border-radius: 4px;
+      padding: 12px 14px;
+      background: #FFF8E1;
+      margin-top: 20px;
+    }
+
+    .meta-box-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8a6200;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 10mm;
+      left: 14mm;
+      right: 14mm;
+      text-align: center;
+      font-size: 8.5px;
+      color: #aaa;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-top: 1px solid #eee;
+      padding-top: 6px;
+    }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .speaker-num {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      background: #1B2B5B;
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .day1 .speaker-num { background: #5E35B1; }
+    .day2 .speaker-num { background: #1565C0; }
+    .day3 .speaker-num { background: #2E7D32; }
+
+    /* ============================================================
+       PRINT
+    ============================================================ */
+    @media print {
+      body {
+        background: #fff;
+        font-size: 10px;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        padding: 14mm 14mm 12mm 14mm;
+        box-shadow: none;
+        page-break-after: always;
+      }
+
+      .cover {
+        min-height: 297mm;
+      }
+
+      .page-break { page-break-before: always; }
+
+      * {
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+      }
+    }
+
+    @media screen {
+      .page-break {
+        /* visual cue on screen */
+        border-top: 3px dashed #ccc;
+        margin-top: 0;
+      }
+    }
+
+    /* Compact variant for Day 2 (11 speakers) */
+    .compact .speaker-block { margin-bottom: 8px; padding-bottom: 8px; }
+    .compact .speaker-header { padding: 5px 8px; margin-bottom: 6px; }
+    .compact .note-area { margin-bottom: 5px; }
+    .compact .action-area { padding: 4px 7px; }
+    .compact .line { height: 22px; }
+    .compact .day-summary { margin-top: 10px; padding: 10px 12px; }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================
+     PORTADA / COVER
+================================================================ -->
+<div class="page">
+  <div class="cover">
+    <img src="../LOGO BOOTCAMP.png" alt="Bootcamp Digital" class="cover-logo">
+    <div class="cover-title">Mi Cuaderno de Trabajo</div>
+    <div class="cover-subtitle">Bootcamp Digital de Aceleración de Emprendimiento</div>
+    <div class="cover-dates">5 &middot; 6 &middot; 7 de Junio, 2026</div>
+    <div class="cover-divider"></div>
+
+    <div class="cover-fields">
+      <div class="cover-field-label">Nombre:</div>
+      <span class="cover-line"></span>
+
+      <div class="cover-field-label">Mi meta para este Bootcamp:</div>
+      <span class="cover-line"></span>
+      <span class="cover-line"></span>
+    </div>
+
+    <div class="cover-footer">Sinergéticos / Synergy for Education</div>
+  </div>
+</div>
+
+<!-- ================================================================
+     INSTRUCCIONES
+================================================================ -->
+<div class="page page-break">
+  <div class="instructions-page">
+    <div class="instructions-title">Cómo Usar Este Cuaderno</div>
+
+    <ul class="tip-list">
+      <li>
+        <div class="tip-num">1</div>
+        <div class="tip-text"><strong>Toma notas en tiempo real</strong> — escribe mientras el speaker habla, no después.</div>
+      </li>
+      <li>
+        <div class="tip-num">2</div>
+        <div class="tip-text"><strong>No copies todo</strong> — anota lo que te genera una reacción: sorpresa, incomodidad, claridad o urgencia.</div>
+      </li>
+      <li>
+        <div class="tip-num">3</div>
+        <div class="tip-text"><strong>Completa la sección de "Mi acción inmediata"</strong> antes de que empiece el siguiente speaker.</div>
+      </li>
+      <li>
+        <div class="tip-num">4</div>
+        <div class="tip-text"><strong>Al final de cada día, llena el resumen del día.</strong> Es lo más importante del cuaderno.</div>
+      </li>
+    </ul>
+
+    <div class="remember-box">
+      <p>Recuerda: este Bootcamp NO se graba. Lo que no captures hoy, no existirá mañana.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     DÍA 1 — MENTALIDAD
+================================================================ -->
+<div class="page page-break day1">
+  <div class="section-header day1-header">
+    <h2>Día 1 &middot; Mentalidad &middot; Jueves 5 de Junio, 2026</h2>
+    <div class="day-sub">9:00 AM – 7:00 PM &middot; YouTube Live</div>
+  </div>
+
+  <!-- Speaker 1 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">1</span>Efrén Martínez</div>
+      <div class="speaker-creds">PhD en logoterapia &middot; Autor de 25 libros &middot; Coach de líderes &middot; 1M seguidores</div>
+      <div class="speaker-topic">"Hazte dueño de ti: romper las programaciones mentales que te sabotean"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 2 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">2</span>Luis Fallas</div>
+      <div class="speaker-creds">CEO Centro de Superación Personal &middot; +25 años transformando vidas</div>
+      <div class="speaker-topic">"Potencial máximo: cómo el desarrollo personal desbloquea ingresos reales"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 3 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">3</span>Memo Serrano</div>
+      <div class="speaker-creds">Business &amp; Mindset Mentor &middot; Proctor Gallagher Institute &middot; Autor bestseller</div>
+      <div class="speaker-topic">"Cómo reprogramar tu mentalidad financiera para escalar sin límites"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 4 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">4</span>Ricardo Perret</div>
+      <div class="speaker-creds">Neurocientífico del comportamiento &middot; TEDx speaker &middot; Autor</div>
+      <div class="speaker-topic">"El cerebro que vende: neuromarketing aplicado a tu negocio"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 5 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">5</span>Coral Mujaes</div>
+      <div class="speaker-creds">Coach espiritual y de vida &middot; +2M seguidores &middot; Autora internacional</div>
+      <div class="speaker-topic">"Cómo monetizar tu conocimiento y construir un negocio digital escalable desde cero"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Day 1 Summary -->
+  <div class="day-summary day1-summary">
+    <div class="summary-title">Resumen del Día 1</div>
+    <div class="summary-sub">Mis 3 aprendizajes más importantes del día:</div>
+    <div class="numbered-line"><span class="num">1</span><span class="line"></span></div>
+    <div class="numbered-line"><span class="num">2</span><span class="line"></span></div>
+    <div class="numbered-line"><span class="num">3</span><span class="line"></span></div>
+    <div class="summary-sub">Mi compromiso del Día 1:</div>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <div class="summary-sub">Mañana en el evento, lo primero que haré diferente es:</div>
+    <span class="line"></span>
+    <span class="line"></span>
+  </div>
+
+  <div class="page-footer">Bootcamp Digital Junio 5–7, 2026 &middot; Sinergéticos / Synergy for Education</div>
+</div>
+
+<!-- ================================================================
+     DÍA 2 — NEGOCIOS (compact — 11 speakers)
+================================================================ -->
+<div class="page page-break day2 compact">
+  <div class="section-header day2-header">
+    <h2>Día 2 &middot; Negocios &middot; Viernes 6 de Junio, 2026</h2>
+    <div class="day-sub">9:00 AM – 7:00 PM &middot; YouTube Live</div>
+  </div>
+
+  <!-- Speaker 6 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">6</span>Jorge Serratos</div>
+      <div class="speaker-creds">CEO Grupo Serlo &middot; Doctor en derecho &middot; Podcast #1 Negocios México &middot; +11M seguidores</div>
+      <div class="speaker-topic">"Cómo construir un movimiento, no solo un negocio"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 7 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">7</span>Salvador Alva</div>
+      <div class="speaker-creds">Empresario y speaker &middot; Estrategia comercial y escalamiento</div>
+      <div class="speaker-topic">"Estrategia sin excusas: cómo las grandes empresas toman decisiones que funcionan"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 8 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">8</span>Pavo Gómez</div>
+      <div class="speaker-creds">Especialista en ventas digitales &middot; Founder academia de ventas &middot; +500K seguidores</div>
+      <div class="speaker-topic">"El sistema de ventas que no depende de ti: cierra clientes en piloto automático"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 9 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">9</span>Alejandro Cardona</div>
+      <div class="speaker-creds">Marketing digital y personal branding &middot; Ex-directivo corporativo</div>
+      <div class="speaker-topic">"Tu marca personal es tu activo más rentable: cómo monetizarla en 90 días"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 10 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">10</span>Regina Carrot</div>
+      <div class="speaker-creds">Consultora de imagen y marca personal &middot; +300K seguidores</div>
+      <div class="speaker-topic">"La imagen que vende: cómo lo que proyectas define lo que cobras"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 11 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">11</span>Fer León</div>
+      <div class="speaker-creds">Copywriter y estratega de contenido &middot; Especialista en conversión</div>
+      <div class="speaker-topic">"Las palabras que venden: copywriting que convierte sin parecer vendedor"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 12 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">12</span>Fernando Anzures</div>
+      <div class="speaker-creds">Gurú del marketing latinoamericano &middot; Autor de 8 libros &middot; Conferencista en +30 países</div>
+      <div class="speaker-topic">"El nuevo consumidor: cómo venderle a quien ya no quiere que le vendan"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 13 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">13</span>Claudia Lizaldi</div>
+      <div class="speaker-creds">Conductora y empresaria &middot; Emprendedora serial &middot; +1M seguidores</div>
+      <div class="speaker-topic">"De la pantalla al negocio: cómo construí un emprendimiento desde cero sin manual"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 14 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">14</span>Milena Sandoval</div>
+      <div class="speaker-creds">Experta en e-commerce y ventas online &middot; Mentora de emprendedores digitales</div>
+      <div class="speaker-topic">"Vende sin inventario, sin bodega y sin límites: el modelo de negocio digital del futuro"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 15 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">15</span>César Sánchez</div>
+      <div class="speaker-creds">Coach de ventas y liderazgo &middot; Formador de equipos comerciales</div>
+      <div class="speaker-topic">"El vendedor que no vende: técnicas de influencia ética para cerrar sin presionar"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 16 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">16</span>Daniel García</div>
+      <div class="speaker-creds">Especialista en LinkedIn y ventas B2B &middot; Generación de leads orgánicos</div>
+      <div class="speaker-topic">"LinkedIn como máquina de clientes: atrae prospectos calificados sin pagar publicidad"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Day 2 Summary -->
+  <div class="day-summary day2-summary">
+    <div class="summary-title">Resumen del Día 2</div>
+    <div class="summary-sub">Mis 3 aprendizajes más importantes del día:</div>
+    <div class="numbered-line"><span class="num">1</span><span class="line"></span></div>
+    <div class="numbered-line"><span class="num">2</span><span class="line"></span></div>
+    <div class="numbered-line"><span class="num">3</span><span class="line"></span></div>
+    <div class="summary-sub">Mi compromiso del Día 2:</div>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <div class="summary-sub">Mañana en el evento, lo primero que haré diferente es:</div>
+    <span class="line"></span>
+    <span class="line"></span>
+  </div>
+
+  <div class="page-footer">Bootcamp Digital Junio 5–7, 2026 &middot; Sinergéticos / Synergy for Education</div>
+</div>
+
+<!-- ================================================================
+     DÍA 3 — ESCALAMIENTO
+================================================================ -->
+<div class="page page-break day3">
+  <div class="section-header day3-header" style="color:#fff;">
+    <h2>Día 3 &middot; Escalamiento &middot; Sábado 7 de Junio, 2026</h2>
+    <div class="day-sub">9:00 AM – 7:00 PM &middot; YouTube Live</div>
+  </div>
+
+  <!-- Speaker 17 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">17</span>Manuel de León</div>
+      <div class="speaker-creds">CEO y fundador de múltiples empresas &middot; Especialista en franquicias y escalamiento</div>
+      <div class="speaker-topic">"Escala o muere: cómo replicar tu modelo sin que todo dependa de ti"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 18 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">18</span>Susi Vereecken</div>
+      <div class="speaker-creds">Experta en productividad y sistemas &middot; Consultora de operaciones</div>
+      <div class="speaker-topic">"Sistemas que liberan: cómo crear procesos que corren solos"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 19 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">19</span>Alejandro Saracho</div>
+      <div class="speaker-creds">Inversión, finanzas personales y empresariales &middot; Educador financiero</div>
+      <div class="speaker-topic">"El dinero que no ves: cómo estructurar tus finanzas para que el negocio crezca"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 20 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">20</span>Brando Angulo</div>
+      <div class="speaker-creds">Fundador Brada Grupo Inmobiliario &middot; Premio Joven Empresario Inmobiliario 2017 &middot; +823K seguidores</div>
+      <div class="speaker-topic">"Cómo construir patrimonio desde cero: inversión inmobiliaria como vehículo de libertad financiera"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- Speaker 21 -->
+  <div class="speaker-block">
+    <div class="speaker-header">
+      <div class="speaker-name"><span class="speaker-num">21</span>Daniel Marcos</div>
+      <div class="speaker-creds">CEO Growth Institute &middot; Experto en escalamiento empresarial &middot; Autor &middot; Conferencista internacional</div>
+      <div class="speaker-topic">"Scaling Up: el método que usan las empresas de alto crecimiento para llegar al siguiente nivel"</div>
+    </div>
+    <div class="note-area">
+      <div class="note-label">Puntos clave que escuché:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="note-area">
+      <div class="note-label">¿Cómo aplico esto en mi negocio?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="action-area">
+      <div class="note-label">Mi acción inmediata:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+    <div class="speaker-block">
+      <div class="speaker-header">
+        <div class="speaker-name">Dr. Roch</div>
+        <div class="speaker-creds">Doctor en Comportamiento Organizacional · Neurocientífico · Consultor FEMSA, Disney, Coca-Cola · Autor de 10+ libros</div>
+        <div class="speaker-topic">"Mentalidad de alto rendimiento: cómo programar tu cerebro para vender más y liderar mejor"</div>
+      </div>
+      <div class="notes-section">
+        <div class="notes-label">Puntos clave que escuché:</div>
+        <div class="line"></div><div class="line"></div><div class="line"></div>
+        <div class="notes-label">¿Cómo aplico esto en mi negocio?</div>
+        <div class="line"></div><div class="line"></div>
+        <div class="action-box">
+          <div class="action-label">Mi acción inmediata:</div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-block">
+      <div class="speaker-header">
+        <div class="speaker-name">Tito Luzardo</div>
+        <div class="speaker-creds">Emprendedor venezolano · Creador del método Hackea Tu Mente · De -$800K a +$1.5M/año</div>
+        <div class="speaker-topic">"Transformar la crisis en negocio: de perder todo a escalar a 7 cifras"</div>
+      </div>
+      <div class="notes-section">
+        <div class="notes-label">Puntos clave que escuché:</div>
+        <div class="line"></div><div class="line"></div><div class="line"></div>
+        <div class="notes-label">¿Cómo aplico esto en mi negocio?</div>
+        <div class="line"></div><div class="line"></div>
+        <div class="action-box">
+          <div class="action-label">Mi acción inmediata:</div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="speaker-block">
+      <div class="speaker-header">
+        <div class="speaker-name">Víctor Heras</div>
+        <div class="speaker-creds">Experto en marca personal · +500K seguidores en 5 meses · Fundador de PostMe, agencia de marca personal #1 España</div>
+        <div class="speaker-topic">"Contenido viral, comunidades gigantes y ganar dinero con redes sociales"</div>
+      </div>
+      <div class="notes-section">
+        <div class="notes-label">Puntos clave que escuché:</div>
+        <div class="line"></div><div class="line"></div><div class="line"></div>
+        <div class="notes-label">¿Cómo aplico esto en mi negocio?</div>
+        <div class="line"></div><div class="line"></div>
+        <div class="action-box">
+          <div class="action-label">Mi acción inmediata:</div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Day 3 Summary -->
+  <div class="day-summary day3-summary">
+    <div class="summary-title">Resumen del Día 3</div>
+    <div class="summary-sub">Mis 3 aprendizajes más importantes del día:</div>
+    <div class="numbered-line"><span class="num">1</span><span class="line"></span></div>
+    <div class="numbered-line"><span class="num">2</span><span class="line"></span></div>
+    <div class="numbered-line"><span class="num">3</span><span class="line"></span></div>
+    <div class="summary-sub">Mi compromiso del Día 3:</div>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <div class="summary-sub">Lo que voy a implementar esta semana:</div>
+    <span class="line"></span>
+    <span class="line"></span>
+  </div>
+
+  <div class="page-footer">Bootcamp Digital Junio 5–7, 2026 &middot; Sinergéticos / Synergy for Education</div>
+</div>
+
+<!-- ================================================================
+     MI PLAN DE ACCIÓN
+================================================================ -->
+<div class="page page-break">
+  <div class="action-page-header">
+    <h2>Mi Plan de Acción Post-Bootcamp</h2>
+  </div>
+
+  <div class="action-section">
+    <div class="action-section-label">En los próximos 7 días, haré esto:</div>
+    <div class="numbered-line"><span class="num">1</span><span class="line-wide"></span></div>
+    <div class="numbered-line"><span class="num">2</span><span class="line-wide"></span></div>
+    <div class="numbered-line"><span class="num">3</span><span class="line-wide"></span></div>
+  </div>
+
+  <div class="action-section">
+    <div class="action-section-label">En los próximos 90 días, lograré:</div>
+    <div class="numbered-line"><span class="num">1</span><span class="line-wide"></span></div>
+    <div class="numbered-line"><span class="num">2</span><span class="line-wide"></span></div>
+    <div class="numbered-line"><span class="num">3</span><span class="line-wide"></span></div>
+  </div>
+
+  <div class="action-section">
+    <div class="action-section-label">Lo que NO puedo seguir haciendo:</div>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+  </div>
+
+  <div class="action-section">
+    <div class="action-section-label">Lo que DEBO empezar a hacer:</div>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+  </div>
+
+  <div class="meta-box">
+    <div class="meta-box-label">Mi meta más importante del Bootcamp:</div>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+    <span class="line-wide"></span>
+  </div>
+
+  <div class="page-footer">Bootcamp Digital Junio 5–7, 2026 &middot; Sinergéticos / Synergy for Education</div>
+</div>
+
+</body>
+</html>

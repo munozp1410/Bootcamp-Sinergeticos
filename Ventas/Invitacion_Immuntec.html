@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación Immuntec — Bootcamp Sinergéticos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #ECE5DD;
+    min-height: 100vh;
+    padding: 30px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .chat-window {
+    background: #fff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+  .chat-header {
+    background: #075E54;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #D4A843;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #1B2B5B;
+    flex-shrink: 0;
+  }
+  .chat-name { color: #fff; font-weight: 700; font-size: 15px; }
+  .chat-status { color: #a8d5b0; font-size: 11px; margin-top: 1px; }
+
+  .chat-body {
+    background: #ECE5DD;
+    padding: 20px 16px;
+    min-height: 200px;
+  }
+
+  .bubble {
+    background: #fff;
+    border-radius: 0 12px 12px 12px;
+    padding: 12px 15px;
+    max-width: 92%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #111;
+    white-space: pre-wrap;
+    position: relative;
+  }
+  .bubble::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -8px;
+    border-width: 0 8px 8px 0;
+    border-style: solid;
+    border-color: transparent #fff transparent transparent;
+  }
+
+  .bubble-time {
+    text-align: right;
+    font-size: 10.5px;
+    color: #999;
+    margin-top: 3px;
+    margin-bottom: 14px;
+    padding-right: 2px;
+  }
+
+  /* COPY BOX */
+  .copy-section {
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 16px;
+  }
+  .copy-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+  .copy-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #111;
+    white-space: pre-wrap;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+    cursor: text;
+    user-select: all;
+  }
+
+  .btn-copy {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    margin: 8px 0 24px;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+  .btn-copy:hover { background: #1ebe5d; }
+  .btn-copy.copied { background: #075E54; }
+
+  .divider-label {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    width: 100%;
+    max-width: 480px;
+    margin: 4px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .divider-label::before, .divider-label::after {
+    content: ''; flex: 1; height: 1px; background: #ccc;
+  }
+
+  .version-tag {
+    display: inline-block;
+    background: #1B2B5B;
+    color: #D4A843;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Invitación especial Immuntec · WhatsApp de Jorge Serratos</h1>
+
+<!-- VERSIÓN 1 -->
+<div class="version-tag">Versión 1 — Corta e impactante</div>
+
+<div class="chat-window">
+  <div class="chat-header">
+    <div class="avatar">JS</div>
+    <div>
+      <div class="chat-name">Jorge Serratos</div>
+      <div class="chat-status">en línea</div>
+    </div>
+  </div>
+  <div class="chat-body">
+    <div class="bubble">Hola [NOMBRE] 👋
+
+Soy Jorge Serratos y te escribo personalmente porque quiero invitarte a algo especial.
+
+El 5, 6 y 7 de junio lanzo el *Bootcamp de Aceleración de Emprendimiento* — 3 días 100% en vivo con más de 24 speakers internacionales en temas de negocios, liderazgo, mentalidad y finanzas.
+
+Es completamente *gratuito* y sé que como parte de Immuntec ya tienes ese espíritu emprendedor. Este evento fue hecho para personas como tú.
+
+¿Te apunto? 🙌</div>
+    <div class="bubble-time">10:42 a.m. ✓✓</div>
+  </div>
+</div>
+
+<div class="copy-section">
+  <div class="copy-label">Copiar mensaje</div>
+  <div class="copy-box" id="msg1">Hola [NOMBRE] 👋
+
+Soy Jorge Serratos y te escribo personalmente porque quiero invitarte a algo especial.
+
+El 5, 6 y 7 de junio lanzo el *Bootcamp de Aceleración de Emprendimiento* — 3 días 100% en vivo con más de 24 speakers internacionales en temas de negocios, liderazgo, mentalidad y finanzas.
+
+Es completamente *gratuito* y sé que como parte de Immuntec ya tienes ese espíritu emprendedor. Este evento fue hecho para personas como tú.
+
+¿Te apunto? 🙌</div>
+</div>
+<button class="btn-copy" onclick="copiar('msg1', this)">📋 Copiar mensaje</button>
+
+<div class="divider-label">versión 2</div>
+
+<!-- VERSIÓN 2 -->
+<div class="version-tag">Versión 2 — Con contexto y beneficios</div>
+
+<div class="chat-window">
+  <div class="chat-header">
+    <div class="avatar">JS</div>
+    <div>
+      <div class="chat-name">Jorge Serratos</div>
+      <div class="chat-status">en línea</div>
+    </div>
+  </div>
+  <div class="chat-body">
+    <div class="bubble">Hola [NOMBRE], ¿cómo estás? 😊
+
+Te escribo yo directamente — Jorge Serratos — porque quiero darte una invitación especial.
+
+Sé que eres parte de Immuntec y que ya vives el emprendimiento desde adentro. Por eso quiero que estés en el *Bootcamp de Aceleración de Emprendimiento* que arranca el *5 de junio*.
+
+Son *3 días en vivo*, completamente gratis, con más de *24 speakers internacionales* — mentalidad, ventas, liderazgo, redes sociales, finanzas y mucho más.
+
+No hay grabación. Solo en vivo. Y quiero que tú seas parte de esto.
+
+¿Puedo enviarte el link de registro? 🔗</div>
+    <div class="bubble-time">10:43 a.m. ✓✓</div>
+  </div>
+</div>
+
+<div class="copy-section">
+  <div class="copy-label">Copiar mensaje</div>
+  <div class="copy-box" id="msg2">Hola [NOMBRE], ¿cómo estás? 😊
+
+Te escribo yo directamente — Jorge Serratos — porque quiero darte una invitación especial.
+
+Sé que eres parte de Immuntec y que ya vives el emprendimiento desde adentro. Por eso quiero que estés en el *Bootcamp de Aceleración de Emprendimiento* que arranca el *5 de junio*.
+
+Son *3 días en vivo*, completamente gratis, con más de *24 speakers internacionales* — mentalidad, ventas, liderazgo, redes sociales, finanzas y mucho más.
+
+No hay grabación. Solo en vivo. Y quiero que tú seas parte de esto.
+
+¿Puedo enviarte el link de registro? 🔗</div>
+</div>
+<button class="btn-copy" onclick="copiar('msg2', this)">📋 Copiar mensaje</button>
+
+<div class="divider-label">versión 3</div>
+
+<!-- VERSIÓN 3 -->
+<div class="version-tag">Versión 3 — Enfocada en salud + emprendimiento</div>
+
+<div class="chat-window">
+  <div class="chat-header">
+    <div class="avatar">JS</div>
+    <div>
+      <div class="chat-name">Jorge Serratos</div>
+      <div class="chat-status">en línea</div>
+    </div>
+  </div>
+  <div class="chat-body">
+    <div class="bubble">Hola [NOMBRE] 🙌
+
+Habla Jorge Serratos. Te escribo con una invitación que quiero que recibas tú personalmente.
+
+Creo mucho en lo que hacen en Immuntec — combinar salud con emprendimiento es uno de los modelos más poderosos que existen hoy. Y precisamente por eso quiero que estés en el *Bootcamp de Aceleración de Emprendimiento* del *5 al 7 de junio*.
+
+3 días en vivo, gratuitos, con +24 líderes internacionales compartiendo lo mejor de negocios, mentalidad, liderazgo y crecimiento personal.
+
+Este evento va a darte herramientas que complementan directamente lo que ya construyes con tu negocio de salud.
+
+¿Te interesa? Con gusto te mando el acceso 🎯</div>
+    <div class="bubble-time">10:44 a.m. ✓✓</div>
+  </div>
+</div>
+
+<div class="copy-section">
+  <div class="copy-label">Copiar mensaje</div>
+  <div class="copy-box" id="msg3">Hola [NOMBRE] 🙌
+
+Habla Jorge Serratos. Te escribo con una invitación que quiero que recibas tú personalmente.
+
+Creo mucho en lo que hacen en Immuntec — combinar salud con emprendimiento es uno de los modelos más poderosos que existen hoy. Y precisamente por eso quiero que estés en el *Bootcamp de Aceleración de Emprendimiento* del *5 al 7 de junio*.
+
+3 días en vivo, gratuitos, con +24 líderes internacionales compartiendo lo mejor de negocios, mentalidad, liderazgo y crecimiento personal.
+
+Este evento va a darte herramientas que complementan directamente lo que ya construyes con tu negocio de salud.
+
+¿Te interesa? Con gusto te mando el acceso 🎯</div>
+</div>
+<button class="btn-copy" onclick="copiar('msg3', this)">📋 Copiar mensaje</button>
+
+<div class="divider-label">versión sinergéticos</div>
+
+<!-- VERSIÓN SINERGÉTICOS -->
+<div class="version-tag" style="background:#D4A843; color:#1B2B5B;">Versión Sinergéticos — Mención Immuntec</div>
+
+<div class="chat-window">
+  <div class="chat-header">
+    <div class="avatar" style="background:#fff; color:#1B2B5B; font-size:11px; font-weight:800;">SIN</div>
+    <div>
+      <div class="chat-name">Sinergéticos</div>
+      <div class="chat-status">Equipo oficial</div>
+    </div>
+  </div>
+  <div class="chat-body">
+    <div class="bubble">Hola [NOMBRE] 👋
+
+Te escribimos desde *Sinergéticos* con una invitación especial para ti y para toda la comunidad de *Immuntec*.
+
+Jorge Serratos y su equipo quieren que seas parte del *Bootcamp de Aceleración de Emprendimiento* — un evento de 3 días completamente en vivo y gratuito, del *5 al 7 de junio*.
+
+Más de *24 speakers internacionales* compartirán lo mejor en ventas, liderazgo, mentalidad, finanzas y crecimiento personal. Exactamente las herramientas que complementan lo que ya construyes en Immuntec.
+
+Esta es una invitación directa para tu comunidad. Los lugares son limitados.
+
+¿Te mandamos el link de acceso? 🎯</div>
+    <div class="bubble-time">10:45 a.m. ✓✓</div>
+  </div>
+</div>
+
+<div class="copy-section">
+  <div class="copy-label">Copiar mensaje</div>
+  <div class="copy-box" id="msg4">Hola [NOMBRE] 👋
+
+Te escribimos desde *Sinergéticos* con una invitación especial para ti y para toda la comunidad de *Immuntec*.
+
+Jorge Serratos y su equipo quieren que seas parte del *Bootcamp de Aceleración de Emprendimiento* — un evento de 3 días completamente en vivo y gratuito, del *5 al 7 de junio*.
+
+Más de *24 speakers internacionales* compartirán lo mejor en ventas, liderazgo, mentalidad, finanzas y crecimiento personal. Exactamente las herramientas que complementan lo que ya construyes en Immuntec.
+
+Esta es una invitación directa para tu comunidad. Los lugares son limitados.
+
+¿Te mandamos el link de acceso? 🎯</div>
+</div>
+<button class="btn-copy" onclick="copiar('msg4', this)">📋 Copiar mensaje</button>
+
+<script>
+function copiar(id, btn) {
+  const texto = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(texto).then(() => {
+    const original = btn.innerText;
+    btn.innerText = '✅ Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = original;
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

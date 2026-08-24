@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Briefing Equipo de Ventas — Bootcamp Digital Jun 2026</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a1a;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 16px 60px;
+}
+
+/* ── HEADER ── */
+.header {
+  background: #1B2B5B;
+  border-radius: 10px;
+  padding: 20px 28px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left h1 {
+  font-size: 20px;
+  font-weight: 900;
+  color: #D4A843;
+  line-height: 1.2;
+}
+.header-left p {
+  font-size: 11px;
+  color: #aab4d4;
+  margin-top: 4px;
+}
+.header-right {
+  text-align: right;
+}
+.header-right .event-dates {
+  font-size: 13px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.5;
+}
+.header-right .event-sub {
+  font-size: 10px;
+  color: #aab4d4;
+  margin-top: 3px;
+}
+.badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.badge.gold { background: #D4A843; color: #1B2B5B; }
+.badge.green { background: #25D366; color: white; }
+.badge.red { background: #C62828; color: white; }
+
+/* ── ALERT BAR ── */
+.alert-bar {
+  background: #FFF8E1;
+  border-left: 5px solid #D4A843;
+  border-radius: 4px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  font-size: 12.5px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.alert-bar .alert-icon { font-size: 22px; }
+.alert-bar strong { color: #1B2B5B; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: white;
+  background: #1B2B5B;
+  padding: 8px 14px;
+  border-radius: 5px;
+  margin: 24px 0 14px;
+}
+.section-title.purple { background: #5E35B1; }
+.section-title.green  { background: #1A6B31; }
+.section-title.red    { background: #B71C1C; }
+.section-title.gold   { background: #B8860B; }
+.section-title.teal   { background: #00695C; }
+
+/* ── DIAS CARDS ── */
+.dias-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.dia-card {
+  border-radius: 7px;
+  padding: 14px 16px;
+  border-left: 5px solid;
+}
+.dia-card.d1 { background: #EDE7F6; border-color: #5E35B1; }
+.dia-card.d2 { background: #E3F2FD; border-color: #1565C0; }
+.dia-card.d3 { background: #E8F5E9; border-color: #2E7D32; }
+.dia-card .dia-num {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.6;
+  margin-bottom: 3px;
+}
+.dia-card .dia-tema {
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+.dia-card.d1 .dia-tema { color: #4527A0; }
+.dia-card.d2 .dia-tema { color: #0D47A1; }
+.dia-card.d3 .dia-tema { color: #1B5E20; }
+.dia-card .dia-para {
+  font-size: 11px;
+  color: #444;
+  line-height: 1.45;
+}
+
+/* ── EVENT INFO ROW ── */
+.event-info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.info-card {
+  background: white;
+  border-radius: 7px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  border-top: 3px solid #1B2B5B;
+}
+.info-card .info-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #999;
+  margin-bottom: 6px;
+}
+.info-card .info-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1B2B5B;
+  line-height: 1.4;
+}
+.info-card .info-sub {
+  font-size: 10px;
+  color: #666;
+  margin-top: 3px;
+  line-height: 1.4;
+}
+.info-card.green-top { border-top-color: #25D366; }
+.info-card.gold-top  { border-top-color: #D4A843; }
+
+/* ── FLUJO DE VENTA ── */
+.flujo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.step-card {
+  background: white;
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.step-num {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1B2B5B;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-num.gold   { background: #D4A843; color: #1B2B5B; }
+.step-num.green  { background: #2E7D32; }
+.step-num.purple { background: #5E35B1; }
+.step-num.teal   { background: #00695C; }
+.step-num.red    { background: #C62828; }
+.step-content .step-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: #1B2B5B;
+  margin-bottom: 3px;
+}
+.step-content .step-desc {
+  font-size: 11px;
+  color: #444;
+  line-height: 1.45;
+}
+.step-content .step-tip {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 10px;
+  background: #FFF8E1;
+  border-left: 2px solid #D4A843;
+  padding: 3px 8px;
+  border-radius: 0 3px 3px 0;
+  color: #555;
+  font-style: italic;
+}
+.step-content .step-link {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 10px;
+  background: #E3F2FD;
+  border-left: 2px solid #1565C0;
+  padding: 3px 8px;
+  border-radius: 0 3px 3px 0;
+  color: #0D47A1;
+  font-weight: 700;
+}
+
+/* ── MÉTRICAS ── */
+.metricas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.metrica-card {
+  background: white;
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  text-align: center;
+}
+.metrica-card .met-value {
+  font-size: 28px;
+  font-weight: 900;
+  color: #1B2B5B;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.metrica-card .met-value.gold   { color: #B8860B; }
+.metrica-card .met-value.green  { color: #2E7D32; }
+.metrica-card .met-value.red    { color: #C62828; }
+.metrica-card .met-label {
+  font-size: 10px;
+  color: #666;
+  line-height: 1.35;
+}
+.metrica-card .met-sub {
+  font-size: 9px;
+  color: #999;
+  margin-top: 3px;
+}
+
+/* ── PERFILES ── */
+.perfiles-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.perfil-card {
+  border-radius: 8px;
+  padding: 14px 12px;
+  color: white;
+}
+.perfil-card.fan  { background: #C2185B; }
+.perfil-card.wann { background: #E65100; }
+.perfil-card.ent  { background: #2E7D32; }
+.perfil-card.emp  { background: #1565C0; }
+.perfil-card.acp  { background: #5E35B1; }
+.perfil-card .perf-tag {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  opacity: 0.75;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.perfil-card .perf-name {
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.perfil-card .perf-senal {
+  font-size: 10px;
+  opacity: 0.85;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+.perfil-card .perf-ancla {
+  font-size: 9px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.2);
+  padding: 3px 7px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+/* ── ARCHIVOS Y RECURSOS ── */
+.recursos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.recurso-card {
+  background: white;
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-left: 4px solid;
+}
+.recurso-card.navy  { border-left-color: #1B2B5B; }
+.recurso-card.gold  { border-left-color: #D4A843; }
+.recurso-card.green { border-left-color: #2E7D32; }
+.recurso-card.teal  { border-left-color: #00695C; }
+.recurso-card .rec-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: #1B2B5B;
+  margin-bottom: 6px;
+}
+.recurso-card .rec-desc {
+  font-size: 11px;
+  color: #444;
+  line-height: 1.5;
+}
+.recurso-card .rec-como {
+  margin-top: 8px;
+  font-size: 10px;
+  color: #888;
+  font-style: italic;
+}
+.recurso-card .rec-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  background: #E3F2FD;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #0D47A1;
+  word-break: break-all;
+}
+
+/* ── CONTACTOS ── */
+.contactos-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.contacto-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.contacto-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  flex-shrink: 0;
+}
+.contacto-avatar.navy { background: #1B2B5B; }
+.contacto-avatar.teal { background: #00695C; }
+.contacto-info .cont-role {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.contacto-info .cont-name {
+  font-size: 14px;
+  font-weight: 900;
+  color: #1B2B5B;
+  margin-bottom: 3px;
+}
+.contacto-info .cont-desc {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* ── REGLA CRÍTICA ── */
+.regla-critica {
+  background: #1B2B5B;
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.regla-critica .rc-num {
+  font-size: 40px;
+  font-weight: 900;
+  color: #D4A843;
+  line-height: 1;
+  min-width: 60px;
+  text-align: center;
+}
+.regla-critica .rc-text {
+  font-size: 13px;
+  color: white;
+  line-height: 1.5;
+}
+.regla-critica .rc-text strong { color: #D4A843; }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 32px;
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: #999;
+}
+
+/* ── PRINT ── */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body { background: white; padding: 0; }
+  .wrapper { padding: 10mm; max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Briefing del Equipo de Ventas</h1>
+      <p>Bootcamp Digital de Aceleración de Emprendimiento · Sinergéticos / Synergy for Education</p>
+      <div class="badge-row">
+        <span class="badge gold">21 Speakers Internacionales</span>
+        <span class="badge green">Incluido en membresía del Club</span>
+        <span class="badge red">Meta: 40% confirmación mínimo</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="event-dates">Junio 5 · 6 · 7 de 2026</div>
+      <div class="event-sub">Llamadas: 7 – 15 de mayo · 50 llamadas/día</div>
+    </div>
+  </div>
+
+  <!-- ALERTA -->
+  <div class="alert-bar">
+    <span class="alert-icon">📌</span>
+    <div>
+      <strong>Lee esto antes de marcar tu primera llamada.</strong> Esta hoja tiene todo lo que necesitas saber para trabajar bien: qué es el evento, cómo funciona la venta, qué hacer en cada paso y dónde encontrar cada archivo. Si tienes dudas, consulta aquí primero.
+    </div>
+  </div>
+
+  <!-- QUÉ ES EL BOOTCAMP -->
+  <div class="section-title">▸ ¿Qué es el Bootcamp Digital?</div>
+  <div class="dias-row">
+    <div class="dia-card d1">
+      <div class="dia-num">Día 1 · Jueves 5 Junio</div>
+      <div class="dia-tema">MENTALIDAD</div>
+      <div class="dia-para">Para quien se sabotea, procrastina, tiene miedo al cambio o está mentalmente estancado.</div>
+    </div>
+    <div class="dia-card d2">
+      <div class="dia-num">Día 2 · Viernes 6 Junio</div>
+      <div class="dia-tema">NEGOCIOS</div>
+      <div class="dia-para">Para quien tiene ventas planas, no consigue clientes, su modelo no funciona o no tiene claridad en su oferta.</div>
+    </div>
+    <div class="dia-card d3">
+      <div class="dia-num">Día 3 · Sábado 7 Junio</div>
+      <div class="dia-tema">ESCALAMIENTO</div>
+      <div class="dia-para">Para quien quiere crecer su equipo, delegar, salir del día a día o replicar su modelo.</div>
+    </div>
+  </div>
+
+  <div class="event-info-row" style="margin-top:12px;">
+    <div class="info-card">
+      <div class="info-label">Plataforma</div>
+      <div class="info-value">YouTube (en vivo)</div>
+      <div class="info-sub">El link se comparte el día del evento por el grupo de WhatsApp y aparece en el boleto de cada asistente. <strong>No se graba.</strong></div>
+    </div>
+    <div class="info-card green-top">
+      <div class="info-label">¿Quiénes son los leads?</div>
+      <div class="info-value">Miembros activos del Club Sinergético</div>
+      <div class="info-sub">El Bootcamp está incluido en su membresía, sin costo adicional. No les estás vendiendo nada — les estás entregando un beneficio que ya les pertenece.</div>
+    </div>
+    <div class="info-card gold-top">
+      <div class="info-label">Link de registro</div>
+      <div class="info-value">bootcampsinergetico.com</div>
+      <div class="info-sub">Usa este link para registrar a tu lead durante la llamada. Hazlo en vivo — cada minuto que pasa reduce la probabilidad de que lo hagan solos.</div>
+    </div>
+  </div>
+
+  <!-- FLUJO DE VENTA -->
+  <div class="section-title green">▸ El Flujo de Venta — Paso a Paso</div>
+  <div class="flujo-grid">
+
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Llamada de contacto</div>
+        <div class="step-desc">Abre con la noticia del boleto: <em>"Tu acceso al Bootcamp ya está disponible, es un bono de tu membresía."</em> No pidas nada — entrega primero.</div>
+        <div class="step-tip">Script completo en el archivo Script de Llamada.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num purple">2</div>
+      <div class="step-content">
+        <div class="step-title">Perfilar al cliente</div>
+        <div class="step-desc">Identifica en cuál de los 5 perfiles cae: <strong>FAN, WANNAPRENEUR, ENTREPRENEUR, EMPRESARIO o ACOMPAÑANTE.</strong> Escucha su situación y su dolor antes de hablar del evento.</div>
+        <div class="step-tip">Ver perfiles más abajo en esta hoja.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num teal">3</div>
+      <div class="step-content">
+        <div class="step-title">Conectar el evento con su perfil</div>
+        <div class="step-desc">Usa sus palabras exactas: <em>"Me dijiste que [dolor] — eso es exactamente lo que se trabaja en el Día [X] de [Tema]."</em> Los 3 días son para él — no solo uno.</div>
+        <div class="step-tip">El día ancla engancha, pero cierra siempre con los 3 días.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num green">4</div>
+      <div class="step-content">
+        <div class="step-title">Confirmar asistencia y fechas</div>
+        <div class="step-desc">Visualiza las fechas con él: <em>"¿Las tienes disponibles del 5 al 7 de junio?"</em> Si duda, ancla al día más libre primero y construye desde ahí.</div>
+        <div class="step-tip">Meta mínima: 40% de confirmación sobre contactos efectivos.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#25D366;">5</div>
+      <div class="step-content">
+        <div class="step-title">Agregar al grupo de WhatsApp</div>
+        <div class="step-desc">Una vez confirmado, agrégalo al grupo de WhatsApp del evento. Por ahí recibirá el link de acceso el día del Bootcamp y todos los recordatorios.</div>
+        <div class="step-tip">El link del grupo está en tu Drive de coordinación.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num gold">6</div>
+      <div class="step-content">
+        <div class="step-title">Entrega de boleto</div>
+        <div class="step-desc">Mándale su boleto por WhatsApp inmediatamente después de confirmar. Esto hace tangible el registro y reduce el no-show.</div>
+        <div class="step-tip">El boleto está en tu Drive de coordinación.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#0D47A1;">7</div>
+      <div class="step-content">
+        <div class="step-title">Link para agendar en calendario</div>
+        <div class="step-desc">Mándale el link para que agregue el evento a su Google Calendar o Apple Calendar. Quien lo agenda, se presenta.</div>
+        <div class="step-link">Link disponible en el Drive de coordinación.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#00838F;">8</div>
+      <div class="step-content">
+        <div class="step-title">Entregar brochure del evento</div>
+        <div class="step-desc">Comparte el brochure para que tenga todo el detalle del evento: speakers, temas y horarios. Refuerza el valor de lo que ya confirmó.</div>
+        <div class="step-tip">Brochure disponible en tu Drive de coordinación.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#6A1B9A;">9</div>
+      <div class="step-content">
+        <div class="step-title">Preguntar por acompañantes y referidos</div>
+        <div class="step-desc"><em>"¿Hay alguien en tu círculo que también se beneficiaría de estar ahí — un socio, un familiar, alguien en tu equipo?"</em> Cada confirmado puede traer otro.</div>
+        <div class="step-tip">Registra acompañantes en tu tracker individual.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num red">10</div>
+      <div class="step-content">
+        <div class="step-title">Recordatorios hasta el día del evento</div>
+        <div class="step-desc">Manda recordatorios a todos tus confirmados: 48 hrs antes, la mañana del Día 1, y si aplica, antes de cada día. Un evento gratuito sin recordatorio tiene 60–70% de no-show.</div>
+        <div class="step-tip">Secuencia de mensajes en el Script de WhatsApp.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MÉTRICAS -->
+  <div class="section-title gold">▸ Tus Números — Lo Que Se Mide, Se Logra</div>
+  <div class="metricas-grid">
+    <div class="metrica-card">
+      <div class="met-value">384</div>
+      <div class="met-label">Leads totales por vendedor</div>
+      <div class="met-sub">A contactar antes del 15 de mayo</div>
+    </div>
+    <div class="metrica-card">
+      <div class="met-value">50</div>
+      <div class="met-label">Llamadas mínimas por día</div>
+      <div class="met-sub">Del 7 al 15 de mayo (8 días)</div>
+    </div>
+    <div class="metrica-card">
+      <div class="met-value green">40%</div>
+      <div class="met-label">Tasa de confirmación mínima</div>
+      <div class="met-sub">Sobre contactos efectivos logrados</div>
+    </div>
+    <div class="metrica-card">
+      <div class="met-value gold">77</div>
+      <div class="met-label">Confirmados meta por vendedor</div>
+      <div class="met-sub">384 leads × 50% contacto × 40% cierre</div>
+    </div>
+  </div>
+
+  <div class="regla-critica" style="margin-top:12px;">
+    <div class="rc-num">40%</div>
+    <div class="rc-text">
+      <strong>Esta es la meta mínima de confirmación.</strong> De cada 10 personas que contactes efectivamente, al menos 4 deben quedar confirmadas. Si estás por debajo de eso, revisa tu script, habla con tu líder y ajusta antes de que se acaben los días de llamadas.
+    </div>
+  </div>
+
+  <!-- PERFILES -->
+  <div class="section-title purple">▸ Los 5 Perfiles — Identifícalos en la Llamada</div>
+  <div class="perfiles-grid">
+    <div class="perfil-card fan">
+      <div class="perf-tag">Perfil 01</div>
+      <div class="perf-name">FAN</div>
+      <div class="perf-senal">"Me encanta Sinergéticos, sigo todo el contenido, estoy muy emocionado."</div>
+      <div class="perf-ancla">⚡ Ya quiere ir — registra rápido</div>
+    </div>
+    <div class="perfil-card wann">
+      <div class="perf-tag">Perfil 02</div>
+      <div class="perf-name">WANNAPRENEUR</div>
+      <div class="perf-senal">"Quiero emprender pero no he arrancado", "tengo la idea pero no sé por dónde empezar."</div>
+      <div class="perf-ancla">📌 Día 1 Mentalidad + Día 2 Negocios</div>
+    </div>
+    <div class="perfil-card ent">
+      <div class="perf-tag">Perfil 03</div>
+      <div class="perf-name">ENTREPRENEUR</div>
+      <div class="perf-senal">"Ya tengo negocio pero las ventas están planas", "no sé cómo conseguir más clientes."</div>
+      <div class="perf-ancla">📌 Día 2 Negocios + Día 1</div>
+    </div>
+    <div class="perfil-card emp">
+      <div class="perf-tag">Perfil 04</div>
+      <div class="perf-name">EMPRESARIO</div>
+      <div class="perf-senal">"Quiero crecer el equipo", "no puedo delegar", "estoy rebasado y necesito salir del día a día."</div>
+      <div class="perf-ancla">📌 Día 3 Escalamiento</div>
+    </div>
+    <div class="perfil-card acp">
+      <div class="perf-tag">Perfil 05</div>
+      <div class="perf-name">ACOMPAÑANTE</div>
+      <div class="perf-senal">Viene porque alguien más lo invitó, no es miembro del Club o tiene poco contexto del evento.</div>
+      <div class="perf-ancla">📌 Día 1 Mentalidad — engancha fácil</div>
+    </div>
+  </div>
+
+  <!-- ARCHIVOS Y RECURSOS -->
+  <div class="section-title teal">▸ Archivos y Recursos — Dónde Encontrar Todo</div>
+  <div class="recursos-grid">
+    <div class="recurso-card navy">
+      <div class="rec-title">📁 Drive de Coordinación del Bootcamp</div>
+      <div class="rec-desc">Aquí están todos los materiales del evento: boletos, brochure, link del grupo de WhatsApp, link de calendario y el workbook del evento.</div>
+      <div class="rec-como">¿Cómo accedo? Mariana (Coordinación) te mandará el link a tu correo antes de que empieces a llamar. Si no lo recibiste, escríbele directamente.</div>
+    </div>
+    <div class="recurso-card gold">
+      <div class="rec-title">📋 Workbook del Evento</div>
+      <div class="rec-desc">Documento de trabajo para los asistentes durante el Bootcamp. Está en el Drive de coordinación. Mándaselo a tus confirmados junto con el brochure.</div>
+      <div class="rec-como">Disponible en el Drive de coordinación una vez que te compartan acceso.</div>
+    </div>
+    <div class="recurso-card green">
+      <div class="rec-title">📞 Script de Llamada (OnePager)</div>
+      <div class="rec-desc">Hoja de una página con el flujo completo de la llamada, metodología F.I.R.$T, manejo de objeciones y guía de perfilamiento. Tenla abierta mientras llamas.</div>
+      <div class="rec-como">Archivo: <strong>OnePager_Script_Llamada.html</strong> — en la carpeta Ventas del Drive.</div>
+    </div>
+    <div class="recurso-card teal">
+      <div class="rec-title">💬 Script de WhatsApp</div>
+      <div class="rec-desc">Flujo completo de mensajes: confirmación post-llamada, seguimiento 24 hrs, recordatorio 48 hrs antes del evento y mensaje del Día 1. Úsalo tal cual.</div>
+      <div class="rec-como">Archivo: <strong>WhatsApp_Script_Club.html</strong> — en la carpeta Ventas del Drive.</div>
+    </div>
+    <div class="recurso-card navy">
+      <div class="rec-title">📊 Tracker Individual</div>
+      <div class="rec-desc">Tu hoja de seguimiento diario. Registra llamadas, contactos efectivos, confirmados, acompañantes y perfilamiento de cada día. Llénala al final de cada jornada.</div>
+      <div class="rec-como">Archivo: <strong>Tracker_Individual_Vendedor.html</strong> — en la carpeta Ventas del Drive.</div>
+    </div>
+    <div class="recurso-card gold">
+      <div class="rec-title">🔗 Link de Registro del Evento</div>
+      <div class="rec-desc">Úsalo durante la llamada para registrar al lead en vivo. No esperes a que ellos lo hagan solos — la probabilidad cae cada minuto después de colgar.</div>
+      <div class="rec-link">bootcampsinergetico.com</div>
+    </div>
+  </div>
+
+  <!-- CÓMO ACCEDEN LOS ASISTENTES -->
+  <div class="section-title" style="background:#37474F;">▸ ¿Cómo Acceden los Asistentes al Evento?</div>
+  <div class="event-info-row">
+    <div class="info-card">
+      <div class="info-label">Plataforma</div>
+      <div class="info-value">YouTube Live</div>
+      <div class="info-sub">El evento es 100% en vivo por YouTube. No hay grabación. Si no asisten en vivo, no acceden al contenido.</div>
+    </div>
+    <div class="info-card green-top">
+      <div class="info-label">¿Cómo reciben el link?</div>
+      <div class="info-value">3 vías el día del evento</div>
+      <div class="info-sub">
+        1. Por el <strong>grupo de WhatsApp del evento</strong>.<br>
+        2. En su <strong>boleto digital</strong>.<br>
+        3. Por mensaje directo de su vendedor.
+      </div>
+    </div>
+    <div class="info-card gold-top">
+      <div class="info-label">Horario</div>
+      <div class="info-value">9:00 am – 7:00 pm</div>
+      <div class="info-sub">Los 3 días tienen el mismo horario. Asegúrate de que tus confirmados lo sepan y lo tengan agendado.</div>
+    </div>
+  </div>
+
+  <!-- CONTACTOS -->
+  <div class="section-title red">▸ Contactos — ¿A Quién Acudo si Tengo Dudas?</div>
+  <div class="contactos-row">
+    <div class="contacto-card">
+      <div class="contacto-avatar navy">P</div>
+      <div class="contacto-info">
+        <div class="cont-role">Organización / Dirección</div>
+        <div class="cont-name">Pablo Muñoz</div>
+        <div class="cont-desc">Para dudas sobre estrategia, reglas del evento, situaciones fuera de lo común o cualquier decisión importante.</div>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-avatar teal">L</div>
+      <div class="contacto-info">
+        <div class="cont-role">Primer contacto para el equipo</div>
+        <div class="cont-name">Tu Líder de Equipo</div>
+        <div class="cont-desc">Para dudas del día a día, objeciones difíciles, leads especiales o cualquier situación durante las llamadas. Tu líder es tu primera línea de apoyo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Sinergéticos / Synergy for Education · Uso interno equipo de ventas · Bootcamp Digital Jun 2026</span>
+    <span>Base Club: 22,000 leads · Meta: 8,800 registros · CPL: $0</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Script NEPQ — Bootcamp Sinergéticos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f2f4f8;
+    color: #1a1a2e;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #1B2B5B 0%, #0f1a3a 100%);
+    border-radius: 10px;
+    padding: 24px 28px 20px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 120px; height: 120px;
+    background: rgba(212,168,67,0.12);
+    border-radius: 50%;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .header h1 {
+    font-size: 20px;
+    color: #D4A843;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+  .header h2 {
+    font-size: 13px;
+    color: #a8b8d8;
+    font-weight: 400;
+    margin-top: 3px;
+  }
+  .header-meta {
+    text-align: right;
+    font-size: 11px;
+    color: #6a80b0;
+  }
+  .header-meta strong { color: #D4A843; font-size: 13px; }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .badge-gold { background: rgba(212,168,67,0.2); color: #D4A843; border: 1px solid rgba(212,168,67,0.4); }
+  .badge-blue { background: rgba(100,140,220,0.2); color: #88aaee; border: 1px solid rgba(100,140,220,0.3); }
+  .badge-green { background: rgba(50,180,100,0.2); color: #66cc88; border: 1px solid rgba(50,180,100,0.3); }
+
+  /* METODOLOGÍA BARRA */
+  .metodo-bar {
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .metodo-step {
+    flex: 1;
+    padding: 7px 4px;
+    text-align: center;
+    color: #fff;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .metodo-step:last-child { border-right: none; }
+  .m1 { background: #1B2B5B; }
+  .m2 { background: #2a407a; }
+  .m3 { background: #7B1FA2; }
+  .m4 { background: #5c1680; }
+  .m5 { background: #C62828; }
+  .m6 { background: #E65100; }
+  .m7 { background: #2E7D32; }
+  .m8 { background: #1B5E20; }
+
+  /* SECCIÓN */
+  .section {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .section-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    font-style: italic;
+    margin-left: auto;
+    text-align: right;
+  }
+  .s-navy .section-header { background: #1B2B5B; }
+  .s-purple .section-header { background: #6A1B9A; }
+  .s-red .section-header { background: #B71C1C; }
+  .s-amber .section-header { background: #E65100; }
+  .s-teal .section-header { background: #00695C; }
+  .s-green .section-header { background: #2E7D32; }
+  .s-dark .section-header { background: #263238; }
+  .s-gold .section-header { background: #7d6120; }
+
+  .section-body {
+    padding: 14px 18px;
+  }
+
+  /* SCRIPT LINE */
+  .script-line {
+    background: #EEF2FF;
+    border-left: 3px solid #1B2B5B;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #1a1a2e;
+    line-height: 1.65;
+  }
+  .script-line strong { color: #1B2B5B; }
+  .script-line em { color: #555; font-style: italic; }
+
+  .script-line.purple { background: #F3E5F5; border-left-color: #7B1FA2; }
+  .script-line.purple strong { color: #6A1B9A; }
+  .script-line.red { background: #FFEBEE; border-left-color: #C62828; }
+  .script-line.red strong { color: #B71C1C; }
+  .script-line.amber { background: #FFF3E0; border-left-color: #E65100; }
+  .script-line.amber strong { color: #BF360C; }
+  .script-line.green { background: #E8F5E9; border-left-color: #2E7D32; }
+  .script-line.green strong { color: #1B5E20; }
+  .script-line.teal { background: #E0F2F1; border-left-color: #00695C; }
+  .script-line.gold { background: #FFF8E1; border-left-color: #D4A843; }
+  .script-line.gold strong { color: #7d6120; }
+  .script-line.dark { background: #ECEFF1; border-left-color: #455A64; }
+
+  /* PREGUNTA */
+  .q-block {
+    margin-bottom: 12px;
+  }
+  .q-label {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .q-label.sit { color: #1B2B5B; }
+  .q-label.prob { color: #7B1FA2; }
+  .q-label.sol { color: #00695C; }
+  .q-label.cons { color: #C62828; }
+  .q-label.qual { color: #E65100; }
+  .q-label.tip { color: #455A64; }
+
+  .q-text {
+    background: #F8F9FF;
+    border: 1px solid #dde3f0;
+    border-radius: 6px;
+    padding: 9px 13px;
+    font-size: 12.5px;
+    color: #1a1a2e;
+    line-height: 1.6;
+  }
+  .q-text.prob { background: #FAF0FF; border-color: #d8b4fe; }
+  .q-text.sol { background: #F0FDF8; border-color: #a7f3d0; }
+  .q-text.cons { background: #FFF5F5; border-color: #fca5a5; }
+  .q-text.qual { background: #FFF8F0; border-color: #fdba74; }
+
+  /* BIFURCACIÓN */
+  .fork {
+    background: #FFFDE7;
+    border: 1px solid #FDD835;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  .fork-title {
+    font-weight: 800;
+    color: #F57F17;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 5px;
+  }
+
+  .fork.green-fork {
+    background: #F1FFF4;
+    border-color: #86efac;
+  }
+  .fork.green-fork .fork-title { color: #166534; }
+
+  .fork.red-fork {
+    background: #FFF1F1;
+    border-color: #fca5a5;
+  }
+  .fork.red-fork .fork-title { color: #991b1b; }
+
+  /* NOTA */
+  .nota {
+    background: #F0F4FF;
+    border-left: 3px solid #7986CB;
+    border-radius: 0 6px 6px 0;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    font-size: 11.5px;
+    color: #3949AB;
+    font-style: italic;
+  }
+  .nota strong { color: #1A237E; font-style: normal; }
+
+  /* OBJECIÓN */
+  .obj-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .obj-header {
+    padding: 7px 14px;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .obj-body { padding: 10px 14px; }
+  .obj-money .obj-header { background: #FFF3E0; color: #E65100; border-bottom: 1px solid #FFCC80; }
+  .obj-pareja .obj-header { background: #E8EAF6; color: #3949AB; border-bottom: 1px solid #C5CAE9; }
+  .obj-tiempo .obj-header { background: #F3E5F5; color: #7B1FA2; border-bottom: 1px solid #CE93D8; }
+  .obj-ya-sé .obj-header { background: #E8F5E9; color: #2E7D32; border-bottom: 1px solid #A5D6A7; }
+
+  /* PERFILES */
+  .perfil-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .perfil-card {
+    border-radius: 7px;
+    padding: 9px 11px;
+    font-size: 11px;
+    border: 1px solid transparent;
+  }
+  .perfil-card .p-tipo { font-weight: 800; font-size: 10px; text-transform: uppercase; margin-bottom: 3px; }
+  .perfil-card .p-dolor { color: #555; font-size: 10.5px; }
+  .pf1 { background: #EEF2FF; border-color: #c7d2fe; }
+  .pf1 .p-tipo { color: #3730a3; }
+  .pf2 { background: #FFF7ED; border-color: #fed7aa; }
+  .pf2 .p-tipo { color: #c2410c; }
+  .pf3 { background: #F0FDF4; border-color: #bbf7d0; }
+  .pf3 .p-tipo { color: #15803d; }
+  .pf4 { background: #FDF4FF; border-color: #e9d5ff; }
+  .pf4 .p-tipo { color: #7e22ce; }
+  .pf5 { background: #FFF1F2; border-color: #fecdd3; }
+  .pf5 .p-tipo { color: #be123c; }
+
+  /* STEP 3 FORMULA */
+  .tres-pasos {
+    counter-reset: paso;
+  }
+  .paso {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .paso-num {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #1B2B5B;
+    color: #D4A843;
+    font-weight: 800;
+    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .paso-body { flex: 1; }
+  .paso-label { font-size: 9.5px; font-weight: 800; color: #888; text-transform: uppercase; margin-bottom: 3px; }
+  .paso-text {
+    background: #F8F9FF;
+    border: 1px solid #dde3f0;
+    border-radius: 6px;
+    padding: 9px 13px;
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  /* TONALIDAD */
+  .tono-box {
+    background: linear-gradient(135deg, #1B2B5B, #2a407a);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 12px;
+  }
+  .tono-box h4 { color: #D4A843; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tono-box ul { padding-left: 16px; }
+  .tono-box li { margin-bottom: 3px; }
+
+  /* DIVISOR */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #dde3f0, transparent);
+    margin: 12px 0;
+  }
+
+  .label-or {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #999;
+    margin: 6px 0;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    font-size: 10px;
+    color: #999;
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { padding: 10px; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>Script NEPQ — Bootcamp Sinergéticos</h1>
+        <h2>Framework 7th Level · Adaptado para llamadas de confirmación y venta Black Access</h2>
+      </div>
+      <div class="header-meta">
+        <strong>Black Access</strong><br>
+        $36,997 MXN<br>
+        Junio 5 · 6 · 7, 2026
+      </div>
+    </div>
+    <div class="badge-row">
+      <span class="badge badge-gold">Lead Warm — Ya registrado</span>
+      <span class="badge badge-blue">Llamada de confirmación + venta</span>
+      <span class="badge badge-green">Una sola llamada</span>
+    </div>
+  </div>
+
+  <!-- BARRA DE METODOLOGÍA -->
+  <div class="metodo-bar">
+    <div class="metodo-step m1">① Apertura</div>
+    <div class="metodo-step m2">② Situación</div>
+    <div class="metodo-step m3">③ Problema</div>
+    <div class="metodo-step m4">④ Solución prev.</div>
+    <div class="metodo-step m5">⑤ Consecuencia</div>
+    <div class="metodo-step m6">⑥ Qualifying</div>
+    <div class="metodo-step m7">⑦ Presentación</div>
+    <div class="metodo-step m8">⑧ Cierre</div>
+  </div>
+
+  <!-- TONALIDAD -->
+  <div class="tono-box">
+    <h4>🎙 Principios de tonalidad NEPQ — Leer antes de cada llamada</h4>
+    <ul>
+      <li><strong>Si tú bajas el tono de algo, ellos lo suben.</strong> Nunca sonar urgente ni desesperado.</li>
+      <li><strong>Preguntar, no presentar.</strong> El 85% de la venta ocurre en las preguntas, no en la presentación.</li>
+      <li><strong>Escuchar con cues verbales</strong> cada 10-15 segundos: "Mmm… ¿y cómo así?", "Interesante, ¿qué más?"</li>
+      <li><strong>Pausar después de cada respuesta.</strong> El silencio los hace expandir su respuesta.</li>
+      <li><strong>Nunca interrumpir.</strong> Deja que terminen. Luego hablas.</li>
+    </ul>
+  </div>
+
+  <!-- PERFILES -->
+  <div class="section s-dark">
+    <div class="section-header">
+      <div class="section-num">👤</div>
+      <div class="section-title">Perfiles del lead — Identifica a cuál pertenece en los primeros 2 minutos</div>
+    </div>
+    <div class="section-body">
+      <div class="perfil-grid">
+        <div class="perfil-card pf1">
+          <div class="p-tipo">FAN</div>
+          <div class="p-dolor">Seguidor de Jorge. Quiere estar cerca. Dolor: no tiene acceso directo ni comunidad de su nivel.</div>
+        </div>
+        <div class="perfil-card pf2">
+          <div class="p-tipo">Wannapreneur</div>
+          <div class="p-dolor">Quiere emprender pero no ha empezado. Dolor: no sabe por dónde, miedo a fracasar, sin guía.</div>
+        </div>
+        <div class="perfil-card pf3">
+          <div class="p-tipo">Entrepreneur</div>
+          <div class="p-dolor">Ya tiene negocio pequeño. Dolor: estancado en ventas, trabaja mucho, no escala.</div>
+        </div>
+        <div class="perfil-card pf4">
+          <div class="p-tipo">Empresario</div>
+          <div class="p-dolor">Empresa establecida. Dolor: quiere nuevas redes, socios, ideas para el siguiente nivel.</div>
+        </div>
+        <div class="perfil-card pf5">
+          <div class="p-tipo">Acompañante</div>
+          <div class="p-dolor">Va con alguien más. Dolor: apoyar a su pareja/hijo, o quiere entender el mundo del emprendimiento.</div>
+        </div>
+      </div>
+      <div class="nota"><strong>Tip:</strong> La pregunta "¿Qué te llevó a registrarte?" te dice inmediatamente el perfil. Escucha con atención.</div>
+    </div>
+  </div>
+
+  <!-- 1. APERTURA -->
+  <div class="section s-navy">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Apertura — Conectar y generar curiosidad</div>
+      <div class="section-sub">30 segundos · No vender</div>
+    </div>
+    <div class="section-body">
+
+      <div class="nota"><strong>NOTA:</strong> El objetivo aquí NO es vender. Solo generar suficiente curiosidad para que quieran seguir hablando contigo.</div>
+
+      <div class="q-block">
+        <div class="q-label sit">Apertura estándar — lead warm (ya se registró)</div>
+        <div class="script-line">
+          "Hola, ¿hablo con <strong>[NOMBRE]</strong>?… Hola [nombre], habla <strong>[TU NOMBRE]</strong> del equipo de Sinergéticos… ¿Cómo estás?"
+          <br><br><em>— Deja que responda —</em><br><br>
+          "Oye, te llamo porque vi que te registraste para el Bootcamp de Aceleración de Emprendimiento que arranca el <strong>5 de junio</strong>... y quería tomar un momento contigo para conocerte un poco y ver de qué manera podemos ayudarte a que aproveches al máximo los 3 días. ¿Tienes unos minutitos ahorita?"
+        </div>
+      </div>
+
+      <div class="fork green-fork">
+        <div class="fork-title">✅ Si dicen "sí, claro"</div>
+        Perfecto. Ir directo a las preguntas de situación.
+      </div>
+
+      <div class="fork red-fork">
+        <div class="fork-title">⛔ Si preguntan "¿de qué se trata?" o suenan desconfiados</div>
+        "Por supuesto… mira, tú sabes cómo hay personas que se registran en eventos y no los aprovechan del todo porque no saben exactamente qué esperar o cómo prepararse… Justo de eso quiero platicarte, para que no te pase eso a ti. ¿Me das un par de minutos?"
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="q-block">
+        <div class="q-label sit">Comercial de 30 segundos — si piden que te presentes más</div>
+        <div class="script-line">
+          "Claro… mira, tú sabes cómo muchas personas que quieren emprender o hacer crecer su negocio se frustran con <strong>no saber por dónde empezar, no tener los contactos correctos y no contar con una mentoría real</strong>… Lo que hacemos en Sinergéticos es precisamente ayudar a personas así a conectar con los líderes, las herramientas y la comunidad que necesitan para dar ese salto. ¿Eso resuena contigo o es algo que estás viviendo?"
+        </div>
+      </div>
+
+      <div class="nota"><strong>Después del intro → ir a preguntas de situación.</strong> No te extiendas más aquí.</div>
+
+    </div>
+  </div>
+
+  <!-- 2. SITUACIÓN -->
+  <div class="section s-navy">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Preguntas de Situación — Fact Finding</div>
+      <div class="section-sub">El 85% de la venta se hace aquí · Escucha, no hables</div>
+    </div>
+    <div class="section-body">
+
+      <div class="nota">"La primera parte de esta llamada es para conocerte un poco… saber qué estás haciendo ahora, qué quieres lograr… <em>para ver si realmente podemos ayudarte</em>, porque hay personas a las que tal vez no podamos ayudar de la mejor manera."</div>
+
+      <div class="q-block">
+        <div class="q-label sit">Pregunta de entrada</div>
+        <div class="q-text">
+          "Oye, cuéntame… ¿qué te llevó a registrarte para el Bootcamp? ¿Qué fue lo que te llamó la atención?"
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label sit">Situación actual</div>
+        <div class="q-text">
+          "Y actualmente, ¿qué estás haciendo? ¿Tienes un negocio ya andando, estás buscando cómo empezar, o qué está pasando en tu vida ahorita en ese sentido?"
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label sit">Profundizar situación</div>
+        <div class="q-text">
+          "¿Y hace cuánto tiempo llevas en eso?"<br>
+          <em>— Escucha, cue verbal "Mmm… ¿y cómo así?" —</em><br><br>
+          "¿Y qué tipo de resultados has estado obteniendo hasta ahora?"
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label sit">Qué están buscando</div>
+        <div class="q-text">
+          "Antes de que habláramos hoy, ¿sabías exactamente lo que estabas buscando, o todavía lo estás definiendo?"
+        </div>
+      </div>
+
+      <div class="nota"><strong>Cues verbales para mantener fluyendo la conversación:</strong> "Interesante… ¿y cómo así?" / "¿Y qué más?" / "¿Cómo te ha ido con eso?" / "¿Y eso qué significa para ti?"</div>
+
+    </div>
+  </div>
+
+  <!-- 3. PROBLEM AWARENESS -->
+  <div class="section s-purple">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Problem Awareness — Abrir la puerta emocional</div>
+      <div class="section-sub">Descubrir qué duele, qué causó el dolor, cómo los afecta</div>
+    </div>
+    <div class="section-body">
+
+      <div class="nota"><strong>Propósito:</strong> Que ELLOS mismos articulen su dolor. Nunca le digas a alguien cuál es su problema. Ayúdalos a descubrirlo.</div>
+
+      <div class="q-block">
+        <div class="q-label prob">¿Qué les gusta de su situación actual?</div>
+        <div class="q-text prob">
+          "¿Qué es lo que más te gusta de lo que estás haciendo ahorita en cuanto a tu negocio/emprendimiento/carrera?"<br><br>
+          <em>— Si dicen que sí les gusta —</em> "Oh, ¿qué más te gusta?"<br>
+          <em>— Cue: "¿Y eso qué significa para ti?" —</em>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label prob">Two Truth — nadie está 100% satisfecho</div>
+        <div class="q-text prob">
+          "Suena bien lo que me cuentas… Pero dime, si pudieras cambiar <em>algo</em> de tu situación actual en cuanto a [repetir lo que dijeron], ¿qué cambiarías?"
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label prob">¿Por qué querría cambiar eso?</div>
+        <div class="q-text prob">
+          "¿Y por qué cambiarías eso?"<br><br>
+          "¿Y por qué es importante para ti eso <em>ahora</em>?"
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="q-block">
+        <div class="q-label prob">Profundizar en el dolor (elegir 2-3)</div>
+        <div class="q-text prob">
+          "¿Qué es lo que más te cuesta ahorita para crecer tu negocio/alcanzar lo que buscas?"<br><br>
+          "¿Sientes que tienes los contactos correctos, la mentoría o las herramientas para llegar a donde quieres?"<br><br>
+          "¿Cuánto tiempo llevas sintiéndote así?"<br><br>
+          "¿Y eso cómo te ha afectado? ¿En qué sentido?"
+        </div>
+      </div>
+
+      <div class="fork">
+        <div class="fork-title">⚡ Si están en el medio — no muy seguros</div>
+        "No suenas muy seguro con eso… ¿qué es lo que no te convence del todo?"
+      </div>
+
+      <div class="q-block">
+        <div class="q-label tip">Preguntas clarificadoras — usar cuando algo no está claro</div>
+        <div class="q-text">
+          "¿Cómo así?" · "¿Qué quieres decir con eso?" · "¿Cómo te afecta eso específicamente?"
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. SOLUTION AWARENESS -->
+  <div class="section s-teal">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Solution Awareness — ¿Qué han intentado antes?</div>
+      <div class="section-sub">Involucra sus ideas · Fortalece el valor de cambiar</div>
+    </div>
+    <div class="section-body">
+
+      <div class="q-block">
+        <div class="q-label sol">¿Han buscado una solución?</div>
+        <div class="q-text sol">
+          "Antes de hablar hoy, ¿habías estado buscando activamente algo que te ayude a [repetir lo que dijeron que quieren]?"
+        </div>
+      </div>
+
+      <div class="fork green-fork">
+        <div class="fork-title">✅ Si dicen SÍ han intentado algo</div>
+        "¿Y qué intentaste?"<br>
+        "¿Cómo te fue con eso?"<br>
+        "¿Qué resultados obtuviste?"<br>
+        "¿Qué crees que te frenó para obtener los resultados que querías?"
+      </div>
+
+      <div class="fork red-fork">
+        <div class="fork-title">⛔ Si dicen NO han intentado nada</div>
+        "¿Y qué te ha frenado de buscar algo?"<br>
+        "¿Qué te ha impedido tomar acción en eso hasta ahora?"
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="q-block">
+        <div class="q-label sol">Si intentaron y no resultó bien</div>
+        <div class="q-text sol">
+          "¿Sabes si otras personas que hicieron lo mismo sí obtuvieron resultados?"<br><br>
+          "¿Qué crees que marcó la diferencia para ellos que a ti no te funcionó?"
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 5. CONSEQUENCE QUESTIONS -->
+  <div class="section s-red">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Consequence Questions — El costo de no hacer nada</div>
+      <div class="section-sub">Ayuda al prospecto a cuestionar su propia forma de pensar</div>
+    </div>
+    <div class="section-body">
+
+      <div class="nota"><strong>Propósito:</strong> No amenazar. Preguntar con curiosidad genuina para que ELLOS mismos sientan el peso de no actuar. Usar solo 1 o 2, no todas.</div>
+
+      <div class="q-block">
+        <div class="q-label cons">Consecuencia de no resolver (elegir 1-2)</div>
+        <div class="q-text cons">
+          "¿Qué pasa si no haces nada con esto y en 12 meses sigues exactamente en el mismo lugar?"
+        </div>
+      </div>
+
+      <div class="label-or">— O —</div>
+
+      <div class="q-block">
+        <div class="q-text cons">
+          "¿Has pensado en lo que te está costando cada mes no tener [repetir lo que quieren: los contactos correctos / ingresos más altos / claridad]?"
+        </div>
+      </div>
+
+      <div class="label-or">— O —</div>
+
+      <div class="q-block">
+        <div class="q-text cons">
+          "¿Cuánto tiempo más crees que puedes seguir así antes de que afecte [su negocio / sus finanzas / su familia]?"
+        </div>
+      </div>
+
+      <div class="label-or">— O —</div>
+
+      <div class="q-block">
+        <div class="q-text cons">
+          "¿Has considerado qué pasaría si no resuelves esto… y en 3 años la situación es peor que hoy?"
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 6. QUALIFYING -->
+  <div class="section s-amber">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Qualifying — Confirmar que quieren cambiar ahora</div>
+      <div class="section-sub">¿Qué tan comprometidos están con resolver esto?</div>
+    </div>
+    <div class="section-body">
+
+      <div class="q-block">
+        <div class="q-label qual">Pregunta de calificación</div>
+        <div class="q-text qual">
+          "Oye, ¿qué tan importante es para ti resolver esto <em>ahora</em>? No en 6 meses, sino en este momento."
+        </div>
+      </div>
+
+      <div class="label-or">— Luego —</div>
+
+      <div class="q-block">
+        <div class="q-text qual">
+          "¿Por qué es importante para ti ahora y no después?"
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="q-block">
+        <div class="q-label qual">Consolidar lo que ya dijeron</div>
+        <div class="q-text qual">
+          "Mira, para que tenga sentido lo que podría funcionarte… además de [repetir 1-2 cosas que dijeron], ¿qué más sería importante para ti?"<br><br>
+          "¿Cuál sería para ti el criterio ideal?"
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 7. TRANSICIÓN -->
+  <div class="section s-gold">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Fórmula de Transición — Puente hacia la presentación</div>
+      <div class="section-sub">Repetir lo que dijeron · Conectar emocionalmente</div>
+    </div>
+    <div class="section-body">
+
+      <div class="nota"><strong>Este momento es clave.</strong> Antes de presentar, demuestra que los escuchaste. Repite exactamente sus palabras (no las tuyas).</div>
+
+      <div class="script-line gold">
+        <strong>Basado en lo que me contaste…</strong> [repetir lo que quieren lograr]…<br><br>
+        <strong>Y tú me dijiste que…</strong> [repetir el problema lógico que mencionaron]…<br><br>
+        <strong>Y eso te hace sentir…</strong> [repetir la emoción que expresaron: frustrado, estancado, perdido, solo en esto…]<br><br>
+        Creo que lo que hacemos <em>podría</em> ayudarte con eso. ¿Con tu permiso te cuento un poco de cómo funciona?
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 8. PRESENTACIÓN -->
+  <div class="section s-green">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">Presentación — Fórmula de 3 pasos (Black Access)</div>
+      <div class="section-sub">Problema → Solución → Beneficio personal</div>
+    </div>
+    <div class="section-body">
+
+      <div class="nota"><strong>IMPORTANTE:</strong> Repite cada paso del problema CON LAS PALABRAS DE ELLOS, no con las tuyas. Esto crea resonancia emocional.</div>
+
+      <div class="tres-pasos">
+
+        <div class="paso">
+          <div class="paso-num">1</div>
+          <div class="paso-body">
+            <div class="paso-label">El problema que más vemos</div>
+            <div class="paso-text">
+              "Uno de los mayores problemas que tienen las personas que quieren <strong>[lo que ellos dijeron]</strong> es que no tienen acceso a los mentores correctos, no están en la sala donde se toman las decisiones, y no tienen la red de contactos que los jale hacia arriba. Siguen trabajando solos, sin orientación, sin atajos."
+            </div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <div class="paso-num">2</div>
+          <div class="paso-body">
+            <div class="paso-label">Cómo lo resolvemos con el Black Access</div>
+            <div class="paso-text">
+              "Lo que hace el <strong>Black Access del Bootcamp</strong> es ponerte en la misma sala — física y mentalmente — con más de 20 speakers de talla internacional como [2-3 nombres relevantes para su perfil], durante 3 días intensivos. Pero además del evento, tienes acceso directo a Jorge Serratos en mentoría privada, kit Black, foto y tiempo con los speakers, y el Club Sinergético para seguir conectado después."
+            </div>
+          </div>
+        </div>
+
+        <div class="paso">
+          <div class="paso-num">3</div>
+          <div class="paso-body">
+            <div class="paso-label">Lo que eso significa para ellos específicamente</div>
+            <div class="paso-text">
+              "Y lo que eso significa para ti, basado en lo que me contaste, es que <strong>[conectar con su dolor/deseo específico]</strong>: finalmente tendrías [el contacto / la claridad / la red / la mentoría] que te ha faltado para dar ese salto que llevas tiempo queriendo dar."
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="q-block">
+        <div class="q-label sit">Preguntas de verificación durante presentación (cada 60-90 seg.)</div>
+        <div class="q-text">
+          "¿Tiene sentido eso?" · "¿Estamos en la misma página?" · "¿Cómo ves que eso podría ayudarte?" · "¿Hay algo que quieras que te aclare?"
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 9. CIERRE -->
+  <div class="section s-dark">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title">Committing Questions — Cierre</div>
+      <div class="section-sub">No presionar · Preguntar con calma y curiosidad</div>
+    </div>
+    <div class="section-body">
+
+      <div class="q-block">
+        <div class="q-label sit">Pregunta de cierre principal</div>
+        <div class="q-text">
+          "¿Sientes que esto podría ser lo que estás buscando para [repetir lo que dijeron que querían]?"
+        </div>
+      </div>
+
+      <div class="nota">Si dicen SÍ → "¿Por qué sientes que sí?" — deja que se convenzan solos.</div>
+
+      <div class="label-or">— Si dicen que sí pero dudan —</div>
+
+      <div class="q-block">
+        <div class="q-text">
+          "¿Sientes que esto puede llevarte a donde quieres ir?"<br><br>
+          <em>— Si necesitas probing —</em> "¿Por qué sientes que sí?"
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="script-line dark">
+        "Mira, creo que cubrimos bastante bien lo que estás buscando. El siguiente paso sería hacer el acceso Black hoy mismo — puedes hacerlo con tarjeta de crédito, débito o transferencia — y con eso te confirmamos tu lugar, tu kit y todos los beneficios que te mencioné. ¿Cómo te gustaría proceder desde aquí?"
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MANEJO DE OBJECIONES -->
+  <div class="section s-red">
+    <div class="section-header">
+      <div class="section-num">🛡</div>
+      <div class="section-title">Manejo de Objeciones</div>
+      <div class="section-sub">Nunca argumentar · Preguntar con curiosidad</div>
+    </div>
+    <div class="section-body">
+
+      <div class="obj-card obj-money">
+        <div class="obj-header">💸 "No tengo el dinero" / "Es mucho"</div>
+        <div class="obj-body">
+          <div class="script-line amber">
+            "Entiendo perfectamente… oye, dime una cosa: si el dinero <em>no fuera</em> un obstáculo, ¿sientes que esto sería lo que estás buscando?"<br><br>
+            <em>— Si dicen sí —</em><br><br>
+            "Okay, entonces cuéntame… ¿cómo crees que podrías resolver ese tema del presupuesto para poder hacer esto? ¿Qué opciones se te ocurren?"<br><br>
+            <em>— Deja que piensen. Si no encuentran —</em><br><br>
+            "¿Has pensado en poner una parte en tarjeta de crédito y usar los primeros resultados para liquidarla? Mucha gente lo hace así cuando sabe que la inversión les va a regresar más de lo que ponen."
+          </div>
+          <div class="fork">
+            <div class="fork-title">Si preguntan el precio antes de tiempo</div>
+            "Mira, dependiendo de lo que estés buscando, hay diferentes niveles de acceso. ¿Me cuentas un poco más sobre lo que necesitas y así te digo cuál tiene más sentido para ti?"
+          </div>
+        </div>
+      </div>
+
+      <div class="obj-card obj-pareja">
+        <div class="obj-header">👫 "Necesito consultarlo con mi pareja"</div>
+        <div class="obj-body">
+          <div class="script-line">
+            "Claro, con gusto… oye, ¿cómo crees que se siente tu pareja respecto a que inviertas en hacer crecer tu negocio / carrera?"<br><br>
+            <em>— Deja que respondan —</em><br><br>
+            "Y si no estuviera de acuerdo… ¿qué harías? Porque al final, si no tienes las herramientas correctas, ¿cómo llegas a [lo que dijeron que querían]?"
+          </div>
+        </div>
+      </div>
+
+      <div class="obj-card obj-tiempo">
+        <div class="obj-header">⏰ "No tengo tiempo" / "Estoy muy ocupado"</div>
+        <div class="obj-body">
+          <div class="script-line purple">
+            "Entiendo que el tiempo es un recurso valioso… pero dime, ¿cuánto tiempo llevas ocupado sin llegar a [lo que dijeron que quieren]?"<br><br>
+            "¿Qué crees que cambia si no haces algo diferente ahora? ¿El tiempo se va a liberar solo?"
+          </div>
+        </div>
+      </div>
+
+      <div class="obj-card obj-ya-sé">
+        <div class="obj-header">📺 "Ya lo veo en el Bootcamp gratis"</div>
+        <div class="obj-body">
+          <div class="script-line green">
+            "Sí, claro, el evento gratuito tiene contenido increíble y te va a dar mucho… la diferencia es que el Black Access no es solo el contenido — es <em>el acceso</em>. Es sentarte con Jorge en una mentoría privada, es estar en la sala VIP, es que los speakers te conozcan a ti directamente, y es la red de personas que van en ese nivel. El contenido lo pueden ver todos. Las relaciones y la mentoría solo están disponibles en Black."<br><br>
+            "¿Sientes que eso marca la diferencia para lo que tú quieres lograr?"
+          </div>
+        </div>
+      </div>
+
+      <div class="obj-card obj-tiempo">
+        <div class="obj-header">🤔 "Déjame pensarlo"</div>
+        <div class="obj-body">
+          <div class="script-line purple">
+            "Por supuesto, quiero que te sientas seguro con esto… Oye, ¿qué es específicamente lo que quieres pensar? ¿Hay algo que no quedó claro o que te genera duda?"<br><br>
+            <em>— Deja que lo digan. Casi siempre es dinero o permiso de alguien —</em><br><br>
+            "Okay, porque si tienes claridad en eso, hay algo que pueda aclararte ahora mismo, ¿no?"
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONFIRMAR ASISTENCIA AL BOOTCAMP GRATIS -->
+  <div class="section s-navy">
+    <div class="section-header">
+      <div class="section-num">✔</div>
+      <div class="section-title">Si no compra Black — Confirmar asistencia al Bootcamp gratuito</div>
+      <div class="section-sub">Nunca colgar sin confirmar asistencia</div>
+    </div>
+    <div class="section-body">
+
+      <div class="script-line">
+        "Perfecto, sin problema… lo que sí es importante es que no te pierdas el Bootcamp gratuito del 5 al 7 de junio — es 100% en vivo por YouTube y no hay repetición. ¿Tienes ya tu acceso confirmado?"<br><br>
+        <em>— Si ya tiene el link —</em> "Excelente. Te veo ahí el 5 de junio. Y si en algún momento quieres platicar sobre el Black Access, no dudes en escribirme."<br><br>
+        <em>— Si no tiene el link —</em> "Te mando ahora mismo el link de acceso. ¿Me confirmas que lo vas a checar antes del 5?"
+      </div>
+
+      <div class="nota"><strong>Recuerda:</strong> Un lead que asiste al Bootcamp gratuito y lo vive en vivo puede convertirse en Black durante el evento. Siempre dejar la puerta abierta.</div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    Sinergéticos / Synergy for Education · Script NEPQ adaptado de 7th Level Communications · Bootcamp Digital Junio 5–7, 2026
+  </div>
+
+</div>
+</body>
+</html>
